@@ -30,7 +30,7 @@ In this page, if users press done with no pick date -> it will show one alert wi
 
 if they press back button -> go back PopUpPage.
 
-2. Don't know -> Just in case users have no idea about the date, we make this option. -> Go to HomeViewPage.
+2. Don't know -> Just in case users have no idea about the date, we make this option. -> Go to HomeViewPage directly.
 
 <img width="361" alt="Screen Shot 2022-09-10 at 3 47 09 AM" src="https://user-images.githubusercontent.com/90818221/189479917-8c524711-0f60-4288-b834-0de68fc5002d.png">
 
