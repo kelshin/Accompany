@@ -24,6 +24,12 @@ There are two options:
 <img width="363" alt="Screen Shot 2022-09-10 at 3 39 06 AM" src="https://user-images.githubusercontent.com/90818221/189479841-4c5bf9fe-ff45-4698-bf0e-53435994adfa.png">
 <img width="359" alt="Screen Shot 2022-09-10 at 3 39 16 AM" src="https://user-images.githubusercontent.com/90818221/189479847-05e1aedd-ce37-4dcb-a964-9a4cd467790d.png">
 
+In this page, if users press done with no pick date -> it will show one alert window to make sure users have already picked; otherwise, will go to HomeViewPage.
+
+<img width="277" alt="Screen Shot 2022-09-10 at 3 49 47 AM" src="https://user-images.githubusercontent.com/90818221/189480027-f016891c-0131-465c-8162-ee5b8a0e1893.png">
+
+if they press back button -> go back PopUpPage.
+
 2. Don't know -> Just in case users have no idea about the date, we make this option. -> Go to HomeViewPage.
 
 <img width="361" alt="Screen Shot 2022-09-10 at 3 47 09 AM" src="https://user-images.githubusercontent.com/90818221/189479917-8c524711-0f60-4288-b834-0de68fc5002d.png">
