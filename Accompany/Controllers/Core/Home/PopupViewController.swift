@@ -89,7 +89,6 @@ class PopupViewController: UIViewController {
   }
   
   @objc func goToAnsVC() {
-//    print("press!")
     
     let ansVC = AnsDueDateViewController()
     let navVC = UINavigationController(rootViewController: ansVC)
@@ -101,7 +100,6 @@ class PopupViewController: UIViewController {
   @objc func goToTabVC() {
     let tabBarVC = TabBarViewController()
     view.window?.rootViewController = tabBarVC
-    
   }
 
 }
