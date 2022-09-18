@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     let window = UIWindow(windowScene: windowScene)
     window.makeKeyAndVisible()
-    window.rootViewController = TabBarViewController()
+    window.rootViewController = PopupViewController()
         
     self.window = window
   }

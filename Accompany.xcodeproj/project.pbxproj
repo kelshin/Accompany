@@ -33,9 +33,7 @@
 		43FB2B1027BE381C004A641D /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B0D27BE381C004A641D /* SecondaryButton.swift */; };
 		43FB2B1427BE415A004A641D /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B1227BE415A004A641D /* TodoCell.swift */; };
 		43FB2B1627BE49BD004A641D /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B1527BE49BD004A641D /* MyProfileViewController.swift */; };
-		43FB2B1A27BE49F4004A641D /* InvitePartnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B1927BE49F4004A641D /* InvitePartnerViewController.swift */; };
 		43FB2B1C27BE4A0B004A641D /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B1B27BE4A0B004A641D /* AccountSettingsViewController.swift */; };
-		43FB2B2027BE4A71004A641D /* PregnantArticlesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B1F27BE4A71004A641D /* PregnantArticlesTableViewController.swift */; };
 		43FB2B2227BE4A8B004A641D /* AboutAccompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B2127BE4A8B004A641D /* AboutAccompanyViewController.swift */; };
 		6413589A27C0623B0086BB39 /* ToDoBasicInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6413589827C0623B0086BB39 /* ToDoBasicInfoCell.swift */; };
 		641452EC27BF0B0D0058800B /* Contraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641452EB27BF0B0D0058800B /* Contraction.swift */; };
@@ -45,6 +43,9 @@
 		6C1FC56A27BEF301007D625E /* PhotoDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FC56927BEF301007D625E /* PhotoDetailedViewController.swift */; };
 		6C1FC57627BF2454007D625E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FC57527BF2454007D625E /* ImageView.swift */; };
 		6C1FC57A27C36F83007D625E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C1FC57927C36F83007D625E /* Assets.xcassets */; };
+		6C97121728CA164100AE4227 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C97121628CA164100AE4227 /* PopupView.swift */; };
+		6C97121928CB1C8900AE4227 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C97121828CB1C8800AE4227 /* PopupViewController.swift */; };
+		6C97121B28CB212B00AE4227 /* AnsDueDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C97121A28CB212A00AE4227 /* AnsDueDateViewController.swift */; };
 		6CB9D45B27C4D11C00D377F7 /* CustomTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D45A27C4D11C00D377F7 /* CustomTextViewController.swift */; };
 		6CB9D45D27C5F07C00D377F7 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D45C27C5F07C00D377F7 /* ProfileCell.swift */; };
 		6CB9D45F27C5F35F00D377F7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D45E27C5F35F00D377F7 /* User.swift */; };
@@ -86,9 +87,7 @@
 		43FB2B0D27BE381C004A641D /* SecondaryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		43FB2B1227BE415A004A641D /* TodoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
 		43FB2B1527BE49BD004A641D /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
-		43FB2B1927BE49F4004A641D /* InvitePartnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitePartnerViewController.swift; sourceTree = "<group>"; };
 		43FB2B1B27BE4A0B004A641D /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
-		43FB2B1F27BE4A71004A641D /* PregnantArticlesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PregnantArticlesTableViewController.swift; sourceTree = "<group>"; };
 		43FB2B2127BE4A8B004A641D /* AboutAccompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAccompanyViewController.swift; sourceTree = "<group>"; };
 		6413589827C0623B0086BB39 /* ToDoBasicInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoBasicInfoCell.swift; sourceTree = "<group>"; };
 		641452EB27BF0B0D0058800B /* Contraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contraction.swift; sourceTree = "<group>"; };
@@ -99,6 +98,9 @@
 		6C1FC57527BF2454007D625E /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		6C1FC57927C36F83007D625E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C96352827B7C252001D0E45 /* Simple Boy ttf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Simple Boy ttf.ttf"; sourceTree = "<group>"; };
+		6C97121628CA164100AE4227 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
+		6C97121828CB1C8800AE4227 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		6C97121A28CB212A00AE4227 /* AnsDueDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnsDueDateViewController.swift; sourceTree = "<group>"; };
 		6CB9D45A27C4D11C00D377F7 /* CustomTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextViewController.swift; sourceTree = "<group>"; };
 		6CB9D45C27C5F07C00D377F7 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		6CB9D45E27C5F35F00D377F7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				437721E827ADE4E800EC8A98 /* LaunchScreen.storyboard */,
+				6C97121628CA164100AE4227 /* PopupView.swift */,
 				4378AA2A27C8CCB20019773E /* Components */,
 				43FB2AEF27BDDB70004A641D /* TodoList */,
 				43FB2AF327BDDBD1004A641D /* Album */,
@@ -226,6 +229,8 @@
 		437721F627ADE90D00EC8A98 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				6C97121828CB1C8800AE4227 /* PopupViewController.swift */,
+				6C97121A28CB212A00AE4227 /* AnsDueDateViewController.swift */,
 				437721FA27ADE97B00EC8A98 /* HomeViewController.swift */,
 				6C1FC57C27C3BED4007D625E /* ToDoList */,
 			);
@@ -255,9 +260,7 @@
 			children = (
 				4377220027ADE99300EC8A98 /* ServiceViewController.swift */,
 				43FB2B1827BE49E1004A641D /* MyProfile */,
-				43FB2B1727BE49D2004A641D /* InvitePartner */,
 				43FB2B1D27BE4A11004A641D /* AccountSettings */,
-				43FB2B1E27BE4A31004A641D /* PregnantArticles */,
 				43FB2B2127BE4A8B004A641D /* AboutAccompanyViewController.swift */,
 			);
 			path = Services;
@@ -307,14 +310,6 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
-		43FB2B1727BE49D2004A641D /* InvitePartner */ = {
-			isa = PBXGroup;
-			children = (
-				43FB2B1927BE49F4004A641D /* InvitePartnerViewController.swift */,
-			);
-			path = InvitePartner;
-			sourceTree = "<group>";
-		};
 		43FB2B1827BE49E1004A641D /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,14 +330,6 @@
 			path = AccountSettings;
 			sourceTree = "<group>";
 		};
-		43FB2B1E27BE4A31004A641D /* PregnantArticles */ = {
-			isa = PBXGroup;
-			children = (
-				43FB2B1F27BE4A71004A641D /* PregnantArticlesTableViewController.swift */,
-			);
-			path = PregnantArticles;
-			sourceTree = "<group>";
-		};
 		6413589C27C0625F0086BB39 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,7 +340,6 @@
 		6413589D27C0626A0086BB39 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				6CF5E38727C3D9D000F427A2 /* ContentCell.swift */,
 				6CB9D45C27C5F07C00D377F7 /* ProfileCell.swift */,
 				4378AA2427C86C5B0019773E /* DatePickerTableViewCell.swift */,
 				6CF5E38727C3D9D000F427A2 /* ContentCell.swift */,
@@ -526,7 +512,6 @@
 				64EF106D27B717C600167984 /* ToDoFormTableViewController.swift in Sources */,
 				4377220127ADE99300EC8A98 /* ServiceViewController.swift in Sources */,
 				43FB2B0F27BE381C004A641D /* PrimaryButton.swift in Sources */,
-				43FB2B2027BE4A71004A641D /* PregnantArticlesTableViewController.swift in Sources */,
 				6C1FC56A27BEF301007D625E /* PhotoDetailedViewController.swift in Sources */,
 				43FB2B1027BE381C004A641D /* SecondaryButton.swift in Sources */,
 				43A8C58227C0790F00FD647F /* ToDoNotesCell.swift in Sources */,
@@ -546,22 +531,24 @@
 				6CB9D46127C60B8200D377F7 /* ProfileDetailViewController.swift in Sources */,
 				6CB9D47427CA063900D377F7 /* Image.swift in Sources */,
 				4377220327ADE9A800EC8A98 /* TabBarViewController.swift in Sources */,
+				6C97121728CA164100AE4227 /* PopupView.swift in Sources */,
 				437721FB27ADE97B00EC8A98 /* HomeViewController.swift in Sources */,
 				6CB9D45D27C5F07C00D377F7 /* ProfileCell.swift in Sources */,
 				4354219727BDD88C002160DA /* Todo.swift in Sources */,
 				43FB2AF527BDDC7C004A641D /* TodoList.swift in Sources */,
 				6CB9D45B27C4D11C00D377F7 /* CustomTextViewController.swift in Sources */,
 				437721FF27ADE98B00EC8A98 /* RecordsViewController.swift in Sources */,
+				6C97121928CB1C8900AE4227 /* PopupViewController.swift in Sources */,
 				6CF45F7427BE520100ED0942 /* BabySonogramController.swift in Sources */,
 				43FB2B1427BE415A004A641D /* TodoCell.swift in Sources */,
 				43FB2B0E27BE381C004A641D /* OutlineButton.swift in Sources */,
+				6C97121B28CB212B00AE4227 /* AnsDueDateViewController.swift in Sources */,
 				6413589A27C0623B0086BB39 /* ToDoBasicInfoCell.swift in Sources */,
 				430F6D8C27BF67DC0095DB8D /* PrivacyPolicyViewController.swift in Sources */,
 				6CF5E38627C3C26B00F427A2 /* QAController.swift in Sources */,
 				43FB2B0727BE37F0004A641D /* VStack.swift in Sources */,
 				6CB9D45F27C5F35F00D377F7 /* User.swift in Sources */,
 				43FB2AFC27BDEB91004A641D /* TitleLabel.swift in Sources */,
-				43FB2B1A27BE49F4004A641D /* InvitePartnerViewController.swift in Sources */,
 				4354218D27BC66B2002160DA /* ContractionTimerViewController.swift in Sources */,
 				4378AA2527C86C5B0019773E /* DatePickerTableViewCell.swift in Sources */,
 			);

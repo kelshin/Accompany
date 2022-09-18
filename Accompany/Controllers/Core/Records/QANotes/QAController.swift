@@ -11,7 +11,7 @@ class QAController: UIViewController, UIScrollViewDelegate {
 
   var noteContent : String?
   
-  let titleLabel = TitleLabel(title: "Q&A To Obstetrician", size: .medium)
+  let titleLabel = TitleLabel(title: "Take Notes", size: .medium)
   
   let rightBarButton : UIButton = {
     let button = UIButton()

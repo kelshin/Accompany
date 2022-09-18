@@ -72,7 +72,7 @@ class MyProfileViewController: CustomTextViewController {
     userImageView.layer.borderWidth = 1.0
     userImageView.layer.masksToBounds = false
     userImageView.layer.borderColor = #colorLiteral(red: 1, green: 0.8831380575, blue: 0.9568627451, alpha: 1)
-    userImageView.layer.cornerRadius = 60
+//    userImageView.layer.cornerRadius = 60
     userImageView.clipsToBounds = true
     
   }

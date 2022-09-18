@@ -14,7 +14,7 @@ class RecordsViewController: UIViewController {
   
   let goToAlbumButton = SecondaryButton(title: "Photo Album")
   let goToTimerButton = PrimaryButton(title: "Contraction Timer")
-  let goToQAButton = PrimaryButton(title: "Q&A To Obstetrician")
+  let goToQAButton = PrimaryButton(title: "Take Notes")
   
   let bgCircleView = ImageView()
 

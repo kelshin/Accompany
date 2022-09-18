@@ -22,20 +22,20 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
   
   let appName = "Accompany"
   
-  let babyTitleLabel = TitleLabel(title: "Baby's Sonogram", size: .medium)
+  let babyTitleLabel = TitleLabel(title: "Photo Album", size: .medium)
   
   let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
 
   // MARK: Data
   
-  lazy var randomImages: [Image] = uploadedImages[randomPick: 10]
+  lazy var randomImages: [Image] = uploadedImages[randomPick: 5]
     
   var uploadedImages: [Image] = {
     var images = [Image]()
      
-    for i in 1..<21 {
-     images.append(Image(id: i, uiImage: UIImage(named: "logo-app")!))
-    }
+//    for i in 1..<21 {
+//      images.append(Image(id: i, uiImage: UIImage(named: "logo-app")!, category: .uploadPhoto))
+//     }
      
     return images
   }()
@@ -54,6 +54,9 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
     snapshot.appendSections([.uploadPhoto])
     snapshot.appendItems(uploadedImages, toSection: .uploadPhoto)
     
+    sections = snapshot.sectionIdentifiers
+    dataSource.apply(snapshot)
+    
     return snapshot
   }
     
@@ -63,8 +66,6 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
     view.addSubview(babyTitleLabel)
     
     setupLabelLayout()
-
-   
 
     view.addSubview(collectionView)
     collectionView.snp.makeConstraints { make in
@@ -129,7 +130,6 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
       return cell
     })
 
-    sections = snapshot.sectionIdentifiers
     dataSource.apply(snapshot)
     
   }
