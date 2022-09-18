@@ -89,7 +89,6 @@ class PopupViewController: UIViewController {
   }
   
   @objc func goToAnsVC() {
-    
     let ansVC = AnsDueDateViewController()
     let navVC = UINavigationController(rootViewController: ansVC)
     navVC.modalPresentationStyle = .fullScreen
