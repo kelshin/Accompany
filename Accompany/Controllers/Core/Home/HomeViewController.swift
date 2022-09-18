@@ -8,11 +8,10 @@
 import UIKit
 import SnapKit
 
-class HomeViewController: UIViewController {
 
-  let accompanyTitleLabel = TitleLabel(title: "Accompany", size: .large, color: .red)
+class HomeViewController: UIViewController {
   
-  //TODO: Fetch username, and titlLabel text will be welcome back \(username)
+  let accompanyTitleLabel = TitleLabel(title: "Accompany", size: .large, color: .red)
   let welcomeTitleLabel = TitleLabel(title: "Welcome back!", size: .mini, color: .black)
 
   let firstTrimesterButton = PrimaryButton(title: Trimester.firstTrimester.rawValue)
@@ -25,7 +24,7 @@ class HomeViewController: UIViewController {
     notifyTableView.register(TodoCell.self, forCellReuseIdentifier: TodoCell.identifier)
     notifyTableView.register(TodoHeaderView.self, forHeaderFooterViewReuseIdentifier: TodoHeaderView.identifier)
     notifyTableView.isUserInteractionEnabled = true
-    notifyTableView.layer.cornerRadius = 10
+    notifyTableView.layer.cornerRadius = 5
     notifyTableView.translatesAutoresizingMaskIntoConstraints = false
     
     return notifyTableView
@@ -35,9 +34,15 @@ class HomeViewController: UIViewController {
   
   var todoLists = [TodoList]()
   var currentTodos = [Todo]()
+ 
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    navigationController?.navigationBar.isHidden = true
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
  
     bgCircleView.image = UIImage(named: "grey-bg")
@@ -69,8 +74,7 @@ class HomeViewController: UIViewController {
   }
   
   private func getCurrentTrimester() -> Trimester {
-    // due date
-    // TODO: fetch due date from DB
+    // due date got from the AnsVC
     let dueDate = Date.init("2022-12-31")
     
     print(Date().description(with: .current))
@@ -99,7 +103,7 @@ class HomeViewController: UIViewController {
   }
   
   private func setupLayout() {
-    
+   
     view.addSubview(accompanyTitleLabel)
     
     accompanyTitleLabel.snp.makeConstraints { make in
@@ -133,7 +137,7 @@ class HomeViewController: UIViewController {
       make.top.equalTo(notifyTableView.snp.bottom).offset(20)
       make.left.equalTo(view.safeAreaLayoutGuide)
       make.right.equalTo(view.safeAreaLayoutGuide)
-      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(3)
+      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(5)
     }
     
     let buttons = [firstTrimesterButton, secondTrimesterButton, thirdTrimesterButton, afterButton]
@@ -277,7 +281,7 @@ extension Date {
   
   init(_ dateString: String) {
     let dateStringFormatter = DateFormatter()
-    dateStringFormatter.dateFormat = "yyyy-MM-dd"
+    dateStringFormatter.dateFormat = "yyyy-mm-dd"
     dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
     
     let date = dateStringFormatter.date(from: dateString)!

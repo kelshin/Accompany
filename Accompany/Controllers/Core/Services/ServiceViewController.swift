@@ -11,10 +11,9 @@ enum Services: CustomStringConvertible, CaseIterable {
   
   case myProfile
 //  case invitePartner
-  case accountSettings
+  case settings
 //  case pregnantArticles
   case aboutAccompany
-  case logOut
   
   var description: String {
     switch self {
@@ -22,14 +21,14 @@ enum Services: CustomStringConvertible, CaseIterable {
       return "My Profile"
 //    case .invitePartner:
 //      return "Invite Partner"
-    case .accountSettings:
-      return "Account Settings"
+    case .settings:
+      return "Settings"
 //    case .pregnantArticles:
 //      return "Pregnant Articles"
     case .aboutAccompany:
       return "About Accompany"
-    case .logOut:
-      return "Log Out"
+//    case .logOut:
+//      return "Log Out"
     }
   }
 
@@ -114,24 +113,25 @@ class ServiceViewController: UIViewController {
       
       navigationController?.pushViewController(myProfileVC, animated: true)
     // Account Settings
-    case Services.accountSettings.description:
+    case Services.settings.description:
       navigationController?.pushViewController(AccountSettingsViewController(), animated: true)
     // About Accompany
     case Services.aboutAccompany.description:
       navigationController?.pushViewController(AboutAccompanyViewController(), animated: true)
     // Log Out
-    case Services.logOut.description:
-      
-      let alert = UIAlertController(title: "Log Out of Accompany?", message: nil, preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-      alert.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { _ in
-        // TODO: Log out with database
-        print("Log out")
-        
+//    case Services.logOut.description:
+//      
+//      let alert = UIAlertController(title: "Log Out of Accompany?", message: nil, preferredStyle: .alert)
+//      alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//      alert.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { _ in
+//        // TODO: Log out with database
+//        print("Log out")
+//        
         // back to log in page (scene delegate?)
-      }))
+    
+  
       
-      self.present(alert, animated: true, completion: nil)
+//      self.present(alert, animated: true, completion: nil)
       
     default:
       return
