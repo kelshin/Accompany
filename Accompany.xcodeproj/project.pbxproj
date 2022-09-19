@@ -334,6 +334,7 @@
 			children = (
 			);
 			path = Timer;
+   };
 		43FB2B1E27BE4A31004A641D /* PregnantArticles */ = {
 			isa = PBXGroup;
 			children = (
