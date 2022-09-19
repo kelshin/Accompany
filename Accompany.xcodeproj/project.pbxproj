@@ -196,7 +196,6 @@
 				4378AA2A27C8CCB20019773E /* Components */,
 				43FB2AEF27BDDB70004A641D /* TodoList */,
 				43FB2AF327BDDBD1004A641D /* Album */,
-				6413589C27C0625F0086BB39 /* Timer */,
 				6413589D27C0626A0086BB39 /* Services */,
 			);
 			path = Views;
@@ -343,17 +342,9 @@
 			path = PregnantArticles;
 			sourceTree = "<group>";
 		};
-		6413589C27C0625F0086BB39 /* Timer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Timer;
-			sourceTree = "<group>";
-		};
 		6413589D27C0626A0086BB39 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				6CF5E38727C3D9D000F427A2 /* ContentCell.swift */,
 				6CB9D45C27C5F07C00D377F7 /* ProfileCell.swift */,
 				4378AA2427C86C5B0019773E /* DatePickerTableViewCell.swift */,
 				6CF5E38727C3D9D000F427A2 /* ContentCell.swift */,
@@ -738,7 +729,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7669655F54;
+				DEVELOPMENT_TEAM = N53R4WJ796;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Accompany/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

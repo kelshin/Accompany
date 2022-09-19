@@ -18,7 +18,7 @@ class ToDoBasicInfoCell : UITableViewCell {
     button.isSelected = false
     button.setContentHuggingPriority(.init(rawValue: 251), for: .horizontal)
     button.translatesAutoresizingMaskIntoConstraints = false
-    
+//    button.addTarget(self, action: #selector(tapped), for: .touchUpInside)
     return button
   }()
   
@@ -57,6 +57,10 @@ class ToDoBasicInfoCell : UITableViewCell {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  @objc func tapped(){
+    print("i am tapped")
   }
   
 }
