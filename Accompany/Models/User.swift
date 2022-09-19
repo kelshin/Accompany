@@ -24,13 +24,12 @@ struct Info {
 
 struct User {
   
-  var info: Info?
+//  var info: Info?
   // TODO: add default todos
   var todolists = [TodoList]()
   // TODO: Photos
-  var media: [URL]?
-  var contractions: [Contractions]
-  var note: String?
-  var isNotificationOn: Bool = false
-  
+//  var media: [URL]?
+//  var contractions: [Contractions]
+//  var note: String?
+//  var isNotificationOn: Bool = false
 }

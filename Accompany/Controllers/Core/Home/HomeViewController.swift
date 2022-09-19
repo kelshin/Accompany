@@ -31,14 +31,16 @@ class HomeViewController: UIViewController {
   }()
   
   let bgCircleView = ImageView()
-  
-  var todoLists = [TodoList]()
+  var currentUser = User()
+  static var todoLists = [TodoList]()
   var currentTodos = [Todo]()
- 
+
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     navigationController?.navigationBar.isHidden = true
   }
+
+  var currentTrimester = String()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -47,9 +49,16 @@ class HomeViewController: UIViewController {
  
     bgCircleView.image = UIImage(named: "grey-bg")
     
-    // TODO: fetch todoLists
+    // KELBIN
+    print("I AM CURRENT USER")
+    print(currentUser)
+//    createData()
+    
     fetchTodoLists()
-
+    fetchCurrentLists()
+    
+    // TODO: fetch todoLists
+    
     configureTableView()
     setupLayout()
     
@@ -62,15 +71,45 @@ class HomeViewController: UIViewController {
         title: "Home Page", style: .plain, target: nil, action: nil)
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    fetchCurrentLists()
+    notifyTableView.reloadData()
+  }
+  
+  func saveTodoList() {
+    let encoder = JSONEncoder()
+    if let encoder = try? encoder.encode(HomeViewController.todoLists){
+      let defaults = UserDefaults.standard
+      defaults.set(encoder, forKey: "SavedTodos")
+    }
+  }
+  
+  func loadTodoList(){
+    let defaults = UserDefaults.standard
+    if let savedTodo = defaults.object(forKey: "SavedTodos") as? Data {
+      let decoder = JSONDecoder()
+      if let loadedTodo = try? decoder.decode([TodoList].self, from: savedTodo){
+        HomeViewController.todoLists = loadedTodo
+      } else {
+        print("Error loading previous list")
+      }
+    } else {
+      HomeViewController.todoLists = TodoList.loadSampleTodoLists()
+      saveTodoList()
+    }
+  }
+  
   private func fetchTodoLists() {
     // fetch todolists
-    todoLists = TodoList.loadSampleTodoLists()
-    
+    loadTodoList()
+  }
+  
+  private func fetchCurrentLists() {
     // decide current trimester
     let currentTrimester = getCurrentTrimester()
     
     // assign current todos
-    currentTodos = TodoList.getTodos(of: currentTrimester, from: todoLists) ?? [Todo]()
+    currentTodos = TodoList.getTodos(of: currentTrimester, from: HomeViewController.todoLists, status: .notDone) ?? [Todo]()
   }
   
   private func getCurrentTrimester() -> Trimester {
@@ -86,12 +125,16 @@ class HomeViewController: UIViewController {
     
     switch Double(dateDifference) / 7.0 {
     case Double(Int.min)..<14:
+      currentTrimester = Trimester.after.rawValue
       return .after
     case 14..<29:
+      currentTrimester = Trimester.thirdTrimester.rawValue
       return .thirdTrimester
     case 29..<41:
+      currentTrimester = Trimester.secondTrimester.rawValue
       return .secondTrimester
     default:
+      currentTrimester = Trimester.firstTrimester.rawValue
       return .firstTrimester
     }
   }
@@ -127,7 +170,6 @@ class HomeViewController: UIViewController {
       make.top.equalTo(welcomeTitleLabel.snp.bottom).offset(20)
       make.width.equalTo(view.snp.width).multipliedBy(0.84)
       make.height.equalTo(view.snp.width).multipliedBy(0.5)
-   
     }
     
     view.addSubview(bgCircleView)
@@ -156,7 +198,6 @@ class HomeViewController: UIViewController {
       make.top.equalTo(bgCircleView.snp.top).offset(45)
       make.width.equalTo(view.snp.width).multipliedBy(0.45)
     }
-
   }
    
   @objc func goToTodoList(_ button: UIButton) {
@@ -165,22 +206,25 @@ class HomeViewController: UIViewController {
     switch button {
     case firstTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.firstTrimester.rawValue
-      todoListVC.todos = TodoList.getTodos(of: .firstTrimester, from: todoLists) ?? [Todo]()
+      todoListVC.currentTrimester = Trimester.firstTrimester.rawValue
+      todoListVC.todos = TodoList.getTodos(of: .firstTrimester, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
     case secondTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.secondTrimester.rawValue
-      todoListVC.todos = TodoList.getTodos(of: .secondTrimester, from: todoLists) ?? [Todo]()
+      todoListVC.currentTrimester = Trimester.secondTrimester.rawValue
+      todoListVC.todos = TodoList.getTodos(of: .secondTrimester, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
     case thirdTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.thirdTrimester.rawValue
-      todoListVC.todos = TodoList.getTodos(of: .thirdTrimester, from: todoLists) ?? [Todo]()
+      todoListVC.currentTrimester = Trimester.thirdTrimester.rawValue
+      todoListVC.todos = TodoList.getTodos(of: .thirdTrimester, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
     case afterButton:
       todoListVC.todoListTitleLabel.text = Trimester.after.rawValue
-      todoListVC.todos = TodoList.getTodos(of: .after, from: todoLists) ?? [Todo]()
+      todoListVC.currentTrimester = Trimester.after.rawValue
+      todoListVC.todos = TodoList.getTodos(of: .after, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
     default:
       return
     }
     
     navigationController?.pushViewController(todoListVC, animated: true)
-  
   }
   
 }
@@ -206,7 +250,6 @@ extension HomeViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 58
   }
-  
 }
   
 extension HomeViewController: UITableViewDataSource {
@@ -219,28 +262,26 @@ extension HomeViewController: UITableViewDataSource {
     cell.backgroundColor = .white
     
     return cell
-    
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let addNoteTVC = ToDoFormTableViewController()
     addNoteTVC.todo = currentTodos[indexPath.row]
+    print(currentTodos[indexPath.row].id)
     addNoteTVC.delegate = self
     navigationController?.pushViewController(addNoteTVC, animated: true)
-    
   }
   
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == .delete {
-    // 1. update model
-      currentTodos.remove(at: indexPath.row)
-    // 2. update view
-      tableView.deleteRows(at: [indexPath], with: .fade)
-    }
-    
-  }
-  
+//  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//    if editingStyle == .delete {
+//    // 1. update model
+//      currentTodos.remove(at: indexPath.row)
+//    // 2. update view
+//      tableView.deleteRows(at: [indexPath], with: .fade)
+//    }
+//  }
 }
+
 
 extension HomeViewController: TodoCellDelegate {
   
@@ -248,14 +289,21 @@ extension HomeViewController: TodoCellDelegate {
     if let indexPath = notifyTableView.indexPath(for: sender) {
       var todo = currentTodos[indexPath.row]
       todo.isCompleted.toggle()
-
+      
       // update model
       currentTodos[indexPath.row].isCompleted.toggle()
 
-
-      notifyTableView.reloadRows(at: [indexPath], with: .automatic)
+      if let trimesterIndex =  HomeViewController.todoLists.firstIndex(where: { $0.trimester.rawValue == currentTrimester }){
+        if let todoIndex = HomeViewController.todoLists[trimesterIndex].todos?.firstIndex(where: { $0.id == todo.id }) {
+          HomeViewController.todoLists[trimesterIndex].todos?[todoIndex] = todo
+        }
+      }
+      
+      currentTodos.remove(at: indexPath.row)
       notifyTableView.reloadData()
+      
       // TODO: save changes to database
+      saveTodoList()
     }
   }
 }
@@ -264,17 +312,16 @@ extension HomeViewController: TodoCellDelegate {
 extension HomeViewController: ToDoFormTableViewControllerDelegate {
 
   func add(todo: Todo) {
-
   }
 
   func edit(todo: Todo) {
-    if let selectedIndexPath = notifyTableView.indexPathForSelectedRow {
-      currentTodos[selectedIndexPath.row] = todo
-      notifyTableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+    if let trimesterIndex =  HomeViewController.todoLists.firstIndex(where: { $0.trimester.rawValue == currentTrimester }){
+      if let todoIndex = HomeViewController.todoLists[trimesterIndex].todos?.firstIndex(where: { $0.id == todo.id }) {
+        HomeViewController.todoLists[trimesterIndex].todos?[todoIndex] = todo
+      }
     }
-
+    saveTodoList()
   }
-
 }
 
 extension Date {
@@ -287,5 +334,5 @@ extension Date {
     let date = dateStringFormatter.date(from: dateString)!
     self.init(timeInterval:0, since:date)
   }
-  
 }
+
