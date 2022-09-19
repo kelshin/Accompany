@@ -199,7 +199,6 @@
 				4378AA2A27C8CCB20019773E /* Components */,
 				43FB2AEF27BDDB70004A641D /* TodoList */,
 				43FB2AF327BDDBD1004A641D /* Album */,
-				6413589C27C0625F0086BB39 /* Timer */,
 				6413589D27C0626A0086BB39 /* Services */,
 			);
 			path = Views;
@@ -335,6 +334,13 @@
 			children = (
 			);
 			path = Timer;
+   };
+		43FB2B1E27BE4A31004A641D /* PregnantArticles */ = {
+			isa = PBXGroup;
+			children = (
+				43FB2B1F27BE4A71004A641D /* PregnantArticlesTableViewController.swift */,
+			);
+			path = PregnantArticles;
 			sourceTree = "<group>";
 		};
 		6413589D27C0626A0086BB39 /* Services */ = {
@@ -725,7 +731,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7669655F54;
+				DEVELOPMENT_TEAM = N53R4WJ796;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Accompany/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
