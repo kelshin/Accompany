@@ -8,7 +8,6 @@
 import UIKit
 import SnapKit
 
-
 class HomeViewController: UIViewController {
   
   let accompanyTitleLabel = TitleLabel(title: "Accompany", size: .large, color: .red)
@@ -34,11 +33,6 @@ class HomeViewController: UIViewController {
   var currentUser = User()
   static var todoLists = [TodoList]()
   var currentTodos = [Todo]()
-
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    navigationController?.navigationBar.isHidden = true
-  }
 
   var currentTrimester = String()
   
@@ -72,6 +66,7 @@ class HomeViewController: UIViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
+    navigationController?.navigationBar.isHidden = true
     fetchCurrentLists()
     notifyTableView.reloadData()
   }
