@@ -1,4 +1,3 @@
-//
 //  Image.swift
 //  Accompany
 //
@@ -11,14 +10,16 @@ import UIKit
 struct Image: Hashable {
   var id: Int
   var uiImage: UIImage
-  
+  var uuid = UUID().uuidString.lowercased()
+    
   func hash(into hasher: inout Hasher) {
     hasher.combine(id)
     hasher.combine(uiImage)
   }
   
   static func == (lhs: Image, rhs: Image) -> Bool {
-    return lhs.id == rhs.id
+    return lhs.uuid == rhs.uuid
   }
   
 }
+
