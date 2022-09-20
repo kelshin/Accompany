@@ -137,9 +137,7 @@ class AnsDueDateViewController: UIViewController {
       })
       } else {
       let tabBarVC = TabBarViewController()
-      let navVC1 = UINavigationController(rootViewController: tabBarVC)
-      navVC1.modalPresentationStyle = .fullScreen
-      present(navVC1, animated: true)
+      view.window?.rootViewController = tabBarVC
     }
 
     
