@@ -70,6 +70,7 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
+  
     setupLabelLayout()
     
     // collectionView
@@ -87,50 +88,12 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
     
     configureDataSource()
     configCollectionView()
+//    retrieveData(key: .keyForImage)
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
       title: "Photo Album ", style: .plain, target: nil, action: nil)
   }
-  
-  func openCamera() {
-    
-    if UIImagePickerController.isSourceTypeAvailable(.camera) {
-      let imagePicker = UIImagePickerController()
-      imagePicker.delegate = self
-      imagePicker.sourceType = .camera
-      imagePicker.allowsEditing = true
-      
-      self.present(imagePicker, animated: true, completion: nil)
-    }
-    
-  }
-  
-  func openPhotoGallery() {
-    
-    if UIImagePickerController.isSourceTypeAvailable((.photoLibrary)) {
-      let imagePicker = UIImagePickerController()
-      imagePicker.delegate = self
-      imagePicker.sourceType = .photoLibrary
-      imagePicker.allowsEditing = true
-      
-      self.present(imagePicker, animated: true, completion: nil)
-    }
-    
-  }
-  
-  func gotoDetail() {
-    
-    let photoDetailVC = PhotoDetailedViewController()
-    if selectedIndexPath!.section == 0 {
-      photoDetailVC.imageView.image = slideImages[selectedIndexPath!.row].uiImage
-    } else if selectedIndexPath!.section == 1 {
-      photoDetailVC.imageView.image = uploadedImages[selectedIndexPath!.row].uiImage
-    }
-    
-    navigationController?.pushViewController(photoDetailVC, animated: true)
-    
-  }
-  
+ 
   func configureDataSource() {
     
     // MARK: Data Source Initialization
@@ -153,14 +116,11 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
     
     // MARK: Snapshot Definition
     dataSource.apply(snapshot)
-  
   }
-  
   
   func configCollectionView() {
     
     collectionView.delegate = self
-    
   }
   
   func setupLabelLayout() {
@@ -224,16 +184,68 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
     
   }
   
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    print(selectedIndexPath!.row)
-    print(selectedIndexPath!.section)
+  func openCamera() {
     
+    if UIImagePickerController.isSourceTypeAvailable(.camera) {
+      let imagePicker = UIImagePickerController()
+      imagePicker.delegate = self
+      imagePicker.sourceType = .camera
+      imagePicker.allowsEditing = true
+      
+      self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+  }
+  
+  func openPhotoGallery() {
+    
+    if UIImagePickerController.isSourceTypeAvailable((.photoLibrary)) {
+      let imagePicker = UIImagePickerController()
+      imagePicker.delegate = self
+      imagePicker.sourceType = .photoLibrary
+      imagePicker.allowsEditing = true
+      
+      self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+  }
+  
+  func gotoDetail() {
+    
+    let photoDetailVC = PhotoDetailedViewController()
+    if selectedIndexPath!.section == 0 {
+      photoDetailVC.imageView.image = slideImages[selectedIndexPath!.row].uiImage
+    } else if selectedIndexPath!.section == 1 {
+      photoDetailVC.imageView.image = uploadedImages[selectedIndexPath!.row].uiImage
+    }
+    
+    navigationController?.pushViewController(photoDetailVC, animated: true)
+    
+  }
+  
+  func save(image: UIImage) {
+    
+    let imageData = image.pngData()! as NSData
+    UserDefaults.standard.set(imageData, forKey: .keyForImage)
+  }
+  
+  func retrieveData(key: String) {
+    
+    guard let data = UserDefaults.standard.value(forKey: key) as? NSData else { return }
+    let image = UIImage(data: data as Data)
+  
+    slideImages[selectedIndexPath!.row].uiImage = image ?? UIImage(named: "logo-app")!
+//    uploadedImages[selectedIndexPath!.row].uiImage = image ?? UIImage(named: "logo-app")!
+  }
+  
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     // update snapshot
     let uiImage = info[.editedImage] as! UIImage
     // TODO: Upload Image to Database
     
     if (selectedIndexPath!.section == 0 ) && (selectedIndexPath!.row < slideImages.count) {
       slideImages[selectedIndexPath!.row].uiImage = uiImage
+      save(image: uiImage)
     } else if (selectedIndexPath!.section == 1) && (selectedIndexPath!.row < uploadedImages.count) {
       uploadedImages[selectedIndexPath!.row].uiImage = uiImage
     }
@@ -275,5 +287,9 @@ extension BabySonogramController: UICollectionViewDelegate {
     
   }
 
+}
+
+extension String {
+  static let keyForImage = "data"
 }
 
