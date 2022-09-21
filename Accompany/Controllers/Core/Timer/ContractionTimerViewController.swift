@@ -201,11 +201,12 @@ class ContractionTimerViewController: UIViewController {
       }
     }
     
-    userConstractionRecords = [
-      Contractions(contractionDate: Date(), contractionRecord: [Detail(state: "Constracting", length: "00:04"),Detail(state: "Rest", length: "00:04")]),
-      Contractions(contractionDate: Date(), contractionRecord: [Detail(state: "Constracting", length: "00:06"),Detail(state: "Rest", length: "00:02")])]
-    newRecord =
-      Contractions(contractionDate: Date(), contractionRecord: [Detail(state: "Constracting", length: "00:04"),Detail(state: "Rest", length: "00:07")])
+    userConstractionRecords = HomeViewController.currentUser.contractionRecord
+//    userConstractionRecords = [
+//      Contractions(contractionDate: Date(), contractionRecord: [Detail(state: "Constracting", length: "00:04"),Detail(state: "Rest", length: "00:04")]),
+//      Contractions(contractionDate: Date(), contractionRecord: [Detail(state: "Constracting", length: "00:06"),Detail(state: "Rest", length: "00:02")])]
+//    newRecord =
+//      Contractions(contractionDate: Date(), contractionRecord: [Detail(state: "Constracting", length: "00:04"),Detail(state: "Rest", length: "00:07")])
     
   }
   
@@ -383,6 +384,18 @@ class ContractionTimerViewController: UIViewController {
     secondsLabel.text = "00"
   }
   
+  func saveRecord() {
+    print("saving record")
+    print(newRecord)
+    if HomeViewController.currentUser.contractionRecord != nil {
+      HomeViewController.currentUser.contractionRecord?.insert(newRecord!, at: 0)
+    } else {
+      HomeViewController.currentUser.contractionRecord = [newRecord!]
+    }
+    HomeViewController().saveUserData()
+    print(HomeViewController.currentUser)
+  }
+  
   @objc func contractionAndRecordTabTapped() {
     inRecordsTab.toggle()
   }
@@ -390,9 +403,10 @@ class ContractionTimerViewController: UIViewController {
   @objc func stopTimer(){
     if newRecord != nil {
       newRecord?.contractionRecord?.append(Detail(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
+      saveRecord()
       currentRecordList.reloadData()
       if userConstractionRecords != nil {
-        userConstractionRecords?.append(newRecord!)
+        userConstractionRecords?.insert(newRecord!, at: 0)
       } else {
         userConstractionRecords = [newRecord!]
       }
@@ -498,13 +512,19 @@ extension ContractionTimerViewController: UITableViewDelegate, UITableViewDataSo
 ////      currentCell?.isSelected = false
 ////      }
     guard tableView == recordList else { return }
-    tableView.beginUpdates()
-    tableView.endUpdates()
+//    tableView.beginUpdates()
+//    tableView.endUpdates()
   }
 
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       userConstractionRecords?.remove(at: indexPath.section)
+      print(indexPath.section)
+      print("delete here")
+      print(HomeViewController.currentUser.contractionRecord?.count)
+      HomeViewController.currentUser.contractionRecord?.remove(at: indexPath.section)
+      print(HomeViewController.currentUser.contractionRecord?.count)
+//      saveRecord()
       tableView.reloadData()
     }
   }

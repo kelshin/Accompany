@@ -30,10 +30,11 @@ class HomeViewController: UIViewController {
   }()
   
   let bgCircleView = ImageView()
-  var currentUser = User()
+  
+  
+  static var currentUser = User()
   static var todoLists = [TodoList]()
   var currentTodos = [Todo]()
-
   var currentTrimester = String()
   
   override func viewDidLoad() {
@@ -45,11 +46,20 @@ class HomeViewController: UIViewController {
     
     // KELBIN
     print("I AM CURRENT USER")
-    print(currentUser)
-//    createData()
+    print(HomeViewController.currentUser)
     
-    fetchTodoLists()
+//    createData()
+    loadSavedData()
     fetchCurrentLists()
+    
+    if HomeViewController.currentUser.info?.dueDate == nil {
+      print("Due date is nil")
+      let getDueDate = PopupViewController()
+      getDueDate.modalPresentationStyle = .fullScreen
+      present(getDueDate, animated: false)
+//      dismiss(animated: false, completion: nil)
+//      navigationController?.pushViewController(PopupViewController, animated: <#T##Bool#>)
+    }
     
     // TODO: fetch todoLists
     
@@ -67,8 +77,13 @@ class HomeViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     navigationController?.navigationBar.isHidden = true
+//    fetchUserDetails()
     fetchCurrentLists()
     notifyTableView.reloadData()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    navigationController?.navigationBar.isHidden = false
   }
   
   func saveTodoList() {
@@ -79,10 +94,18 @@ class HomeViewController: UIViewController {
     }
   }
   
-  func loadTodoList(){
+  func saveUserData() {
+    let encoder = JSONEncoder()
+    if let encoder = try? encoder.encode(HomeViewController.currentUser){
+      let defaults = UserDefaults.standard
+      defaults.set(encoder, forKey: "SavedUser")
+    }
+  }
+  
+  func loadSavedData(){
     let defaults = UserDefaults.standard
+    let decoder = JSONDecoder()
     if let savedTodo = defaults.object(forKey: "SavedTodos") as? Data {
-      let decoder = JSONDecoder()
       if let loadedTodo = try? decoder.decode([TodoList].self, from: savedTodo){
         HomeViewController.todoLists = loadedTodo
       } else {
@@ -92,12 +115,29 @@ class HomeViewController: UIViewController {
       HomeViewController.todoLists = TodoList.loadSampleTodoLists()
       saveTodoList()
     }
+    if let savedUserData = defaults.object(forKey: "SavedUser") as? Data {
+      if let loadedUserData = try? decoder.decode(User.self, from: savedUserData){
+        HomeViewController.currentUser = loadedUserData
+      } else {
+        print("Error loading user data")
+      }
+    } else {
+        HomeViewController.currentUser.info = Info.loadSampleInfo()
+    }
+    print(HomeViewController.currentUser)
   }
   
-  private func fetchTodoLists() {
-    // fetch todolists
-    loadTodoList()
-  }
+//  private func fetchUserDetails() {
+//    if HomeViewController.currentUser.info == nil {
+//      HomeViewController.currentUser.info = Info.loadSampleInfo()
+//    }
+//    print(HomeViewController.currentUser.info)
+//  }
+  
+//  private func fetchTodoLists() {
+//    // fetch todolists
+//    loadSavedData()
+//  }
   
   private func fetchCurrentLists() {
     // decide current trimester
@@ -109,8 +149,21 @@ class HomeViewController: UIViewController {
   
   private func getCurrentTrimester() -> Trimester {
     // due date got from the AnsVC
-    let dueDate = Date.init("2022-12-31")
+//    let dueDate = Date.init("2022-12-31")
     
+//    let dueDate = HomeViewController.currentUser.info?.dueDate ?? {
+//      let due = Date()
+//      var dateComponent = DateComponents()
+//      dateComponent.day = 365
+//      let futureDate = Calendar.current.date(byAdding: dateComponent, to: due)
+//
+//      return futureDate
+//    }()
+    
+    guard let dueDate = HomeViewController.currentUser.info?.dueDate else {
+      currentTrimester = Trimester.firstTrimester.rawValue
+      return .firstTrimester
+    }
     print(Date().description(with: .current))
     // TODO: get date of pregnancy
     
