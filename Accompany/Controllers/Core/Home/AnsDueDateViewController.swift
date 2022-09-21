@@ -121,28 +121,24 @@ class AnsDueDateViewController: UIViewController {
   
   @objc func goBackPopVC() {
     let popVC = PopupViewController()
-    let navPopVC = UINavigationController(rootViewController: popVC)
-    navPopVC.modalPresentationStyle = .fullScreen
-    present(navPopVC, animated: true)
+//    let navPopVC = UINavigationController(rootViewController: popVC)
+    popVC.modalPresentationStyle = .fullScreen
+    present(popVC, animated: true)
   }
   
   // MARK: Pass the data to count trimester
   @objc func goToHomeVC() {
-
     if (dueDateInput.text == "") {
       let alert = UIAlertController(title: "Have to choose the date", message: "If you don't know the date, you can press back and choose don't know button.", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
       }))
-      self.present(alert, animated: true, completion: {
+        self.present(alert, animated: true, completion: {
       })
       } else {
-      let tabBarVC = TabBarViewController()
-      let navVC1 = UINavigationController(rootViewController: tabBarVC)
-      navVC1.modalPresentationStyle = .fullScreen
-      present(navVC1, animated: true)
+        HomeViewController.currentUser.info?.dueDate = dueDatePicker.date
+        HomeViewController().saveUserData()
+        self.view.window!.rootViewController?.dismiss(animated: true)
     }
-
-    
   }
 }
   
