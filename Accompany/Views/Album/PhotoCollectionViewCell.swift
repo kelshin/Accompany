@@ -16,8 +16,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    contentView.addSubview(photoView)
     contentView.backgroundColor = .white
+    contentView.addSubview(photoView)
     
 //    photoView.image = UIImage(named: "logo-app")
     photoView.contentMode = .scaleAspectFill

@@ -9,7 +9,7 @@ import UIKit
 
 class PhotoDetailedViewController: UIViewController {
   
-  let imageView = ImageView()
+  var imageView = ImageView()
   let deleteImage = ImageView()
 
 
