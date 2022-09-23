@@ -34,7 +34,7 @@ class DatePickerTableViewCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    titleLabel.text = InfoField.dateOfPregnancy.rawValue
+    titleLabel.text = InfoField.dueDate.rawValue
     titleLabel.font = .systemFont(ofSize: 16, weight: .bold)
     titleLabel.textColor  = #colorLiteral(red: 0.2462079227, green: 0.2246411145, blue: 0.2394523323, alpha: 1)
     datePicker.datePickerMode = .date
