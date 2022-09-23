@@ -69,7 +69,7 @@ class RecordsViewController: UIViewController {
     
     switch button {
     case goToAlbumButton:
-      let babyVC = BabySonogramController()
+      let babyVC = PhotoAblumController()
       navigationController?.pushViewController(babyVC, animated: true)
     case goToTimerButton:
       let timerVC = ContractionTimerViewController()

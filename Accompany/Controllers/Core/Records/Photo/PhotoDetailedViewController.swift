@@ -7,11 +7,20 @@
 
 import UIKit
 
+protocol PhotoDetailDelegate {
+  func photoDelete(data: UIImage, section: Int, id: Int)
+}
+
 class PhotoDetailedViewController: UIViewController {
+  
+  var photoDetaildelegate: PhotoDetailDelegate!
+  var photo: Image?
   
   var imageView = ImageView()
   let deleteImage = ImageView()
-
+  
+  var section: Int = 0
+  var selectedIndex: Int = 0
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -36,6 +45,7 @@ class PhotoDetailedViewController: UIViewController {
     
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (_) in
+      self.goBackPhotoVC()
     }))
     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
     }))
@@ -66,5 +76,13 @@ class PhotoDetailedViewController: UIViewController {
     }
     
   }
+  
+  func goBackPhotoVC() {
+//    photoDetaildelegate.photoDelete(data: UIImage(named: "logo-app")!, section: section, id: id)
+    self.navigationController?.popViewController(animated: true)
+    
+  }
  
 }
+
+

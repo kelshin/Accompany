@@ -51,7 +51,7 @@
 		6CB9D45F27C5F35F00D377F7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D45E27C5F35F00D377F7 /* User.swift */; };
 		6CB9D46127C60B8200D377F7 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D46027C60B8200D377F7 /* ProfileDetailViewController.swift */; };
 		6CB9D47427CA063900D377F7 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D47327CA063900D377F7 /* Image.swift */; };
-		6CF45F7427BE520100ED0942 /* BabySonogramController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7327BE520100ED0942 /* BabySonogramController.swift */; };
+		6CF45F7427BE520100ED0942 /* PhotoAlbumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7327BE520100ED0942 /* PhotoAlbumController.swift */; };
 		6CF45F7627BE624400ED0942 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */; };
 		6CF5E38627C3C26B00F427A2 /* QAController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF5E38527C3C26B00F427A2 /* QAController.swift */; };
 		6CF5E38827C3D9D000F427A2 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF5E38727C3D9D000F427A2 /* ContentCell.swift */; };
@@ -106,7 +106,7 @@
 		6CB9D45E27C5F35F00D377F7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6CB9D46027C60B8200D377F7 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		6CB9D47327CA063900D377F7 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
-		6CF45F7327BE520100ED0942 /* BabySonogramController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabySonogramController.swift; sourceTree = "<group>"; };
+		6CF45F7327BE520100ED0942 /* PhotoAlbumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumController.swift; sourceTree = "<group>"; };
 		6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		6CF5E38527C3C26B00F427A2 /* QAController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAController.swift; sourceTree = "<group>"; };
 		6CF5E38727C3D9D000F427A2 /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
@@ -350,7 +350,7 @@
 		6C1FC57B27C3BEB1007D625E /* Photo */ = {
 			isa = PBXGroup;
 			children = (
-				6CF45F7327BE520100ED0942 /* BabySonogramController.swift */,
+				6CF45F7327BE520100ED0942 /* PhotoAlbumController.swift */,
 				6C1FC56927BEF301007D625E /* PhotoDetailedViewController.swift */,
 			);
 			path = Photo;
@@ -539,7 +539,7 @@
 				6CB9D45B27C4D11C00D377F7 /* CustomTextViewController.swift in Sources */,
 				437721FF27ADE98B00EC8A98 /* RecordsViewController.swift in Sources */,
 				6C97121928CB1C8900AE4227 /* PopupViewController.swift in Sources */,
-				6CF45F7427BE520100ED0942 /* BabySonogramController.swift in Sources */,
+				6CF45F7427BE520100ED0942 /* PhotoAlbumController.swift in Sources */,
 				43FB2B1427BE415A004A641D /* TodoCell.swift in Sources */,
 				43FB2B0E27BE381C004A641D /* OutlineButton.swift in Sources */,
 				6C97121B28CB212B00AE4227 /* AnsDueDateViewController.swift in Sources */,
