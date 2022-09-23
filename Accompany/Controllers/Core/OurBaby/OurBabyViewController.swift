@@ -64,10 +64,12 @@ class OurBabyViewController: UIViewController {
     super.viewDidLoad()
     
     configPicker()
+    babyCalculator()
     
     babyIconTextField.inputView = pickerView
     babyIconTextField.textAlignment = .center
     babyIconTextField.text = "👶🏻"
+    babyIconTextField.tintColor = UIColor.clear
     babyIconTextField.font = UIFont.boldSystemFont(ofSize: 35)
   
     babyImageView.image = UIImage(named: "baby-image")
@@ -75,6 +77,10 @@ class OurBabyViewController: UIViewController {
     setupLayout()
     
     leftTitle.textAlignment = .center
+  }
+  
+  override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+    return false
   }
   
   func configPicker() {
@@ -189,6 +195,53 @@ class OurBabyViewController: UIViewController {
 //    }
 //
 //  }
+  
+  func babyCalculator() {
+    guard let userDueDate = HomeViewController.currentUser.info?.dueDate else {
+      leftTitle.text = "due date not specified"
+      leftNumberTitle.text = ""
+      return
+    }
+    
+    let dateFormatter: DateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd/MM/yyyy"
+
+    let selectedDate: String = dateFormatter.string(from: userDueDate)
+
+    let currentDateTime = Date()
+
+    let formatter = DateFormatter()
+    formatter.timeStyle = .none
+    formatter.dateStyle = .medium
+    formatter.dateFormat = "dd/MM/yyyy"
+    let todayDate: String = formatter.string(from: currentDateTime)
+
+    let dueDate = formatter.date(from: selectedDate)
+    let currentDate = formatter.date(from: todayDate)
+    let difference = (dueDate! - currentDate!)
+    let differenceDays = difference.asDays()
+
+    if differenceDays == 0 {
+//      datePicker.isHidden = true
+//      dueDateTitle.text = ""
+      leftTitle.text = "Congratulations!"
+      leftNumberTitle.text = "🎉🎉🎉"
+
+//      let button = OutlineButton(title: "🎉🎉🎉")
+//      button.addTarget(self, action: #selector(btnTapped(_:)), for: .touchUpInside)
+//      view.addSubview(button)
+//
+//      button.snp.makeConstraints { make in
+//        make.centerX.equalTo(contentView)
+////        make.top.equalTo(contentLabel.snp.bottom).offset(15)
+//        make.bottom.equalTo(contentView.snp.bottom).offset(-5)
+//        make.width.equalTo(view.snp.width).multipliedBy(0.33)
+//      }
+
+    } else {
+      leftNumberTitle.text = differenceDays > 1 ? "\(differenceDays) Days" : "\(differenceDays) Day"
+    }
+  }
   
   @objc func btnTapped(_ sender: UIButton) {
     let alert = UIAlertController(title: "Congratulations!", message: "Your baby is coming today!", preferredStyle: .alert)

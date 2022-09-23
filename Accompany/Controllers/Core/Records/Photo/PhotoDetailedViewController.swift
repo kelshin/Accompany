@@ -74,7 +74,6 @@ class PhotoDetailedViewController: UIViewController {
       make.width.equalTo(25)
       make.height.equalTo(25)
     }
-    
   }
   
   func goBackPhotoVC() {

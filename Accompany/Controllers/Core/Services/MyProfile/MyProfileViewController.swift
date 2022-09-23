@@ -45,7 +45,7 @@ class MyProfileViewController: CustomTextViewController {
     super.viewDidLoad()
     
     fetchUserInfo()
-    
+    loadImage()
     titleLabel.text = Services.myProfile.description
     
     addTapToImage()
@@ -184,20 +184,20 @@ extension MyProfileViewController: UITableViewDataSource {
     
     else {
       let cell = profileTableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier, for: indexPath) as! ProfileCell
-      
+      let userData = HomeViewController.currentUser.info
       switch indexPath.row {
       case 0:
-        cell.update(with: userInfo!.username, for: InfoField.username)
+        cell.update(with: userData!.username, for: InfoField.username)
       case 1:
-        cell.update(with: userInfo!.email, for: InfoField.email)
+        cell.update(with: userData!.email, for: InfoField.email)
       case 2:
-        cell.update(with: userInfo!.babyName, for: InfoField.babyName)
+        cell.update(with: userData!.babyName, for: InfoField.babyName)
       case 3:
         cell.update(with: userInfo?.dateOfPregnancy ?? "", for: InfoField.dueDate)
       case 4:
-        cell.update(with: userInfo?.statusMessage ?? "", for: InfoField.statusMessage)
+        cell.update(with: userData?.statusMessage ?? "", for: InfoField.statusMessage)
       default:
-        cell.update(with: userInfo?.bio ?? "", for: InfoField.bio)
+        cell.update(with: userData?.bio ?? "", for: InfoField.bio)
       }
       
       return cell
@@ -263,9 +263,21 @@ extension MyProfileViewController: UIImagePickerControllerDelegate, UINavigation
     
     let image = info[.editedImage] as? UIImage
     self.userImageView.image = image
+    saveImage(image: image!)
     self.dismiss(animated: true, completion: nil)
   }
+  
+  func saveImage( image : UIImage) {
+    guard let profImage = image.jpegData(compressionQuality: 0.5) else { return }
+    let encoded = try! PropertyListEncoder().encode(profImage)
+    UserDefaults.standard.set(encoded, forKey: "profileImage")
+  }
 
+  func loadImage() {
+    guard let profImage = UserDefaults.standard.data(forKey: "profileImage") else { return }
+    let decoded = try! PropertyListDecoder().decode(Data.self, from: profImage)
+    self.userImageView.image = UIImage(data: decoded)
+  }
 }
 
 extension MyProfileViewController: ProfileDetailViewControllerDelegate {
@@ -273,19 +285,19 @@ extension MyProfileViewController: ProfileDetailViewControllerDelegate {
   func edit(_ value: String, for field: InfoField) {
     switch field {
     case .username:
-      userInfo?.username = value
+      HomeViewController.currentUser.info?.username = value
     case .email:
-      userInfo?.email = value
+      HomeViewController.currentUser.info?.email = value
     case .babyName:
-      userInfo?.babyName = value.isEmpty ? "Not decided yet" : value
+      HomeViewController.currentUser.info?.babyName = value.isEmpty ? "Not decided yet" : value
     case .statusMessage:
-      userInfo?.statusMessage = value
+      HomeViewController.currentUser.info?.statusMessage = value
     case .bio:
-      userInfo?.bio = value
+      HomeViewController.currentUser.info?.bio = value
     default:
       return
     }
-    
+    HomeViewController().saveUserData()
     profileTableView.reloadRows(at: [selectedIndexPath!], with: .automatic)
   }
   
