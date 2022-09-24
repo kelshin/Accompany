@@ -26,9 +26,9 @@ struct User : Codable {
   
   var id: UUID?
   var info: Info?
-  // TODO: add default todos
+  // TODO: implement todolist in user data
 //  var todolists = [TodoList]()
-  // TODO: Photos
+  // TODO: implement photos in user data
 //  var media: [URL]?
   var contractionRecord: [Contractions]?
   var note: String?

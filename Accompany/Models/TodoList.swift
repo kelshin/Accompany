@@ -94,6 +94,5 @@ struct TodoList: Codable {
     case .notDone:
       return todoLists.filter { $0.trimester == trimester }.first?.todos?.filter{ $0.isCompleted == false }
     }
-//    return todoLists.filter { $0.trimester == trimester }.first?.todos
   }
 }

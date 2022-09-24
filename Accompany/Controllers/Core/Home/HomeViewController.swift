@@ -127,18 +127,6 @@ class HomeViewController: UIViewController {
     print(HomeViewController.currentUser)
   }
   
-//  private func fetchUserDetails() {
-//    if HomeViewController.currentUser.info == nil {
-//      HomeViewController.currentUser.info = Info.loadSampleInfo()
-//    }
-//    print(HomeViewController.currentUser.info)
-//  }
-  
-//  private func fetchTodoLists() {
-//    // fetch todolists
-//    loadSavedData()
-//  }
-  
   private func fetchCurrentLists() {
     // decide current trimester
     let currentTrimester = getCurrentTrimester()
@@ -148,27 +136,13 @@ class HomeViewController: UIViewController {
   }
   
   private func getCurrentTrimester() -> Trimester {
-    // due date got from the AnsVC
-//    let dueDate = Date.init("2022-12-31")
-    
-//    let dueDate = HomeViewController.currentUser.info?.dueDate ?? {
-//      let due = Date()
-//      var dateComponent = DateComponents()
-//      dateComponent.day = 365
-//      let futureDate = Calendar.current.date(byAdding: dateComponent, to: due)
-//
-//      return futureDate
-//    }()
     
     guard let dueDate = HomeViewController.currentUser.info?.dueDate else {
       currentTrimester = Trimester.firstTrimester.rawValue
       return .firstTrimester
     }
-    print(Date().description(with: .current))
-    // TODO: get date of pregnancy
+//    print(Date().description(with: .current))
     
-    // calculate which trimester
-    // TODO: change Date() to date of pregnancy
     let dateDifference = (dueDate - Date()).asDays()
     
     switch Double(dateDifference) / 7.0 {
@@ -320,14 +294,6 @@ extension HomeViewController: UITableViewDataSource {
     navigationController?.pushViewController(addNoteTVC, animated: true)
   }
   
-//  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//    if editingStyle == .delete {
-//    // 1. update model
-//      currentTodos.remove(at: indexPath.row)
-//    // 2. update view
-//      tableView.deleteRows(at: [indexPath], with: .fade)
-//    }
-//  }
 }
 
 
@@ -338,7 +304,6 @@ extension HomeViewController: TodoCellDelegate {
       var todo = currentTodos[indexPath.row]
       todo.isCompleted.toggle()
       
-      // update model
       currentTodos[indexPath.row].isCompleted.toggle()
 
       if let trimesterIndex =  HomeViewController.todoLists.firstIndex(where: { $0.trimester.rawValue == currentTrimester }){
@@ -349,8 +314,6 @@ extension HomeViewController: TodoCellDelegate {
       
       currentTodos.remove(at: indexPath.row)
       notifyTableView.reloadData()
-      
-      // TODO: save changes to database
       saveTodoList()
     }
   }
