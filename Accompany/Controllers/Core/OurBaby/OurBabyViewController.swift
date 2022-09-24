@@ -64,7 +64,7 @@ class OurBabyViewController: UIViewController {
     super.viewDidLoad()
     
     configPicker()
-    babyCalculator()
+//    babyCalculator()
     
     babyIconTextField.inputView = pickerView
     babyIconTextField.textAlignment = .center
@@ -77,6 +77,10 @@ class OurBabyViewController: UIViewController {
     setupLayout()
     
     leftTitle.textAlignment = .center
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    babyCalculator()
   }
   
   override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {

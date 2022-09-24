@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class FeedbackViewController: CustomTextViewController {
+class FeedbackViewController: CustomTextViewController, MFMailComposeViewControllerDelegate {
   
   let submitButton = PrimaryButton(title: "Submit")
 
@@ -28,8 +29,24 @@ class FeedbackViewController: CustomTextViewController {
   @objc func submitData(_ sender: UIButton) {
     //TODO: Receive one automatically email from Accompany
     
-    textView.text = ""
-    
+    if MFMailComposeViewController.canSendMail() {
+      print("can send email")
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["kelbinmdavid@gmail.com"])
+      mail.setSubject("Accompany Feedback")
+      mail.setMessageBody("<p>\(String(describing: textView.text ?? ""))</p>", isHTML: true)
+
+            present(mail, animated: true)
+        } else {
+            // show failure alert
+        }
+    textView.text = "Thank you, we will review your feedback. Have a nice day"
+  }
+  
+  func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+      print("Email was sent")
+      controller.dismiss(animated: true)
   }
   
   func setupLayout() {

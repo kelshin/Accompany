@@ -329,20 +329,6 @@
 			path = AccountSettings;
 			sourceTree = "<group>";
 		};
-		6413589C27C0625F0086BB39 /* Timer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Timer;
-   };
-		43FB2B1E27BE4A31004A641D /* PregnantArticles */ = {
-			isa = PBXGroup;
-			children = (
-				43FB2B1F27BE4A71004A641D /* PregnantArticlesTableViewController.swift */,
-			);
-			path = PregnantArticles;
-			sourceTree = "<group>";
-		};
 		6413589D27C0626A0086BB39 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -701,7 +687,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7669655F54;
+				DEVELOPMENT_TEAM = N53R4WJ796;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Accompany/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -729,6 +715,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N53R4WJ796;
@@ -747,6 +734,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.Accompany;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

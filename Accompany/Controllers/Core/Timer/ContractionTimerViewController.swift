@@ -504,6 +504,10 @@ extension ContractionTimerViewController: UITableViewDelegate, UITableViewDataSo
       return cell
     }
   }
+  
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    return indexPath.row > 0 ? false : true
+  }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     //print(userConstractionRecords!)
@@ -512,8 +516,8 @@ extension ContractionTimerViewController: UITableViewDelegate, UITableViewDataSo
 ////      currentCell?.isSelected = false
 ////      }
     guard tableView == recordList else { return }
-//    tableView.beginUpdates()
-//    tableView.endUpdates()
+    tableView.beginUpdates()
+    tableView.endUpdates()
   }
 
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
