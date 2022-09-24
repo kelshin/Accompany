@@ -12,6 +12,7 @@ enum InfoField: String, CaseIterable {
 //  case username = "Username"
   case email = "Email"
   case babyName = "Baby Name"
+  case babyName = "Baby's Name"
   case dueDate = "Due Date"
   case statusMessage = "Status"
   case bio = "Bio"
@@ -158,7 +159,7 @@ extension MyProfileViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 65
+    return 60
   }
   
 }
@@ -191,6 +192,8 @@ extension MyProfileViewController: UITableViewDataSource {
       case 2:
         cell.update(with: DateFormatter().string(from: userData?.dueDate ?? Date.now) , for: InfoField.dueDate)
       case 3:
+        cell.update(with: userInfo?.dateOfPregnancy ?? "", for: InfoField.dueDate)
+      case 4:
         cell.update(with: userData?.statusMessage ?? "", for: InfoField.statusMessage)
       default:
         cell.update(with: userData?.bio ?? "", for: InfoField.bio)
