@@ -1,1 +1,1 @@
-Adding some content to mess with it later
+Changing the contents of text file from new branch
