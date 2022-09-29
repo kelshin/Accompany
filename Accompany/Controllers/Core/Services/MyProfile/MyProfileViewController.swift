@@ -11,7 +11,6 @@ enum InfoField: String, CaseIterable {
   
 //  case username = "Username"
   case email = "Email"
-  case babyName = "Baby Name"
   case babyName = "Baby's Name"
   case dueDate = "Due Date"
   case statusMessage = "Status"
@@ -56,6 +55,10 @@ class MyProfileViewController: CustomTextViewController {
    
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
         title: "My Profile", style: .plain, target: nil, action: nil)
+  }
+  
+  override func viewWillAppear(_ animated: Bool){
+    profileTableView.reloadData()
   }
   
   // TODO: fetch user info from db

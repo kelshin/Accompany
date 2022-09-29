@@ -71,8 +71,9 @@ class OurBabyViewController: UIViewController {
     babyIconTextField.text = "👶🏻"
     babyIconTextField.tintColor = UIColor.clear
     babyIconTextField.font = UIFont.boldSystemFont(ofSize: 35)
-  
     babyImageView.image = UIImage(named: "baby-image")
+    
+    nameTitleTextField.addTarget(self, action: #selector(nameChanged), for: .editingChanged)
     
     setupLayout()
     
@@ -80,6 +81,7 @@ class OurBabyViewController: UIViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
+    nameTitleTextField.text = HomeViewController.currentUser.info?.babyName ?? ""
     babyCalculator()
   }
   
@@ -245,6 +247,11 @@ class OurBabyViewController: UIViewController {
     } else {
       leftNumberTitle.text = differenceDays > 1 ? "\(differenceDays) Days" : "\(differenceDays) Day"
     }
+  }
+  
+  @objc func nameChanged(){
+    HomeViewController.currentUser.info?.babyName = nameTitleTextField.text ?? ""
+    HomeViewController().saveUserData()
   }
   
   @objc func btnTapped(_ sender: UIButton) {
