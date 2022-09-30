@@ -144,8 +144,6 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
 //    UserDefaults.standard.set(imageData, forKey: .keyForImage)
 //  }
   
-  // CHECK THIS
-  
   func saveImages(url: String) {
     for imageURL in saveImgName {
       let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -184,7 +182,6 @@ extension PhotoAblumController: UICollectionViewDataSource {
     return uploadedImages.count
   }
   
-  // CHECK THIS, view image
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.reuseIdentifier, for: indexPath) as? PhotoCollectionViewCell else { fatalError() }
     cell.photoView.image = uploadedImages[indexPath.row].uiImage
@@ -251,4 +248,3 @@ extension PhotoAblumController: PHPickerViewControllerDelegate {
 extension String {
   static let keyForImage = "data"
 }
-
