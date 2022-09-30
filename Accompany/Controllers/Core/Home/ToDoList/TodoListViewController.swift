@@ -10,6 +10,7 @@ import SnapKit
 
 class TodoListViewController: UIViewController {
   
+  
   let todoListTitleLabel = TitleLabel(title: nil, size: .medium, color: .red)
   
   let tableView: UITableView = {
@@ -22,17 +23,26 @@ class TodoListViewController: UIViewController {
   }()
   
   var todos = [Todo]()
+  var currentTrimester = String()
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
-//    prepareLabel(label: self.todoListTitleLabel, string: "1", superScript: "st")
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
     configureTableView()
         
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
+  }
   
+  override func viewWillAppear(_ animated: Bool) {
+    reloadData()
+  }
+  
+  func reloadData(){
+    todos.sort{!$0.isCompleted && $1.isCompleted}
+    tableView.reloadData()
+    saveToMainList()
   }
   
   private func configureTableView() {
@@ -85,7 +95,9 @@ extension TodoListViewController: UITableViewDelegate {
     // configure cell
     cell.update(with: todo)
     cell.isCompleteButton.isSelected = todo.isCompleted
+    cell.delegate = self
     cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    
     return cell
     
   }
@@ -100,26 +112,44 @@ extension TodoListViewController: UITableViewDelegate {
     addNoteTVC.todo = todos[indexPath.row]
     addNoteTVC.delegate = self
     navigationController?.pushViewController(addNoteTVC, animated: true)
-    
   }
-  
 }
 
 extension TodoListViewController: UITableViewDataSource {
   
+//  func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//    let delete = UIContextualAction(style: .destructive, title: "Delete"){ [weak self] _, _, complete in
+//      tableView.deleteRows(at: [indexPath], with: .automatic)
+//      complete(true)
+//    }
+//    delete.backgroundColor = .red
+//
+//    return UISwipeActionsConfiguration(actions: [delete])
+//  }
+  
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
     // 1. update model
-      todos.remove(at: indexPath.row)
+      
     // 2. update view
-      tableView.deleteRows(at: [indexPath], with: .fade)
-    } else if editingStyle == .insert {
-      // 1. update model
-      let todo = Todo(title: "")
-      todos.insert(todo, at: 0)
-      // 2. update view
-      tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+      
+      
+      if let trimesterIndex =  HomeViewController.todoLists.firstIndex(where: { $0.trimester.rawValue == currentTrimester }){
+        if let todoIndex = HomeViewController.todoLists[trimesterIndex].todos?.firstIndex(where: { $0.id == todos[indexPath.row].id }) {
+          HomeViewController.todoLists[trimesterIndex].todos?.remove(at: todoIndex)
+          todos.remove(at: indexPath.row)
+          tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+      }
     }
+//      else if editingStyle == .insert {
+//      // 1. update model
+//      let todo = Todo(title: "")
+//      todos.insert(todo, at: 0)
+//      // 2. update view
+////      tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+//    }
+    reloadData()
   }
   
   func prepareLabel(label: UILabel, string: String, superScript: String){
@@ -128,7 +158,6 @@ extension TodoListViewController: UITableViewDataSource {
     let fontExtension = label.text![label.text!.index(label.text!.startIndex,offsetBy: 3)..<label.text!.index(label.text!.endIndex, offsetBy: 0)]
     let attributedString = NSMutableAttributedString(string: string + superScript + fontExtension, attributes: [NSAttributedString.Key.font:font!])
     attributedString.setAttributes([NSAttributedString.Key.font:fontSuper!, NSAttributedString.Key.baselineOffset:10], range: NSRange(location: string.count, length: superScript.count))
-    print()
     label.attributedText = attributedString
   }
 }
@@ -137,14 +166,53 @@ extension TodoListViewController: ToDoFormTableViewControllerDelegate {
   
   func add(todo: Todo) {
     todos.append(todo)
-    tableView.insertRows(at: [IndexPath(row: todos.count - 1, section: 0)], with: .automatic)
+    
+    if let trimesterIndex =  HomeViewController.todoLists.firstIndex(where: { $0.trimester.rawValue == currentTrimester }){
+      HomeViewController.todoLists[trimesterIndex].todos?.append(todo)
+    }
+    reloadData()
+//    tableView.insertRows(at: [IndexPath(row: todos.count - 1, section: 0)], with: .automatic)
   }
   
   func edit(todo: Todo) {
     if let selectedIndexPath = tableView.indexPathForSelectedRow {
       todos[selectedIndexPath.row] = todo
       tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+      
+      if let trimesterIndex =  HomeViewController.todoLists.firstIndex(where: { $0.trimester.rawValue == currentTrimester }){
+        if let todoIndex = HomeViewController.todoLists[trimesterIndex].todos?.firstIndex(where: { $0.id == todo.id }) {
+          HomeViewController.todoLists[trimesterIndex].todos?[todoIndex] = todo
+        }
+      }
+      reloadData()
     }
   }
   
+  func saveToMainList() {
+    let hvc = HomeViewController()
+    hvc.saveTodoList()
+  }
+}
+
+extension TodoListViewController: TodoCellDelegate {
+  
+  func isCompleteButtonTapped(sender: TodoCell) {
+    if let indexPath = tableView.indexPath(for: sender) {
+      var todo = todos[indexPath.row]
+      todo.isCompleted.toggle()
+      
+      // update model
+      todos[indexPath.row].isCompleted.toggle()
+
+      if let trimesterIndex =  HomeViewController.todoLists.firstIndex(where: { $0.trimester.rawValue == currentTrimester }){
+        if let todoIndex = HomeViewController.todoLists[trimesterIndex].todos?.firstIndex(where: { $0.id == todo.id }) {
+          HomeViewController.todoLists[trimesterIndex].todos?[todoIndex] = todo
+        }
+      }
+      
+      reloadData()
+//      tableView.reloadRows(at: [indexPath], with: .automatic)
+      
+    }
+  }
 }
