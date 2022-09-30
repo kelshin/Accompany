@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
     notifyTableView.translatesAutoresizingMaskIntoConstraints = false
     
     return notifyTableView
-  }()
+  }() 
   
   let bgCircleView = ImageView()
   
