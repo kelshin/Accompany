@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Trimester: String, CaseIterable, Codable {
+enum Trimester: String, CaseIterable {
   
   case firstTrimester = "1st Trimester"
   case secondTrimester = "2nd Trimester"
@@ -16,19 +16,11 @@ enum Trimester: String, CaseIterable, Codable {
   
 }
 
-enum ToDoStatus: String, CaseIterable, Codable {
-  
-  case all = "All"
-  case done = "Done"
-  case notDone = "Not Done"
-  
-}
-
-struct TodoList: Codable {
+struct TodoList {
   
   var id = UUID()
   var trimester: Trimester
-  public var todos: [Todo]?
+  var todos: [Todo]?
   
   static func loadSampleTodoLists() -> [TodoList] {
     return [
@@ -85,14 +77,8 @@ struct TodoList: Codable {
     ]
   }
   
-  static func getTodos(of trimester: Trimester, from todoLists: [TodoList], status: ToDoStatus) -> [Todo]? {
-    switch status {
-    case .all:
-      return todoLists.filter { $0.trimester == trimester }.first?.todos
-    case .done:
-      return todoLists.filter { $0.trimester == trimester }.first?.todos?.filter{ $0.isCompleted == true }
-    case .notDone:
-      return todoLists.filter { $0.trimester == trimester }.first?.todos?.filter{ $0.isCompleted == false }
-    }
+  static func getTodos(of trimester: Trimester, from todoLists: [TodoList]) -> [Todo]? {
+    return todoLists.filter { $0.trimester == trimester }.first?.todos
   }
+  
 }

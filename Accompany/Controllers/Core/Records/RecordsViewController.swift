@@ -62,6 +62,7 @@ class RecordsViewController: UIViewController {
       make.width.equalTo(view.snp.width).multipliedBy(0.55)
       make.top.equalTo(bgCircleView.snp.top).offset(70)
     }
+ 
   }
   
   @objc func goTo(_ button: UIButton) {

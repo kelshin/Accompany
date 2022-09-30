@@ -12,14 +12,25 @@ struct Image: Hashable {
   var uiImage: UIImage
   var uuid = UUID().uuidString.lowercased()
   
+  static let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+  static let archieveURL = documentsDirectory.appendingPathComponent("")
+  
   func hash(into hasher: inout Hasher) {
 //    hasher.combine(id)
     hasher.combine(uiImage)
   }
   
-//  static func loadPhotoCell() -> [Image]? {
-//    return nil
-//  }
+  static func loadPhoto(url: URL) {
+    
+    let task = URLSession.shared.dataTask(with: url) { data, response, error in
+      guard let data = data, let newImage = UIImage(data: data) else {
+        print("can't load image from url: \(url)")
+        return
+      }
+      self.init(uiImage: newImage)
+    }
+    task.resume()
+  }
 //
 //  static func loadSampleSlide() -> [Image] {
 //    var slideArr: [Image] = []

@@ -16,5 +16,6 @@ struct Todo: Codable {
   var title: String
   var isCompleted: Bool = false
   var note: String?
+  
 }
   

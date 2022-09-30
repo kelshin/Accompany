@@ -39,19 +39,20 @@ class ToDoFormTableViewController: UITableViewController {
   
   private func configurateNavigationItem() {
     self.navigationItem.rightBarButtonItem = saveBarButton
+    
     if todo != nil {
       navigationItem.title = "Edit To Do"
     } else {
       navigationItem.title = "Add To Do"
     }
+  
   }
   
   @objc func saveButtonTapped() {
-    let id = todo?.id != nil ? todo?.id : UUID()
     let isComplete = toDoBasicInfoCell.isCompleteButton.isSelected
     let todoTitle = toDoBasicInfoCell.toDoTextView.text!
     let note = toDoNotesCell.noteTextView.text ?? ""
-    let newTodo = Todo(id: id!, title: todoTitle, isCompleted: isComplete, note: note)
+    let newTodo = Todo(title: todoTitle, isCompleted: isComplete, note: note)
     
     if todo != nil {
       delegate?.edit(todo: newTodo)
@@ -138,4 +139,5 @@ class ToDoFormTableViewController: UITableViewController {
     }
      header.textLabel?.textAlignment = .left
   }
+  
 }

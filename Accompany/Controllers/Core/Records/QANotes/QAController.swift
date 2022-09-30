@@ -44,8 +44,6 @@ class QAController: UIViewController, UIScrollViewDelegate {
       DrNoteTextView.becomeFirstResponder()
     } else {
       noteContent = DrNoteTextView.text
-      HomeViewController.currentUser.note = noteContent
-      HomeViewController().saveUserData()
     }
     DrNoteTextView.isUserInteractionEnabled.toggle()
   }
@@ -57,12 +55,11 @@ class QAController: UIViewController, UIScrollViewDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
-    
+      
     addSubview()
     keyboardHasShown()
-    DrNoteTextView.text = HomeViewController.currentUser.note ?? "Tap edit to add notes here"
-    print(HomeViewController.currentUser.note)
+    DrNoteTextView.text = (noteContent != nil) ? noteContent : "Tap edit to add notes here"
+      
     navigationItem.rightBarButtonItem = editButtonItem
       
     scrollView.delegate = self

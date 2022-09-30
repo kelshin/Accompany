@@ -9,9 +9,8 @@ import SnapKit
 
 enum InfoField: String, CaseIterable {
   
-//  case username = "Username"
+  case username = "Username"
   case email = "Email"
-  case babyName = "Baby Name"
   case babyName = "Baby's Name"
   case dueDate = "Due Date"
   case statusMessage = "Status"
@@ -36,17 +35,17 @@ class MyProfileViewController: CustomTextViewController {
   
   let datePickerCell = DatePickerTableViewCell()
   
-  var userInfo = HomeViewController.currentUser.info
+  var userInfo: Info?
   var selectedIndexPath: IndexPath?
   
-  let datePickerIndexPath = IndexPath(row: 2, section: 0)
+  let datePickerIndexPath = IndexPath(row: 3, section: 0)
 
  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-//    fetchUserInfo()
-    loadImage()
+    fetchUserInfo()
+    
     titleLabel.text = Services.myProfile.description
     
     addTapToImage()
@@ -60,7 +59,7 @@ class MyProfileViewController: CustomTextViewController {
   
   // TODO: fetch user info from db
   private func fetchUserInfo() {
-    userInfo = HomeViewController.currentUser.info
+    userInfo = Info.loadSampleInfo()
   }
   
   func addTapToImage() {
@@ -117,11 +116,13 @@ class MyProfileViewController: CustomTextViewController {
 
       self.present(imagePicker, animated: true, completion: nil)
     }
+    
   }
   
   private func configTableView() {
     profileTableView.delegate = self
     profileTableView.dataSource = self
+    
   }
 
   func setupLayout() {
@@ -149,7 +150,9 @@ class MyProfileViewController: CustomTextViewController {
       make.width.equalTo(view.snp.width)
       make.bottom.equalTo(view.safeAreaLayoutGuide)
     }
+
   }
+  
 }
 
 extension MyProfileViewController: UITableViewDelegate {
@@ -167,7 +170,7 @@ extension MyProfileViewController: UITableViewDelegate {
 extension MyProfileViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 5
+    return 6
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -175,31 +178,32 @@ extension MyProfileViewController: UITableViewDataSource {
     if indexPath == datePickerIndexPath {
     
       datePickerCell.datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+            
       return datePickerCell
     }
     
     else {
       let cell = profileTableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier, for: indexPath) as! ProfileCell
-      let userData = HomeViewController.currentUser.info
+      
       switch indexPath.row {
-      // Username to be implemented soon
-//      case 0:
-//        cell.update(with: userData!.username, for: InfoField.username)
       case 0:
-        cell.update(with: userData!.email, for: InfoField.email)
+        cell.update(with: userInfo!.username, for: InfoField.username)
       case 1:
-        cell.update(with: userData!.babyName, for: InfoField.babyName)
+        cell.update(with: userInfo!.email, for: InfoField.email)
       case 2:
-        cell.update(with: DateFormatter().string(from: userData?.dueDate ?? Date.now) , for: InfoField.dueDate)
+        cell.update(with: userInfo!.babyName, for: InfoField.babyName)
       case 3:
         cell.update(with: userInfo?.dateOfPregnancy ?? "", for: InfoField.dueDate)
       case 4:
-        cell.update(with: userData?.statusMessage ?? "", for: InfoField.statusMessage)
+        cell.update(with: userInfo?.statusMessage ?? "", for: InfoField.statusMessage)
       default:
-        cell.update(with: userData?.bio ?? "", for: InfoField.bio)
+        cell.update(with: userInfo?.bio ?? "", for: InfoField.bio)
       }
+      
       return cell
     }
+    
+    
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -213,16 +217,15 @@ extension MyProfileViewController: UITableViewDataSource {
       profileDetailVC.delegate = self
       
       switch indexPath.row {
-// Username to be implemented soon
-//      case 0:
-//        profileDetailVC.fieldValue = userInfo?.username
       case 0:
-        profileDetailVC.fieldValue = userInfo?.email
+        profileDetailVC.fieldValue = userInfo?.username
       case 1:
+        profileDetailVC.fieldValue = userInfo?.email
+      case 2:
         profileDetailVC.fieldValue = userInfo?.babyName
-      case 3:
-        profileDetailVC.fieldValue = userInfo?.statusMessage
       case 4:
+        profileDetailVC.fieldValue = userInfo?.statusMessage
+      case 5:
         profileDetailVC.fieldValue = userInfo?.bio
       default:
         profileDetailVC.fieldValue = ""
@@ -249,9 +252,9 @@ extension MyProfileViewController: UITableViewDataSource {
 
     let selectedDate: String = dateFormatter.string(from: datePicker.date)
     
-    HomeViewController.currentUser.info?.dueDate = datePicker.date
-    HomeViewController().saveUserData()
+    userInfo?.dateOfPregnancy = selectedDate
   }
+
 }
 
 extension MyProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -260,41 +263,30 @@ extension MyProfileViewController: UIImagePickerControllerDelegate, UINavigation
     
     let image = info[.editedImage] as? UIImage
     self.userImageView.image = image
-    saveImage(image: image!)
     self.dismiss(animated: true, completion: nil)
   }
-  
-  func saveImage( image : UIImage) {
-    guard let profImage = image.jpegData(compressionQuality: 0.5) else { return }
-    let encoded = try! PropertyListEncoder().encode(profImage)
-    UserDefaults.standard.set(encoded, forKey: "profileImage")
-  }
 
-  func loadImage() {
-    guard let profImage = UserDefaults.standard.data(forKey: "profileImage") else { return }
-    let decoded = try! PropertyListDecoder().decode(Data.self, from: profImage)
-    self.userImageView.image = UIImage(data: decoded)
-  }
 }
 
 extension MyProfileViewController: ProfileDetailViewControllerDelegate {
   
   func edit(_ value: String, for field: InfoField) {
     switch field {
-//      case .username:
-//        HomeViewController.currentUser.info?.username = value
-      case .email:
-        HomeViewController.currentUser.info?.email = value
-      case .babyName:
-        HomeViewController.currentUser.info?.babyName = value.isEmpty ? "Not decided yet" : value
-      case .statusMessage:
-        HomeViewController.currentUser.info?.statusMessage = value
-      case .bio:
-        HomeViewController.currentUser.info?.bio = value
-      default:
-        return
+    case .username:
+      userInfo?.username = value
+    case .email:
+      userInfo?.email = value
+    case .babyName:
+      userInfo?.babyName = value.isEmpty ? "Not decided yet" : value
+    case .statusMessage:
+      userInfo?.statusMessage = value
+    case .bio:
+      userInfo?.bio = value
+    default:
+      return
     }
-    HomeViewController().saveUserData()
+    
     profileTableView.reloadRows(at: [selectedIndexPath!], with: .automatic)
   }
+  
 }
