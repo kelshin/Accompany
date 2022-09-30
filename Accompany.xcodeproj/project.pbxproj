@@ -199,6 +199,7 @@
 				4378AA2A27C8CCB20019773E /* Components */,
 				43FB2AEF27BDDB70004A641D /* TodoList */,
 				43FB2AF327BDDBD1004A641D /* Album */,
+				6413589C27C0625F0086BB39 /* Timer */,
 				6413589D27C0626A0086BB39 /* Services */,
 			);
 			path = Views;
@@ -327,6 +328,13 @@
 				430F6D8F27BF67F20095DB8D /* FeedbackViewController.swift */,
 			);
 			path = AccountSettings;
+			sourceTree = "<group>";
+		};
+		6413589C27C0625F0086BB39 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Timer;
 			sourceTree = "<group>";
 		};
 		6413589D27C0626A0086BB39 /* Services */ = {
@@ -687,7 +695,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N53R4WJ796;
+				DEVELOPMENT_TEAM = 7669655F54;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Accompany/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -715,10 +723,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N53R4WJ796;
+				DEVELOPMENT_TEAM = 7669655F54;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Accompany/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -734,7 +741,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.Accompany;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

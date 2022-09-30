@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Contractions : Codable {
+struct Contractions {
   let contractionDate: Date?
   var contractionRecord: [Detail]?
 }
 
-struct Detail : Codable {
+struct Detail {
   let state : String?
   let length : String?
 }

@@ -5,9 +5,8 @@
 //  Created by Esperanza on 2022-02-22.
 //
 import Foundation
-import UIKit
 
-struct Info : Codable {
+struct Info {
   
   var username: String
   var email: String
@@ -18,19 +17,20 @@ struct Info : Codable {
   var bio: String?
   
   static func loadSampleInfo() -> Info {
-    return Info(username: "", email: "", babyName: "", dateOfPregnancy: nil, statusMessage: "", bio: "")
+    return Info(username: "Accompany", email: "accompany@email.com", babyName: "Not decided yet", dateOfPregnancy: nil, dueDate: nil, statusMessage: "Happy Mom, Happy Baby!", bio: " Accompany is a pregnant app...")
   }
+  
 }
 
-struct User : Codable {
+struct User {
   
-  var id: UUID?
   var info: Info?
-  // TODO: implement todolist in user data
-//  var todolists = [TodoList]()
-  // TODO: implement photos in user data
-//  var media: [URL]?
-  var contractionRecord: [Contractions]?
+  // TODO: add default todos
+  var todolists = [TodoList]()
+  // TODO: Photos
+  var media: [URL]?
+  var contractions: [Contractions]
   var note: String?
-//  var isNotificationOn: Bool = false
+  var isNotificationOn: Bool = false
+  
 }

@@ -66,8 +66,8 @@ class ProfileDetailViewController: CustomTextViewController {
     title = "Edit \(field.rawValue)"
     
     switch field {
-//    case .username:
-//      textView.text = fieldValue!
+    case .username:
+      textView.text = fieldValue!
     case .email:
       textView.text = fieldValue!
     case .babyName:
@@ -84,11 +84,11 @@ class ProfileDetailViewController: CustomTextViewController {
   
   private func updateConfirmButtonState() {
     // check if username is not empty
-//    if field == InfoField.username {
-//      confirmButton.isEnabled = !textView.text.isEmpty
+    if field == InfoField.username {
+      confirmButton.isEnabled = !textView.text.isEmpty
 //    } else if field == InfoField.email {
 //      // check if email is not empty && is validate
 //      confirmButton.isEnabled = !textView.text.isEmpty && isValidEmail(textView.text)
-//    }
+    }
   }
 }
