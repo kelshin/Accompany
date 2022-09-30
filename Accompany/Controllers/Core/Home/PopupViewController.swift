@@ -90,15 +90,15 @@ class PopupViewController: UIViewController {
   
   @objc func goToAnsVC() {
     let ansVC = AnsDueDateViewController()
-    let navVC = UINavigationController(rootViewController: ansVC)
-    navVC.modalPresentationStyle = .fullScreen
-    present(navVC, animated: true)
-    
+//    let navVC = UINavigationController(rootViewController: ansVC)
+    ansVC.modalPresentationStyle = .fullScreen
+    present(ansVC, animated: true)
+
     }
   
   @objc func goToTabVC() {
-    let tabBarVC = TabBarViewController()
-    view.window?.rootViewController = tabBarVC
+    dismiss(animated: true,completion: nil)
+//    let tabBarVC = TabBarViewController()
+//    view.window?.rootViewController = tabBarVC
   }
-
 }
