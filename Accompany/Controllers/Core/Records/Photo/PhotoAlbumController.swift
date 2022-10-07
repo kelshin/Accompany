@@ -26,7 +26,8 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
-  
+
+    loadFileNames()
     setupLabelLayout()
     
     // collectionView
@@ -45,7 +46,6 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
     collectionView.dataSource = self
     collectionView.delegate = self
 
-
 //    retrieveData(key: .keyForImage)
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
@@ -54,14 +54,12 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
   }
   
   func setupLabelLayout() {
-    
     view.addSubview(photoTitle)
     photoTitle.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
       make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
     }
-    
   }
   
   func createCollectionLayout() -> UICollectionViewCompositionalLayout {
@@ -132,48 +130,71 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
     }))
     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
     self.present(alert, animated: true, completion: nil)
-    
   }
   
+  func loadImageFromDiskWith(fileName: String) -> UIImage? {
+    let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
+
+      let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+      let paths = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
+
+      if let dirPath = paths.first {
+          let imageUrl = URL(fileURLWithPath: dirPath).appendingPathComponent(fileName)
+          let image = UIImage(contentsOfFile: imageUrl.path)
+          return image
+      }
+      return nil
+  }
   
-//
-//  func save(image: UIImage) {
-//    print("save!")
-//
-//    let imageData = image.pngData()! as NSData
-//    UserDefaults.standard.set(imageData, forKey: .keyForImage)
-//  }
+  //SAVE IMAGE TO ARRAY
   
-  func saveImages(url: String) {
-    for imageURL in saveImgName {
-      let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-      print(documentDirectory)
-      let imgURL = documentDirectory.appendingPathComponent(imageURL).appendingPathExtension("plist")
-      print(imgURL)
-      if !FileManager.default.fileExists(atPath: imgURL.path) {
+  func saveImages(image: UIImage) {
+    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    let fileName = UUID().description
+    var imgURL = documentDirectory.appendingPathComponent(fileName)
+    guard let data = image.jpegData(compressionQuality: 1) else { return }
+      if FileManager.default.fileExists(atPath: imgURL.path) {
         do {
-          try (UIImage(named:imageURL)!).pngData()?.write(to: imgURL)
-          print("save")
-        } catch {
-          print("image not added")
+          imgURL = documentDirectory.appendingPathComponent(fileName) 
+          try FileManager.default.removeItem(atPath: imgURL.path)
+          print("Removed old image")
+        } catch let removeError {
+          print("couldn't remove file at path", removeError)
         }
       }
+
+      do {
+        try data.write(to: imgURL)
+        saveImgName.append(fileName)
+      } catch {
+        print("image not added")
+      }
       imgURLArr.append(imgURL)
-    }
+  }
+  
+  func loadFileNames() {
+    guard let saveImgName = listFilesFromDocumentsFolder() else { return }
+    _ = saveImgName.map{ uploadedImages.append(Image(uiImage: loadImageFromDiskWith(fileName: $0) ?? UIImage(named: appName)!))}
+    self.collectionView.reloadData()
+  }
+  
+  func listFilesFromDocumentsFolder() -> [String]?
+  {
+    let fileMngr = FileManager.default;
+    let docs = fileMngr.urls(for: .documentDirectory, in: .userDomainMask).first!.path
     
+    return try? fileMngr.contentsOfDirectory(atPath:docs)
   }
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     if let uiImage = info[.editedImage] as? UIImage {
-      guard let fileUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL else { return }
-//      print(fileUrl.lastPathComponent) // get file Name
-      saveImgName.append(fileUrl.lastPathComponent)
       uploadedImages.append(Image(uiImage: uiImage))
+      self.saveImages(image: uiImage)
       self.collectionView.reloadData()
       picker.dismiss(animated: true)
     }
     picker.dismiss(animated: true, completion: nil)
-    
+    self.collectionView.reloadData()
   }
 }
   
@@ -187,7 +208,6 @@ extension PhotoAblumController: UICollectionViewDataSource {
     cell.photoView.image = uploadedImages[indexPath.row].uiImage
     return cell
   }
-  
 }
 
 extension PhotoAblumController: UICollectionViewDelegate {
@@ -199,7 +219,6 @@ extension PhotoAblumController: UICollectionViewDelegate {
       photoDetailVC.imageView.image = self.uploadedImages[indexPath.row].uiImage
       self.navigationController?.pushViewController(photoDetailVC, animated: true)
     }))
-    
     alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (_) in
       let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
       alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
@@ -207,41 +226,34 @@ extension PhotoAblumController: UICollectionViewDelegate {
         collectionView.reloadData()
       }))
       alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-      
       self.present(alert, animated: true, completion: nil)
     }))
-    
     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-    
     self.present(alert, animated: true, completion: nil)
-
   }
-
 }
 
 extension PhotoAblumController: PHPickerViewControllerDelegate {
   func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
     picker.dismiss(animated: true, completion: nil)
     let group = DispatchGroup()
-    
     results.forEach { result in
       group.enter()
       result.itemProvider.loadObject(ofClass: UIImage.self) { reading,error in
         defer {
           group.leave()
         }
+
         guard let image = reading as? UIImage, error == nil else {
           return
         }
-//        self.saveImages(image: Image(uiImage: image))
+        self.saveImages(image: image)
         self.uploadedImages.append(Image(uiImage: image))
-        
       }
     }
     group.notify(queue: .main) {
       self.collectionView.reloadData()
     }
-    
   }
 }
 

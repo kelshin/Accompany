@@ -6,36 +6,52 @@
 //
 
 import UIKit
+import SnapKit
 
-class PhotoDetailedViewController: UIViewController {
+class PhotoDetailedViewController: UIViewController, UIScrollViewDelegate {
+  
+  var scrollView = UIScrollView()
   
   var imageView = ImageView()
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
-    imageView.layer.masksToBounds = false
-    imageView.layer.borderColor = #colorLiteral(red: 1, green: 0.8831380575, blue: 0.9568627451, alpha: 1)
-    imageView.contentMode = .scaleAspectFill
-    imageView.clipsToBounds = true
-  
-    setupLayout()
-  }
-  
-  func setupLayout() {
+    let vHeight = self.view.frame.height
+    let vWidth = self.view.frame.width
+
+    scrollView.frame = CGRectMake(0, 0, vWidth, vHeight)
+    scrollView.alwaysBounceVertical = false
+    scrollView.alwaysBounceHorizontal = false
+    scrollView.showsVerticalScrollIndicator = false
+    scrollView.showsHorizontalScrollIndicator = false
+    scrollView.flashScrollIndicators()
+    scrollView.minimumZoomScale = 1.0
+    scrollView.maximumZoomScale = 6.0
+    scrollView.delegate = self
+    scrollView.backgroundColor = .black
+
+    view.addSubview(scrollView)
     
-    view.addSubview(imageView)
-    
-    imageView.snp.makeConstraints { make in
-      make.centerX.equalTo(view)
-      make.centerY.equalTo(view)
+    scrollView.snp.makeConstraints { make in
+      make.centerY.centerX.equalTo(view)
       make.width.equalTo(view.snp.width)
-      make.height.equalTo(view.snp.height).multipliedBy(0.6)
+      make.height.equalTo(view.snp.height)
     }
-      
+    
+    scrollView.addSubview(imageView)
+    
+    imageView.clipsToBounds = false
+    imageView.contentMode = .scaleAspectFit
+    imageView.snp.makeConstraints { make in
+      make.leading.equalTo(scrollView)
+      make.centerY.equalTo(self.scrollView)
+      make.width.equalTo(scrollView.snp.width)
+      make.height.equalTo(scrollView.snp.height)
+    }
   }
-  
+
+  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    return imageView
+  }
 }
-
-
