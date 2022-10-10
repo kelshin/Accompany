@@ -52,15 +52,6 @@ class HomeViewController: UIViewController {
     loadSavedData()
     fetchCurrentLists()
     
-    if HomeViewController.currentUser.info?.dueDate == nil {
-      print("Due date is nil")
-      let getDueDate = PopupViewController()
-      getDueDate.modalPresentationStyle = .fullScreen
-      present(getDueDate, animated: false)
-//      dismiss(animated: false, completion: nil)
-//      navigationController?.pushViewController(PopupViewController, animated: <#T##Bool#>)
-    }
-    
     // TODO: fetch todoLists
     
     configureTableView()
@@ -123,6 +114,12 @@ class HomeViewController: UIViewController {
       }
     } else {
         HomeViewController.currentUser.info = Info.loadSampleInfo()
+        if HomeViewController.currentUser.info?.dueDate == nil {
+          print("Due date is nil")
+          let getDueDate = PopupViewController()
+          getDueDate.modalPresentationStyle = .fullScreen
+          present(getDueDate, animated: false)
+        }
     }
     print(HomeViewController.currentUser)
   }

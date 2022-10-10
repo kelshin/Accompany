@@ -195,8 +195,6 @@ extension MyProfileViewController: UITableViewDataSource {
       case 2:
         cell.update(with: DateFormatter().string(from: userData?.dueDate ?? Date.now) , for: InfoField.dueDate)
       case 3:
-        cell.update(with: userInfo?.dateOfPregnancy ?? "", for: InfoField.dueDate)
-      case 4:
         cell.update(with: userData?.statusMessage ?? "", for: InfoField.statusMessage)
       default:
         cell.update(with: userData?.bio ?? "", for: InfoField.bio)

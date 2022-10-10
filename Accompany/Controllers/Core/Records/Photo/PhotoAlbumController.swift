@@ -51,6 +51,9 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
       title: "Photo Album ", style: .plain, target: nil, action: nil)
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
+    
+    print(uploadedImages)
+    print(saveImgName)
   }
   
   func setupLabelLayout() {
@@ -92,7 +95,7 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
       let imagePicker = UIImagePickerController()
       imagePicker.delegate = self
       imagePicker.sourceType = .camera
-      imagePicker.allowsEditing = true
+      imagePicker.allowsEditing = false
       
       self.present(imagePicker, animated: true, completion: nil)
     }
@@ -123,13 +126,29 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
   }
   
   @objc func didTapAdd() {
-    let alert = UIAlertController(title: "Add Photos?", message: nil, preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
-      self.accessPhoto()
-
-    }))
-    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-    self.present(alert, animated: true, completion: nil)
+    self.accessPhoto()
+//    let alert = UIAlertController(title: "Add Photos?", message: nil, preferredStyle: .alert)
+//    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+//      self.accessPhoto()
+//
+//    }))
+//    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//    self.present(alert, animated: true, completion: nil)
+  }
+  
+  func loadFileNames() {
+    guard let saveImgName = listFilesFromDocumentsFolder() else { return }
+    print(saveImgName)
+    _ = saveImgName.map{ uploadedImages.append(Image(uiImage: loadImageFromDiskWith(fileName: $0) ?? UIImage(named: appName)!, uuid: $0))}
+    self.collectionView.reloadData()
+  }
+  
+  func listFilesFromDocumentsFolder() -> [String]?
+  {
+    let fileMngr = FileManager.default;
+    let docs = fileMngr.urls(for: .documentDirectory, in: .userDomainMask).first!.path
+    
+    return try? fileMngr.contentsOfDirectory(atPath:docs)
   }
   
   func loadImageFromDiskWith(fileName: String) -> UIImage? {
@@ -148,14 +167,14 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
   
   //SAVE IMAGE TO ARRAY
   
-  func saveImages(image: UIImage) {
+  func saveImages(image: UIImage, filename: String) {
     let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    let fileName = UUID().description
-    var imgURL = documentDirectory.appendingPathComponent(fileName)
+//    let fileName = UUID().description
+    var imgURL = documentDirectory.appendingPathComponent(filename)
     guard let data = image.jpegData(compressionQuality: 1) else { return }
       if FileManager.default.fileExists(atPath: imgURL.path) {
         do {
-          imgURL = documentDirectory.appendingPathComponent(fileName) 
+          imgURL = documentDirectory.appendingPathComponent(filename)
           try FileManager.default.removeItem(atPath: imgURL.path)
           print("Removed old image")
         } catch let removeError {
@@ -165,31 +184,31 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
 
       do {
         try data.write(to: imgURL)
-        saveImgName.append(fileName)
+        saveImgName.append(filename)
       } catch {
         print("image not added")
       }
       imgURLArr.append(imgURL)
   }
   
-  func loadFileNames() {
-    guard let saveImgName = listFilesFromDocumentsFolder() else { return }
-    _ = saveImgName.map{ uploadedImages.append(Image(uiImage: loadImageFromDiskWith(fileName: $0) ?? UIImage(named: appName)!))}
-    self.collectionView.reloadData()
-  }
-  
-  func listFilesFromDocumentsFolder() -> [String]?
-  {
-    let fileMngr = FileManager.default;
-    let docs = fileMngr.urls(for: .documentDirectory, in: .userDomainMask).first!.path
-    
-    return try? fileMngr.contentsOfDirectory(atPath:docs)
+  func deleteFile(filename : String) {
+    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    var imgURL = documentDirectory.appendingPathComponent(filename)
+      if FileManager.default.fileExists(atPath: imgURL.path) {
+        do {
+          imgURL = documentDirectory.appendingPathComponent(filename)
+          try FileManager.default.removeItem(atPath: imgURL.path)
+          print("Removed old image")
+        } catch let removeError {
+          print("couldn't remove file at path", removeError)
+        }
+      }
   }
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    if let uiImage = info[.editedImage] as? UIImage {
+    if let uiImage = info[.originalImage] as? UIImage {
       uploadedImages.append(Image(uiImage: uiImage))
-      self.saveImages(image: uiImage)
+      self.saveImages(image: uiImage, filename: uploadedImages.last!.uuid)
       self.collectionView.reloadData()
       picker.dismiss(animated: true)
     }
@@ -222,6 +241,7 @@ extension PhotoAblumController: UICollectionViewDelegate {
     alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (_) in
       let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
       alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+        self.deleteFile(filename: self.uploadedImages[indexPath.row].uuid.description)
         self.uploadedImages.remove(at: indexPath.row)
         collectionView.reloadData()
       }))
@@ -247,8 +267,10 @@ extension PhotoAblumController: PHPickerViewControllerDelegate {
         guard let image = reading as? UIImage, error == nil else {
           return
         }
-        self.saveImages(image: image)
+        print(result)
         self.uploadedImages.append(Image(uiImage: image))
+        self.saveImages(image: image, filename: self.uploadedImages.last!.uuid)
+        
       }
     }
     group.notify(queue: .main) {

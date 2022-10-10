@@ -29,7 +29,7 @@ class PhotoDetailedViewController: UIViewController, UIScrollViewDelegate {
     scrollView.minimumZoomScale = 1.0
     scrollView.maximumZoomScale = 6.0
     scrollView.delegate = self
-    scrollView.backgroundColor = .black
+//    scrollView.backgroundColor = .black
 
     view.addSubview(scrollView)
     
@@ -37,6 +37,7 @@ class PhotoDetailedViewController: UIViewController, UIScrollViewDelegate {
       make.centerY.centerX.equalTo(view)
       make.width.equalTo(view.snp.width)
       make.height.equalTo(view.snp.height)
+//      make.bottom.equalTo()
     }
     
     scrollView.addSubview(imageView)
@@ -44,11 +45,15 @@ class PhotoDetailedViewController: UIViewController, UIScrollViewDelegate {
     imageView.clipsToBounds = false
     imageView.contentMode = .scaleAspectFit
     imageView.snp.makeConstraints { make in
-      make.leading.equalTo(scrollView)
-      make.centerY.equalTo(self.scrollView)
+//      make.centerY.equalTo(self.scrollView.snp.centerY)
+//      make.centerX.equalTo(self.scrollView.snp.centerX)
       make.width.equalTo(scrollView.snp.width)
-      make.height.equalTo(scrollView.snp.height)
+      make.height.equalTo(scrollView.snp.height).inset(75)
     }
+    
+    
+    print(view.frame.height)
+    print(scrollView.frame.height)
   }
 
   func viewForZooming(in scrollView: UIScrollView) -> UIView? {

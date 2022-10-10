@@ -78,6 +78,14 @@ class OurBabyViewController: UIViewController {
     setupLayout()
     
     leftTitle.textAlignment = .center
+    
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    self.view.addGestureRecognizer(tapGesture)
+  }
+  
+  @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+    print("tapping")
+    self.view.endEditing(true)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -246,6 +254,7 @@ class OurBabyViewController: UIViewController {
 
     } else {
       leftNumberTitle.text = differenceDays > 1 ? "\(differenceDays) Days" : "\(differenceDays) Day"
+      leftTitle.text = ""
     }
   }
   
