@@ -31,7 +31,6 @@ class HomeViewController: UIViewController {
   
   let bgCircleView = ImageView()
   
-  
   static var currentUser = User()
   static var todoLists = [TodoList]()
   var currentTodos = [Todo]()
@@ -39,7 +38,6 @@ class HomeViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
  
     bgCircleView.image = UIImage(named: "grey-bg")
@@ -48,7 +46,7 @@ class HomeViewController: UIViewController {
     print("I AM CURRENT USER")
     print(HomeViewController.currentUser)
     
-//    createData()
+    // createData()
     loadSavedData()
     fetchCurrentLists()
     
@@ -127,7 +125,6 @@ class HomeViewController: UIViewController {
   private func fetchCurrentLists() {
     // decide current trimester
     let currentTrimester = getCurrentTrimester()
-    
     // assign current todos
     currentTodos = TodoList.getTodos(of: currentTrimester, from: HomeViewController.todoLists, status: .notDone) ?? [Todo]()
   }
@@ -165,37 +162,31 @@ class HomeViewController: UIViewController {
   }
   
   private func setupLayout() {
-   
     view.addSubview(accompanyTitleLabel)
-    
     accompanyTitleLabel.snp.makeConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide).offset(5)
+      make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
       make.centerX.equalTo(view)
     }
     
     view.addSubview(welcomeTitleLabel)
-    
     welcomeTitleLabel.snp.makeConstraints { make in
-      make.top.equalTo(accompanyTitleLabel.snp.bottom).offset(3)
+      make.top.equalTo(accompanyTitleLabel.snp.bottom).offset(2)
       make.centerX.equalTo(view)
     }
 
     view.addSubview(notifyTableView)
-       
     notifyTableView.backgroundColor = .white
-     
     notifyTableView.snp.makeConstraints { (make) -> Void in
       make.centerX.equalTo(view)
-      make.top.equalTo(welcomeTitleLabel.snp.bottom).offset(20)
-      make.width.equalTo(view.snp.width).multipliedBy(0.84)
+      make.top.equalTo(welcomeTitleLabel.snp.bottom).offset(35)
+      make.width.equalTo(view.snp.width).multipliedBy(0.80)
       make.height.equalTo(view.snp.width).multipliedBy(0.5)
     }
     
     view.addSubview(bgCircleView)
-
     bgCircleView.snp.makeConstraints { make in
       make.centerX.equalTo(view)
-      make.top.equalTo(notifyTableView.snp.bottom).offset(20)
+      make.top.equalTo(notifyTableView.snp.bottom).offset(15)
       make.left.equalTo(view.safeAreaLayoutGuide)
       make.right.equalTo(view.safeAreaLayoutGuide)
       make.bottom.equalTo(view.safeAreaLayoutGuide).offset(5)
@@ -214,7 +205,7 @@ class HomeViewController: UIViewController {
     
     stackView.snp.makeConstraints { make in
       make.centerX.equalTo(view)
-      make.top.equalTo(bgCircleView.snp.top).offset(45)
+      make.top.equalTo(bgCircleView.snp.top).offset(40)
       make.width.equalTo(view.snp.width).multipliedBy(0.45)
     }
   }
@@ -259,7 +250,7 @@ extension HomeViewController: UITableViewDelegate {
   }
     
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 30
+    return 35
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -267,7 +258,7 @@ extension HomeViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 58
+    return 52
   }
 }
   
@@ -293,7 +284,6 @@ extension HomeViewController: UITableViewDataSource {
   
 }
 
-
 extension HomeViewController: TodoCellDelegate {
   
   func isCompleteButtonTapped(sender: TodoCell) {
@@ -315,7 +305,6 @@ extension HomeViewController: TodoCellDelegate {
     }
   }
 }
-
 
 extension HomeViewController: ToDoFormTableViewControllerDelegate {
 

@@ -10,7 +10,6 @@ import SnapKit
 
 class TodoListViewController: UIViewController {
   
-  
   let todoListTitleLabel = TitleLabel(title: nil, size: .medium, color: .red)
   
   let tableView: UITableView = {
@@ -27,7 +26,6 @@ class TodoListViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
     configureTableView()
@@ -91,7 +89,6 @@ extension TodoListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.identifier, for: indexPath) as! TodoCell
     let todo = todos[indexPath.row]
-    
     // configure cell
     cell.update(with: todo)
     cell.isCompleteButton.isSelected = todo.isCompleted
@@ -99,12 +96,10 @@ extension TodoListViewController: UITableViewDelegate {
     cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     
     return cell
-    
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 55
-     
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

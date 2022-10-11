@@ -9,7 +9,8 @@ import UIKit
 import SnapKit
 
 protocol AnsDueDateViewControllerDelegateProtocol {
-  func sendDataToHomeVC(data: String) 
+  func sendDataToHomeVC(data: String)
+  
 }
 
 class AnsDueDateViewController: UIViewController {
@@ -41,23 +42,22 @@ class AnsDueDateViewController: UIViewController {
     dueDateInput.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
     dueDateInput.textColor = .black
     return dueDateInput
-    }()
+  }()
   
   let backBtn = OutlineButton(title: "Back")
   let doneBtn = OutlineButton(title: "Done")
   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
-      
-      setupLayout()
-      createDatePicker()
-      
-      backBtn.addTarget(self, action: #selector(goBackPopVC), for: .touchUpInside)
-      doneBtn.addTarget(self, action: #selector(goToHomeVC), for: .touchUpInside)
-      
-    }
-  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
+    
+    setupLayout()
+    createDatePicker()
+
+    backBtn.addTarget(self, action: #selector(goBackPopVC), for: .touchUpInside)
+    doneBtn.addTarget(self, action: #selector(goToHomeVC), for: .touchUpInside)
+  }
+
   private func setupLayout() {
     view.addSubview(container)
     container.snp.makeConstraints { make in
@@ -121,7 +121,6 @@ class AnsDueDateViewController: UIViewController {
   
   @objc func goBackPopVC() {
     let popVC = PopupViewController()
-//    let navPopVC = UINavigationController(rootViewController: popVC)
     popVC.modalPresentationStyle = .fullScreen
     present(popVC, animated: true)
   }
@@ -132,13 +131,14 @@ class AnsDueDateViewController: UIViewController {
       let alert = UIAlertController(title: "Have to choose the date", message: "If you don't know the date, you can press back and choose don't know button.", preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
       }))
-        self.present(alert, animated: true, completion: {
+      self.present(alert, animated: true, completion: {
       })
       } else {
         HomeViewController.currentUser.info?.dueDate = dueDatePicker.date
         HomeViewController().saveUserData()
         self.view.window!.rootViewController?.dismiss(animated: true)
-    }
+      }
   }
+  
 }
   

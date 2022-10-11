@@ -90,7 +90,6 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
   }
   
   func openCamera() {
-    
     if UIImagePickerController.isSourceTypeAvailable(.camera) {
       let imagePicker = UIImagePickerController()
       imagePicker.delegate = self
@@ -113,7 +112,7 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
   }
   
   func accessPhoto() {
-    let alert = UIAlertController(title: "Choose One Way", message: nil, preferredStyle: .alert)
+    let alert = UIAlertController(title: "Accompany Would Like to Access your Photos.", message: "Choose one way to upload photos", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
       self.openCamera()
     }))
@@ -127,13 +126,6 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
   
   @objc func didTapAdd() {
     self.accessPhoto()
-//    let alert = UIAlertController(title: "Add Photos?", message: nil, preferredStyle: .alert)
-//    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
-//      self.accessPhoto()
-//
-//    }))
-//    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//    self.present(alert, animated: true, completion: nil)
   }
   
   func loadFileNames() {
@@ -181,7 +173,6 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
           print("couldn't remove file at path", removeError)
         }
       }
-
       do {
         try data.write(to: imgURL)
         saveImgName.append(filename)

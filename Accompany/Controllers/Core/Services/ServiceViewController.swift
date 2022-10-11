@@ -7,28 +7,32 @@
 
 import UIKit
 
+enum AccountSettings: String {
+  case privacyPolicy = "Privacy Policy"
+  case termsOfUse = "Terms Of Use"
+  case feedback = "Feedback"
+}
+
 enum Services: CustomStringConvertible, CaseIterable {
   
   case myProfile
-//  case invitePartner
-  case settings
-//  case pregnantArticles
+  case privacyPolicy
+  case termsOfUse
   case aboutAccompany
+  case feedback
   
   var description: String {
     switch self {
     case .myProfile:
       return "My Profile"
-//    case .invitePartner:
-//      return "Invite Partner"
-    case .settings:
-      return "Settings"
-//    case .pregnantArticles:
-//      return "Pregnant Articles"
+    case .privacyPolicy:
+      return "Privacy Policy"
+    case .termsOfUse:
+      return "Terms Of Use"
     case .aboutAccompany:
       return "About Accompany"
-//    case .logOut:
-//      return "Log Out"
+    case .feedback:
+      return "Feedback"
     }
   }
 
@@ -105,33 +109,17 @@ class ServiceViewController: UIViewController {
   
   @objc func goTo(_ button: UIButton) {
     switch button.titleLabel?.text {
-    // My Profile
     case Services.myProfile.description:
       let myProfileVC = MyProfileViewController()
-      
-      // TODO: fetch user info
-      
       navigationController?.pushViewController(myProfileVC, animated: true)
-    // Account Settings
-    case Services.settings.description:
-      navigationController?.pushViewController(AccountSettingsViewController(), animated: true)
-    // About Accompany
+    case Services.privacyPolicy.description:
+      navigationController?.pushViewController(PrivacyPolicyViewController(), animated: true)
+    case Services.termsOfUse.description:
+      navigationController?.pushViewController(TermsOfUseViewController(), animated: true)
     case Services.aboutAccompany.description:
       navigationController?.pushViewController(AboutAccompanyViewController(), animated: true)
-    // Log Out
-//    case Services.logOut.description:
-//      
-//      let alert = UIAlertController(title: "Log Out of Accompany?", message: nil, preferredStyle: .alert)
-//      alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//      alert.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { _ in
-//        // TODO: Log out with database
-//        print("Log out")
-//        
-        // back to log in page (scene delegate?)
-    
-  
-      
-//      self.present(alert, animated: true, completion: nil)
+    case Services.feedback.description:
+      navigationController?.pushViewController(FeedbackViewController(), animated: true)
       
     default:
       return

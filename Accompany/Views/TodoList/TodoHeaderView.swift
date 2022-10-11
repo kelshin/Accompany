@@ -28,9 +28,9 @@ class TodoHeaderView: UITableViewHeaderFooterView {
     
     contentView.addSubview(titleLabel)
     // TODO: Fix header layout error in console
-//    titleLabel.snp.makeConstraints { make in
-//      make.edges.equalTo(contentView).inset(UIEdgeInsets(top: 10, left: 12, bottom: 0, right: 0))
-//    }
+    titleLabel.snp.makeConstraints { make in
+      make.edges.equalTo(contentView).inset(UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
+    }
   }
   
   required init?(coder: NSCoder) {

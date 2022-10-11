@@ -42,11 +42,9 @@ class PopupViewController: UIViewController {
     
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
-   
-    setupLayout()
     
+    setupLayout()
   }
     
   func setupLayout() {
@@ -90,16 +88,12 @@ class PopupViewController: UIViewController {
   
   @objc func goToAnsVC() {
     let ansVC = AnsDueDateViewController()
-//    let navVC = UINavigationController(rootViewController: ansVC)
     ansVC.modalPresentationStyle = .fullScreen
     present(ansVC, animated: true)
-
     }
   
   @objc func goToTabVC() {
     dismiss(animated: true,completion: nil)
     HomeViewController().saveUserData()
-//    let tabBarVC = TabBarViewController()
-//    view.window?.rootViewController = tabBarVC
   }
 }
