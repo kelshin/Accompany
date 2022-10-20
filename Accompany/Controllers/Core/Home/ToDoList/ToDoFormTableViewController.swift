@@ -87,7 +87,7 @@ class ToDoFormTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     switch section {
     case 0:
-      return "BASIC INFORMATIONS"
+      return "BASIC INFORMATION"
     case 1:
       return "NOTES"
     default:

@@ -22,7 +22,6 @@ class OurBabyViewController: UIViewController {
     return nameTitleTextField
   }()
   
-
   let babyIconTextField = UITextField()
   
   let icons = ["👶🏻", "👶🏼", "👶", "👶🏽", "👶🏿", "👧🏻", "👧🏼", "👧🏽", "👧🏾", "👧🏿"]
@@ -159,7 +158,7 @@ class OurBabyViewController: UIViewController {
     view.addSubview(babyImageView)
 
     babyImageView.snp.makeConstraints { make in
-      make.top.equalTo(contentView.snp.bottom).offset(20)
+      make.top.equalTo(contentView.snp.bottom).offset(23)
       make.centerX.equalTo(view)
       make.width.equalTo(view.snp.width).multipliedBy(0.7)
       make.height.equalTo(view.snp.height).multipliedBy(0.28)

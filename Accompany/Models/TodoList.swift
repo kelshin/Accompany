@@ -47,18 +47,18 @@ struct TodoList: Codable {
         Todo(title: "Thyroid function tests", isCompleted: false, note: "Type notes"),
         Todo(title: "Fragile X syndrome", isCompleted: false, note: "Type notes") ,
         Todo(title: "Toxoplasmosis screening", isCompleted: false, note: "Type notes"),
-        Todo(title: "pregnant woman physical fitnessd", isCompleted: false, note: "Type notes"),
+        Todo(title: "Pregnant woman physical fitness", isCompleted: false, note: "Type notes"),
         Todo(title: "Non-invasive Prenatal test", isCompleted: false, note: "Type notes"),
         Todo(title: "Maternal blood Down’s syndrome screening for the first trimester", isCompleted: false, note: "Type notes"),
         Todo(title: "Preeclampsia risk assessment", isCompleted: false, note: "Type notes")
       ]),
       TodoList(trimester: .secondTrimester, todos: [
         Todo(title: "Maternal blood Down’s syndrome screening", isCompleted: false, note: "Type notes"),
-        Todo(title: "Health education consultation for prenatal check-up  ", isCompleted: false, note: "Type notes"),
+        Todo(title: "Health education consultation for prenatal check-up", isCompleted: false, note: "Type notes"),
         Todo(title: "Amniocentesis, Amniotic fluid", isCompleted: false, note: "Type notes"),
         Todo(title: "Premature birth risk assessment", isCompleted: false, note: "Type notes"),
         Todo(title: "Anomaly Scan", isCompleted: false, note: "Type notes"),
-        Todo(title: "Seasonal influenza vaccination ", isCompleted: false, note: "Type notes"),
+        Todo(title: "Seasonal influenza vaccination", isCompleted: false, note: "Type notes"),
         Todo(title: "Syphilis", isCompleted: false, note: "Type notes"),
         Todo(title: "Gestational diabetes screening", isCompleted: false, note: "Type notes")
       ]),
@@ -72,8 +72,8 @@ struct TodoList: Codable {
         Todo(title: "Fetal movement record", isCompleted: false, note: "Type notes"),
         Todo(title: "Fetal  health monitoring", isCompleted: false, note: "Type notes"),
         Todo(title: "Fetal monitor", isCompleted: false, note: "Type notes"),
-        Todo(title: "Prenatal blood and urine examination  ", isCompleted: false, note: "Type notes"),
-        Todo(title: "GBS (Group B Streptococcus test)", isCompleted: false, note: "Type notes")
+        Todo(title: "Prenatal blood and urine examination", isCompleted: false, note: "Type notes"),
+        Todo(title: "GBS(Group B Streptococcus test)", isCompleted: false, note: "Type notes")
       ]),
       TodoList(trimester: .after, todos: [
         Todo(title: "Pertussis vaccination", isCompleted: false, note: "Type notes"),

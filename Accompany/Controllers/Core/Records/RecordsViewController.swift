@@ -14,7 +14,7 @@ class RecordsViewController: UIViewController {
   
   let goToAlbumButton = SecondaryButton(title: "Photo Album")
   let goToTimerButton = PrimaryButton(title: "Contraction Timer")
-  let goToQAButton = PrimaryButton(title: "Take Notes")
+  let goToNotesButton = PrimaryButton(title: "Take Notes")
   
   let bgCircleView = ImageView()
 
@@ -49,7 +49,7 @@ class RecordsViewController: UIViewController {
       make.right.equalTo(view.safeAreaLayoutGuide)
     }
     
-    let buttons = [goToAlbumButton, goToTimerButton, goToQAButton]
+    let buttons = [goToAlbumButton, goToTimerButton, goToNotesButton]
     buttons.forEach { $0.addTarget(self, action: #selector(goTo(_:)), for: .touchUpInside) }
     
     let vStack = VStack(arrangedSubviews: buttons)
@@ -73,10 +73,9 @@ class RecordsViewController: UIViewController {
     case goToTimerButton:
       let timerVC = ContractionTimerViewController()
       navigationController?.pushViewController(timerVC, animated: true)
-    case goToQAButton:
-      // MARK: Need to be adjusted
-      let qaVC = QAController()
-      navigationController?.pushViewController(qaVC, animated: true)
+    case goToNotesButton:
+      let noteVC = NotesViewController()
+      navigationController?.pushViewController(noteVC, animated: true)
       
     default:
       return
