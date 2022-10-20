@@ -41,9 +41,11 @@ class QAController: UIViewController, UIScrollViewDelegate {
   override func setEditing(_ editing: Bool, animated: Bool) {
     super.setEditing(editing, animated: animated)
     if isEditing {
+      DrNoteTextView.text = DrNoteTextView.text == "Tap edit to add notes here" ? "" : DrNoteTextView.text
       DrNoteTextView.becomeFirstResponder()
+      
     } else {
-      noteContent = DrNoteTextView.text
+      noteContent = DrNoteTextView.text == "" ? nil : DrNoteTextView.text
       HomeViewController.currentUser.note = noteContent
       HomeViewController().saveUserData()
     }
@@ -62,7 +64,7 @@ class QAController: UIViewController, UIScrollViewDelegate {
     addSubview()
     keyboardHasShown()
     DrNoteTextView.text = HomeViewController.currentUser.note ?? "Tap edit to add notes here"
-    print(HomeViewController.currentUser.note)
+//    print(HomeViewController.currentUser.note)
     navigationItem.rightBarButtonItem = editButtonItem
       
     scrollView.delegate = self

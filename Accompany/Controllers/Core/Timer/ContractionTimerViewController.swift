@@ -386,7 +386,7 @@ class ContractionTimerViewController: UIViewController {
   
   func saveRecord() {
     print("saving record")
-    print(newRecord)
+//    print(newRecord)
     if HomeViewController.currentUser.contractionRecord != nil {
       HomeViewController.currentUser.contractionRecord?.insert(newRecord!, at: 0)
     } else {
@@ -525,9 +525,9 @@ extension ContractionTimerViewController: UITableViewDelegate, UITableViewDataSo
       userConstractionRecords?.remove(at: indexPath.section)
       print(indexPath.section)
       print("delete here")
-      print(HomeViewController.currentUser.contractionRecord?.count)
+//      print(HomeViewController.currentUser.contractionRecord?.count)
       HomeViewController.currentUser.contractionRecord?.remove(at: indexPath.section)
-      print(HomeViewController.currentUser.contractionRecord?.count)
+//      print(HomeViewController.currentUser.contractionRecord?.count)
 //      saveRecord()
       tableView.reloadData()
     }

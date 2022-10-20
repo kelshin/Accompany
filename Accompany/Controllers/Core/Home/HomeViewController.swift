@@ -52,15 +52,6 @@ class HomeViewController: UIViewController {
     loadSavedData()
     fetchCurrentLists()
     
-    if HomeViewController.currentUser.info?.dueDate == nil {
-      print("Due date is nil")
-      let getDueDate = PopupViewController()
-      getDueDate.modalPresentationStyle = .fullScreen
-      present(getDueDate, animated: false)
-//      dismiss(animated: false, completion: nil)
-//      navigationController?.pushViewController(PopupViewController, animated: <#T##Bool#>)
-    }
-    
     // TODO: fetch todoLists
     
     configureTableView()
@@ -73,6 +64,8 @@ class HomeViewController: UIViewController {
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
         title: "Home Page", style: .plain, target: nil, action: nil)
+    
+    updateWelcome()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -123,8 +116,18 @@ class HomeViewController: UIViewController {
       }
     } else {
         HomeViewController.currentUser.info = Info.loadSampleInfo()
+        if HomeViewController.currentUser.info?.dueDate == nil {
+          print("Due date is nil")
+          let getDueDate = PopupViewController()
+          getDueDate.modalPresentationStyle = .fullScreen
+          present(getDueDate, animated: false)
+        }
     }
     print(HomeViewController.currentUser)
+  }
+  
+  func updateWelcome() {
+    welcomeTitleLabel.text = "Welcome back \(HomeViewController.currentUser.info?.email ?? "")!"
   }
   
   private func fetchCurrentLists() {

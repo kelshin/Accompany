@@ -71,15 +71,25 @@ class OurBabyViewController: UIViewController {
     babyIconTextField.text = "👶🏻"
     babyIconTextField.tintColor = UIColor.clear
     babyIconTextField.font = UIFont.boldSystemFont(ofSize: 35)
-  
     babyImageView.image = UIImage(named: "baby-image")
+    
+    nameTitleTextField.addTarget(self, action: #selector(nameChanged), for: .editingChanged)
     
     setupLayout()
     
     leftTitle.textAlignment = .center
+    
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    self.view.addGestureRecognizer(tapGesture)
+  }
+  
+  @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+    print("tapping")
+    self.view.endEditing(true)
   }
   
   override func viewWillAppear(_ animated: Bool) {
+    nameTitleTextField.text = HomeViewController.currentUser.info?.babyName ?? ""
     babyCalculator()
   }
   
@@ -244,7 +254,13 @@ class OurBabyViewController: UIViewController {
 
     } else {
       leftNumberTitle.text = differenceDays > 1 ? "\(differenceDays) Days" : "\(differenceDays) Day"
+      leftTitle.text = "Until our baby is born"
     }
+  }
+  
+  @objc func nameChanged(){
+    HomeViewController.currentUser.info?.babyName = nameTitleTextField.text ?? ""
+    HomeViewController().saveUserData()
   }
   
   @objc func btnTapped(_ sender: UIButton) {

@@ -6,82 +6,59 @@
 //
 
 import UIKit
+import SnapKit
 
-protocol PhotoDetailDelegate {
-  func photoDelete(data: UIImage, section: Int, id: Int)
-}
-
-class PhotoDetailedViewController: UIViewController {
+class PhotoDetailedViewController: UIViewController, UIScrollViewDelegate {
   
-  var photoDetaildelegate: PhotoDetailDelegate!
-  var photo: Image?
+  var scrollView = UIScrollView()
   
   var imageView = ImageView()
-  let deleteImage = ImageView()
   
-  var section: Int = 0
-  var selectedIndex: Int = 0
-
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
+    let vHeight = self.view.frame.height
+    let vWidth = self.view.frame.width
+
+    scrollView.frame = CGRectMake(0, 0, vWidth, vHeight)
+    scrollView.alwaysBounceVertical = false
+    scrollView.alwaysBounceHorizontal = false
+    scrollView.showsVerticalScrollIndicator = false
+    scrollView.showsHorizontalScrollIndicator = false
+    scrollView.flashScrollIndicators()
+    scrollView.minimumZoomScale = 1.0
+    scrollView.maximumZoomScale = 6.0
+    scrollView.delegate = self
+//    scrollView.backgroundColor = .black
+
+    view.addSubview(scrollView)
     
-//    imageView.image = UIImage(named: "logo-app")
-    imageView.backgroundColor = .white
-    imageView.layer.borderWidth = 1.0
-    imageView.layer.masksToBounds = false
-    imageView.layer.borderColor = #colorLiteral(red: 1, green: 0.8831380575, blue: 0.9568627451, alpha: 1)
-    
-    deleteImage.image = UIImage(systemName: "trash.fill")
-    
-    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-    deleteImage.isUserInteractionEnabled = true
-    deleteImage.addGestureRecognizer(tapGestureRecognizer)
-  
-    setupLayout()
-  }
-  
-  @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-    
-    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (_) in
-      self.goBackPhotoVC()
-    }))
-    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
-    }))
-    
-    self.present(alert, animated: true, completion: {
-    })
-    
-  }
-  
-  func setupLayout() {
-    
-    view.addSubview(imageView)
-    
-    imageView.snp.makeConstraints { make in
-      make.centerX.equalTo(view)
-      make.centerY.equalTo(view)
+    scrollView.snp.makeConstraints { make in
+      make.centerY.centerX.equalTo(view)
       make.width.equalTo(view.snp.width)
-      make.height.equalTo(view.snp.height).multipliedBy(0.44)
+      make.height.equalTo(view.snp.height)
+//      make.bottom.equalTo()
     }
     
-    view.addSubview(deleteImage)
+    scrollView.addSubview(imageView)
     
-    deleteImage.snp.makeConstraints { make in
-      make.top.equalTo(imageView.snp.bottom).offset(20)
-      make.centerX.equalTo(view)
-      make.width.equalTo(25)
-      make.height.equalTo(25)
+    let tabBarHeight = Int((tabBarController?.tabBar.frame.height)!)
+    imageView.clipsToBounds = false
+    imageView.contentMode = .scaleAspectFit
+    imageView.snp.makeConstraints { make in
+//      make.centerY.equalTo(self.scrollView.snp.centerY)
+//      make.centerX.equalTo(self.scrollView.snp.centerX)
+      make.width.equalTo(scrollView.snp.width)
+      make.height.equalTo(scrollView.snp.height).inset(tabBarHeight)
     }
-  }
-  
-  func goBackPhotoVC() {
-//    photoDetaildelegate.photoDelete(data: UIImage(named: "logo-app")!, section: section, id: id)
-    self.navigationController?.popViewController(animated: true)
     
+    
+    print(view.frame.height)
+    print(scrollView.frame.height)
+//    print(tabBarController?.tabBar.frame.height)
   }
- 
+
+  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    return imageView
+  }
 }
-
-

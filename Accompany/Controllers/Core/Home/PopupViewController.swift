@@ -98,6 +98,7 @@ class PopupViewController: UIViewController {
   
   @objc func goToTabVC() {
     dismiss(animated: true,completion: nil)
+    HomeViewController().saveUserData()
 //    let tabBarVC = TabBarViewController()
 //    view.window?.rootViewController = tabBarVC
   }

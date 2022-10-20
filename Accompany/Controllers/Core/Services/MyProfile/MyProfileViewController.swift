@@ -11,7 +11,6 @@ enum InfoField: String, CaseIterable {
   
 //  case username = "Username"
   case email = "Email"
-  case babyName = "Baby Name"
   case babyName = "Baby's Name"
   case dueDate = "Due Date"
   case statusMessage = "Status"
@@ -58,6 +57,10 @@ class MyProfileViewController: CustomTextViewController {
         title: "My Profile", style: .plain, target: nil, action: nil)
   }
   
+  override func viewWillAppear(_ animated: Bool){
+    profileTableView.reloadData()
+  }
+  
   // TODO: fetch user info from db
   private func fetchUserInfo() {
     userInfo = HomeViewController.currentUser.info
@@ -70,7 +73,7 @@ class MyProfileViewController: CustomTextViewController {
     userImageView.addGestureRecognizer(tapGestureRecognizer)
     
     userImageView.contentMode = .scaleAspectFit
-    userImageView.layer.borderWidth = 1.0
+//    userImageView.layer.borderWidth = 1.0
     userImageView.layer.masksToBounds = false
     userImageView.layer.borderColor = #colorLiteral(red: 1, green: 0.8831380575, blue: 0.9568627451, alpha: 1)
 //    userImageView.layer.cornerRadius = 60
@@ -192,8 +195,6 @@ extension MyProfileViewController: UITableViewDataSource {
       case 2:
         cell.update(with: DateFormatter().string(from: userData?.dueDate ?? Date.now) , for: InfoField.dueDate)
       case 3:
-        cell.update(with: userInfo?.dateOfPregnancy ?? "", for: InfoField.dueDate)
-      case 4:
         cell.update(with: userData?.statusMessage ?? "", for: InfoField.statusMessage)
       default:
         cell.update(with: userData?.bio ?? "", for: InfoField.bio)
@@ -247,7 +248,7 @@ extension MyProfileViewController: UITableViewDataSource {
     dateFormatter.timeStyle = .none
     dateFormatter.dateStyle = .long
 
-    let selectedDate: String = dateFormatter.string(from: datePicker.date)
+//    let selectedDate: String = dateFormatter.string(from: datePicker.date)
     
     HomeViewController.currentUser.info?.dueDate = datePicker.date
     HomeViewController().saveUserData()
@@ -285,6 +286,7 @@ extension MyProfileViewController: ProfileDetailViewControllerDelegate {
 //        HomeViewController.currentUser.info?.username = value
       case .email:
         HomeViewController.currentUser.info?.email = value
+        HomeViewController().updateWelcome()
       case .babyName:
         HomeViewController.currentUser.info?.babyName = value.isEmpty ? "Not decided yet" : value
       case .statusMessage:
@@ -295,6 +297,7 @@ extension MyProfileViewController: ProfileDetailViewControllerDelegate {
         return
     }
     HomeViewController().saveUserData()
+    fetchUserInfo()
     profileTableView.reloadRows(at: [selectedIndexPath!], with: .automatic)
   }
 }
