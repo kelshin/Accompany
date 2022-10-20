@@ -253,7 +253,7 @@ class OurBabyViewController: UIViewController {
 
     } else {
       leftNumberTitle.text = differenceDays > 1 ? "\(differenceDays) Days" : "\(differenceDays) Day"
-      leftTitle.text = ""
+      leftTitle.text = "Until our baby is born"
     }
   }
   

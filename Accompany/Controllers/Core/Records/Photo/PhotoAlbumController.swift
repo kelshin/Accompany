@@ -139,8 +139,20 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
   {
     let fileMngr = FileManager.default;
     let docs = fileMngr.urls(for: .documentDirectory, in: .userDomainMask).first!.path
-    
-    return try? fileMngr.contentsOfDirectory(atPath:docs)
+    print("docs print")
+//    print(try? fileMngr.contentsOfDirectory(at: URL(fileURLWithPath: docs), includingPropertiesForKeys: [.contentModificationDateKey]))
+//    print(try? fileMngr.contentsOfDirectory(atPath:docs).sorted(by: <))
+    let files = try? fileMngr.contentsOfDirectory(at: URL(fileURLWithPath: docs), includingPropertiesForKeys: [.contentModificationDateKey]).map{$0.lastPathComponent}
+//    print(files)
+    return files
+//    return try? fileMngr.contentsOfDirectory(at: URL(fileURLWithPath: docs), includingPropertiesForKeys: [.creationDateKey], options: .skipsHiddenFiles){
+//      return urlArray.map { url in
+//                  (url.lastPathComponent, (try? url.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate ?? Date.distantPast)
+//              }
+//              .sorted(by: { $0.1 > $1.1 }) // sort descending modification dates
+//              .map { $0.0 }
+//    }
+//    )
   }
   
   func loadImageFromDiskWith(fileName: String) -> UIImage? {

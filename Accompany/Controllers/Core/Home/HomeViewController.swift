@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
     notifyTableView.translatesAutoresizingMaskIntoConstraints = false
     
     return notifyTableView
-  }()
+  }() 
   
   let bgCircleView = ImageView()
   
@@ -62,6 +62,8 @@ class HomeViewController: UIViewController {
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
         title: "Home Page", style: .plain, target: nil, action: nil)
+    
+    updateWelcome()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -120,6 +122,10 @@ class HomeViewController: UIViewController {
         }
     }
     print(HomeViewController.currentUser)
+  }
+  
+  func updateWelcome() {
+    welcomeTitleLabel.text = "Welcome back \(HomeViewController.currentUser.info?.email ?? "")!"
   }
   
   private func fetchCurrentLists() {

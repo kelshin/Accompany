@@ -73,7 +73,7 @@ class MyProfileViewController: CustomTextViewController {
     userImageView.addGestureRecognizer(tapGestureRecognizer)
     
     userImageView.contentMode = .scaleAspectFit
-    userImageView.layer.borderWidth = 1.0
+//    userImageView.layer.borderWidth = 1.0
     userImageView.layer.masksToBounds = false
     userImageView.layer.borderColor = #colorLiteral(red: 1, green: 0.8831380575, blue: 0.9568627451, alpha: 1)
 //    userImageView.layer.cornerRadius = 60
@@ -248,7 +248,7 @@ extension MyProfileViewController: UITableViewDataSource {
     dateFormatter.timeStyle = .none
     dateFormatter.dateStyle = .long
 
-    let selectedDate: String = dateFormatter.string(from: datePicker.date)
+//    let selectedDate: String = dateFormatter.string(from: datePicker.date)
     
     HomeViewController.currentUser.info?.dueDate = datePicker.date
     HomeViewController().saveUserData()
@@ -286,6 +286,7 @@ extension MyProfileViewController: ProfileDetailViewControllerDelegate {
 //        HomeViewController.currentUser.info?.username = value
       case .email:
         HomeViewController.currentUser.info?.email = value
+        HomeViewController().updateWelcome()
       case .babyName:
         HomeViewController.currentUser.info?.babyName = value.isEmpty ? "Not decided yet" : value
       case .statusMessage:
@@ -296,6 +297,7 @@ extension MyProfileViewController: ProfileDetailViewControllerDelegate {
         return
     }
     HomeViewController().saveUserData()
+    fetchUserInfo()
     profileTableView.reloadRows(at: [selectedIndexPath!], with: .automatic)
   }
 }

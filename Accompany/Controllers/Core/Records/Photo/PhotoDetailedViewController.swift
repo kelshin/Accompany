@@ -16,7 +16,7 @@ class PhotoDetailedViewController: UIViewController, UIScrollViewDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     let vHeight = self.view.frame.height
     let vWidth = self.view.frame.width
 
@@ -42,18 +42,20 @@ class PhotoDetailedViewController: UIViewController, UIScrollViewDelegate {
     
     scrollView.addSubview(imageView)
     
+    let tabBarHeight = Int((tabBarController?.tabBar.frame.height)!)
     imageView.clipsToBounds = false
     imageView.contentMode = .scaleAspectFit
     imageView.snp.makeConstraints { make in
 //      make.centerY.equalTo(self.scrollView.snp.centerY)
 //      make.centerX.equalTo(self.scrollView.snp.centerX)
       make.width.equalTo(scrollView.snp.width)
-      make.height.equalTo(scrollView.snp.height).inset(75)
+      make.height.equalTo(scrollView.snp.height).inset(tabBarHeight)
     }
     
     
     print(view.frame.height)
     print(scrollView.frame.height)
+//    print(tabBarController?.tabBar.frame.height)
   }
 
   func viewForZooming(in scrollView: UIScrollView) -> UIView? {

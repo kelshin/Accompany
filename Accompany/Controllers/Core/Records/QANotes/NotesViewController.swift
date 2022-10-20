@@ -64,6 +64,9 @@ class NotesViewController: UIViewController, UIScrollViewDelegate {
     addSubview()
     keyboardHasShown()
     DrNoteTextView.text = HomeViewController.currentUser.note ?? "Tap edit to add notes here"
+
+//    print(HomeViewController.currentUser.note)
+
     navigationItem.rightBarButtonItem = editButtonItem
       
     scrollView.delegate = self
