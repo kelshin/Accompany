@@ -10,7 +10,7 @@ import UIKit
 struct Info : Codable {
   
   var username: String
-  var email: String
+  var name: String?
   var babyName: String
   var dateOfPregnancy: String?
   var dueDate: Date?
@@ -18,7 +18,7 @@ struct Info : Codable {
   var bio: String?
   
   static func loadSampleInfo() -> Info {
-    return Info(username: "", email: "", babyName: "", dateOfPregnancy: nil, statusMessage: "", bio: "")
+    return Info(username: "", name: "", babyName: "", dateOfPregnancy: nil, statusMessage: "", bio: "")
   }
 }
 

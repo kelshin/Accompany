@@ -23,6 +23,7 @@ class FeedbackViewController: UIViewController, MFMailComposeViewControllerDeleg
     textView.textAlignment = .center
     textView.layer.cornerRadius = 10
     textView.translatesAutoresizingMaskIntoConstraints = false
+    textView.isUserInteractionEnabled = false
     
     return textView
   }()
@@ -36,19 +37,19 @@ class FeedbackViewController: UIViewController, MFMailComposeViewControllerDeleg
     return button
   }()
   
-  override func setEditing(_ editing: Bool, animated: Bool) {
-    super.setEditing(editing, animated: animated)
-    if isEditing {
-      textView.text = textView.text == "If you have any problems or suggestions, please let us know." ? "" : textView.text
-      textView.becomeFirstResponder()
-      
-    } else {
-//      noteContent = DrNoteTextView.text == "" ? nil : DrNoteTextView.text
-//      HomeViewController.currentUser.note = noteContent
-//      HomeViewController().saveUserData()
-    }
-    textView.isUserInteractionEnabled.toggle()
-  }
+//  override func setEditing(_ editing: Bool, animated: Bool) {
+//    super.setEditing(editing, animated: animated)
+//    if isEditing {
+//      textView.text = textView.text == "If you have any problems or suggestions, please let us know." ? "" : textView.text
+//      textView.becomeFirstResponder()
+//
+//    } else {
+////      noteContent = DrNoteTextView.text == "" ? nil : DrNoteTextView.text
+////      HomeViewController.currentUser.note = noteContent
+////      HomeViewController().saveUserData()
+//    }
+//    textView.isUserInteractionEnabled.toggle()
+//  }
   
   let submitButton = PrimaryButton(title: "Submit")
 
@@ -62,7 +63,12 @@ class FeedbackViewController: UIViewController, MFMailComposeViewControllerDeleg
   }
   
   @objc func didTapAdd() {
-    textView.resignFirstResponder()
+    
+    if !textView.isUserInteractionEnabled {
+      textView.isUserInteractionEnabled.toggle()
+      textView.text = ""
+      textView.becomeFirstResponder()
+    }
   }
   
   @objc func submitData(_ sender: UIButton) {
@@ -80,6 +86,7 @@ class FeedbackViewController: UIViewController, MFMailComposeViewControllerDeleg
             // show failure alert
       }
      textView.text = "Thank you, we will review your feedback. Have a nice day"
+     textView.isUserInteractionEnabled.toggle()
   }
   
   func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {

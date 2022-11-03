@@ -68,7 +68,7 @@ class ProfileDetailViewController: CustomTextViewController {
     switch field {
 //    case .username:
 //      textView.text = fieldValue!
-    case .email:
+    case .name:
       textView.text = fieldValue!
     case .babyName:
       textView.text = fieldValue!

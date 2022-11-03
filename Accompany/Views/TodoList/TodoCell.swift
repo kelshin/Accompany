@@ -53,6 +53,11 @@ class TodoCell: UITableViewCell {
       make.right.equalTo(contentView).offset(-10)
     }
     
+    isCompleteButton.snp.makeConstraints{ make in
+      make.left.equalTo(stackView.snp.left)
+      make.width.equalTo(20)
+    }
+    
     isCompleteButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
 
   }
@@ -63,8 +68,18 @@ class TodoCell: UITableViewCell {
   
   func update(with todo: Todo) {
     self.isCompleteButton.isSelected = todo.isCompleted
+    self.isCompleteButton.setContentHuggingPriority(UILayoutPriority(250), for: .horizontal)
+//    self.isCompleteButton.translatesAutoresizingMaskIntoConstraints = false
+//    self.isCompleteButton.setContentCompressionResistancePriority(.required, for: .horizontal)
     self.titleLabel.text = todo.title
+    self.titleLabel.lineBreakMode = .byTruncatingTail
+    self.titleLabel.adjustsFontSizeToFitWidth = false
+    self.titleLabel.numberOfLines = 2
+    self.titleLabel.textAlignment = .left
     self.titleLabel.textColor = .black
+    self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    self.titleLabel.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
+//    self.titleLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
   }
   
   @objc func buttonTapped(sender: UIButton) {
