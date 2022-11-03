@@ -63,7 +63,7 @@ class HomeViewController: UIViewController {
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
         title: "Home Page", style: .plain, target: nil, action: nil)
     
-    updateWelcome()
+//    updateWelcome()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -109,6 +109,7 @@ class HomeViewController: UIViewController {
     if let savedUserData = defaults.object(forKey: "SavedUser") as? Data {
       if let loadedUserData = try? decoder.decode(User.self, from: savedUserData){
         HomeViewController.currentUser = loadedUserData
+        welcomeTitleLabel.text = "Welcome back!"
       } else {
         print("Error loading user data")
       }
@@ -118,6 +119,7 @@ class HomeViewController: UIViewController {
           print("Due date is nil")
           let getDueDate = PopupViewController()
           getDueDate.modalPresentationStyle = .fullScreen
+          welcomeTitleLabel.text = "Welcome!"
           present(getDueDate, animated: false)
         }
     }
@@ -125,7 +127,7 @@ class HomeViewController: UIViewController {
   }
   
   func updateWelcome() {
-    welcomeTitleLabel.text = "Welcome \(HomeViewController.currentUser.info?.name != nil ? "back" : "")!"
+    welcomeTitleLabel.text = "Welcome\(HomeViewController.currentUser.info?.dueDate == nil ? "" : " back")!"
     // add user name soon
 //    welcomeTitleLabel.text = "Welcome back \(HomeViewController.currentUser.info?.name ?? "")!"
   }

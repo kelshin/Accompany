@@ -27,7 +27,7 @@ class ToDoBasicInfoCell : UITableViewCell {
     textView.textAlignment = .natural
     
     textView.font = .boldSystemFont(ofSize: 18)
-//    textView.contentInset = UIEdgeIns  ets(top: 10, left: 5, bottom: -5, right: -5)
+    textView.contentInset = UIEdgeInsets(top: 10, left: 5, bottom: -5, right: -5)
     
     textView.translatesAutoresizingMaskIntoConstraints = false
     
