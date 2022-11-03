@@ -49,7 +49,7 @@ class PhotoDetailedViewController: UIViewController, UIScrollViewDelegate {
 //      make.centerY.equalTo(self.scrollView.snp.centerY)
 //      make.centerX.equalTo(self.scrollView.snp.centerX)
       make.width.equalTo(scrollView.snp.width)
-      make.height.equalTo(scrollView.snp.height).inset(tabBarHeight)
+      make.height.equalTo(scrollView.snp.height).inset(tabBarHeight + 10)
     }
     
     

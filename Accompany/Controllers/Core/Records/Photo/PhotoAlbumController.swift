@@ -22,6 +22,9 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
   var uploadedImages = [Image]()
   var saveImgName = [String]()
   var imgURLArr = [URL]()
+  var imgCounter : Int {
+    return 1
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -51,9 +54,6 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
       title: "Photo Album ", style: .plain, target: nil, action: nil)
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
-    
-    print(uploadedImages)
-    print(saveImgName)
   }
   
   func setupLabelLayout() {
@@ -98,7 +98,6 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
       
       self.present(imagePicker, animated: true, completion: nil)
     }
-    
   }
   
   func openPhotoGallery() {
@@ -128,10 +127,18 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
     self.accessPhoto()
   }
   
+  func getDateForFilename() -> String {
+    let currentDate = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+    dateFormatter.dateFormat = "YYYYddMMhhmmss"
+    let dateString = dateFormatter.string(from: currentDate)
+    return dateString
+  }
+  
   func loadFileNames() {
     guard let saveImgName = listFilesFromDocumentsFolder() else { return }
-    print(saveImgName)
-    _ = saveImgName.map{ uploadedImages.append(Image(uiImage: loadImageFromDiskWith(fileName: $0) ?? UIImage(named: appName)!, uuid: $0))}
+    _ = saveImgName.map{ uploadedImages.insert(Image(uiImage: loadImageFromDiskWith(fileName: $0) ?? UIImage(named: appName)!, uuid: $0), at: 0)}
     self.collectionView.reloadData()
   }
   
@@ -139,79 +146,64 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
   {
     let fileMngr = FileManager.default;
     let docs = fileMngr.urls(for: .documentDirectory, in: .userDomainMask).first!.path
-    print("docs print")
-//    print(try? fileMngr.contentsOfDirectory(at: URL(fileURLWithPath: docs), includingPropertiesForKeys: [.contentModificationDateKey]))
-//    print(try? fileMngr.contentsOfDirectory(atPath:docs).sorted(by: <))
-    let files = try? fileMngr.contentsOfDirectory(at: URL(fileURLWithPath: docs), includingPropertiesForKeys: [.contentModificationDateKey]).map{$0.lastPathComponent}
-//    print(files)
+    let files = try? fileMngr.contentsOfDirectory(atPath: docs).sorted(by: <)
     return files
-//    return try? fileMngr.contentsOfDirectory(at: URL(fileURLWithPath: docs), includingPropertiesForKeys: [.creationDateKey], options: .skipsHiddenFiles){
-//      return urlArray.map { url in
-//                  (url.lastPathComponent, (try? url.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate ?? Date.distantPast)
-//              }
-//              .sorted(by: { $0.1 > $1.1 }) // sort descending modification dates
-//              .map { $0.0 }
-//    }
-//    )
   }
   
   func loadImageFromDiskWith(fileName: String) -> UIImage? {
     let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
-
-      let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
-      let paths = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
-
-      if let dirPath = paths.first {
-          let imageUrl = URL(fileURLWithPath: dirPath).appendingPathComponent(fileName)
-          let image = UIImage(contentsOfFile: imageUrl.path)
-          return image
-      }
-      return nil
+    let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+    let paths = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
+    if let dirPath = paths.first {
+        let imageUrl = URL(fileURLWithPath: dirPath).appendingPathComponent(fileName)
+        let image = UIImage(contentsOfFile: imageUrl.path)
+        return image
+    }
+    return nil
   }
   
   //SAVE IMAGE TO ARRAY
   
   func saveImages(image: UIImage, filename: String) {
     let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//    let fileName = UUID().description
     var imgURL = documentDirectory.appendingPathComponent(filename)
     guard let data = image.jpegData(compressionQuality: 1) else { return }
-      if FileManager.default.fileExists(atPath: imgURL.path) {
-        do {
-          imgURL = documentDirectory.appendingPathComponent(filename)
-          try FileManager.default.removeItem(atPath: imgURL.path)
-          print("Removed old image")
-        } catch let removeError {
-          print("couldn't remove file at path", removeError)
-        }
-      }
+    if FileManager.default.fileExists(atPath: imgURL.path) {
       do {
-        try data.write(to: imgURL)
-        saveImgName.append(filename)
-      } catch {
-        print("image not added")
+        imgURL = documentDirectory.appendingPathComponent(filename)
+        try FileManager.default.removeItem(atPath: imgURL.path)
+        print("Removed old image")
+      } catch let removeError {
+        print("couldn't remove file at path", removeError)
       }
-      imgURLArr.append(imgURL)
+    }
+    do {
+      try data.write(to: imgURL)
+      saveImgName.append(filename)
+    } catch {
+      print("image not added")
+    }
+    imgURLArr.append(imgURL)
   }
   
   func deleteFile(filename : String) {
     let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     var imgURL = documentDirectory.appendingPathComponent(filename)
-      if FileManager.default.fileExists(atPath: imgURL.path) {
-        do {
-          imgURL = documentDirectory.appendingPathComponent(filename)
-          try FileManager.default.removeItem(atPath: imgURL.path)
-          print("Removed old image")
-        } catch let removeError {
-          print("couldn't remove file at path", removeError)
-        }
+    if FileManager.default.fileExists(atPath: imgURL.path) {
+      do {
+        imgURL = documentDirectory.appendingPathComponent(filename)
+        try FileManager.default.removeItem(atPath: imgURL.path)
+        print("Removed old image")
+      } catch let removeError {
+        print("couldn't remove file at path", removeError)
       }
+    }
   }
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     if let uiImage = info[.originalImage] as? UIImage {
-      uploadedImages.append(Image(uiImage: uiImage))
-      self.saveImages(image: uiImage, filename: uploadedImages.last!.uuid)
+      uploadedImages.insert(Image(uiImage: uiImage), at: 0)
+      self.saveImages(image: uiImage, filename: self.getDateForFilename())
       self.collectionView.reloadData()
       picker.dismiss(animated: true)
     }
@@ -260,19 +252,17 @@ extension PhotoAblumController: PHPickerViewControllerDelegate {
   func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
     picker.dismiss(animated: true, completion: nil)
     let group = DispatchGroup()
-    results.forEach { result in
+    results.enumerated().forEach { (i,result) in
       group.enter()
       result.itemProvider.loadObject(ofClass: UIImage.self) { reading,error in
         defer {
           group.leave()
         }
-
         guard let image = reading as? UIImage, error == nil else {
           return
         }
-        print(result)
-        self.uploadedImages.append(Image(uiImage: image))
-        self.saveImages(image: image, filename: self.uploadedImages.last!.uuid)
+        self.uploadedImages.insert(Image(uiImage: image), at: 0)
+        self.saveImages(image: image, filename: self.getDateForFilename() + String(i))
         
       }
     }

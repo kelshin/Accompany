@@ -125,7 +125,9 @@ class HomeViewController: UIViewController {
   }
   
   func updateWelcome() {
-    welcomeTitleLabel.text = "Welcome back \(HomeViewController.currentUser.info?.email ?? "")!"
+    welcomeTitleLabel.text = "Welcome \(HomeViewController.currentUser.info?.name != nil ? "back" : "")!"
+    // add user name soon
+//    welcomeTitleLabel.text = "Welcome back \(HomeViewController.currentUser.info?.name ?? "")!"
   }
   
   private func fetchCurrentLists() {

@@ -10,7 +10,7 @@ import SnapKit
 enum InfoField: String, CaseIterable {
   
 //  case username = "Username"
-  case email = "Email"
+  case name = "Name"
   case babyName = "Baby's Name"
   case dueDate = "Due Date"
   case statusMessage = "Status"
@@ -189,7 +189,7 @@ extension MyProfileViewController: UITableViewDataSource {
 //      case 0:
 //        cell.update(with: userData!.username, for: InfoField.username)
       case 0:
-        cell.update(with: userData!.email, for: InfoField.email)
+        cell.update(with: userData?.name ?? "", for: InfoField.name)
       case 1:
         cell.update(with: userData!.babyName, for: InfoField.babyName)
       case 2:
@@ -218,7 +218,7 @@ extension MyProfileViewController: UITableViewDataSource {
 //      case 0:
 //        profileDetailVC.fieldValue = userInfo?.username
       case 0:
-        profileDetailVC.fieldValue = userInfo?.email
+        profileDetailVC.fieldValue = userInfo?.name
       case 1:
         profileDetailVC.fieldValue = userInfo?.babyName
       case 3:
@@ -284,8 +284,8 @@ extension MyProfileViewController: ProfileDetailViewControllerDelegate {
     switch field {
 //      case .username:
 //        HomeViewController.currentUser.info?.username = value
-      case .email:
-        HomeViewController.currentUser.info?.email = value
+      case .name:
+        HomeViewController.currentUser.info?.name = value
         HomeViewController().updateWelcome()
       case .babyName:
         HomeViewController.currentUser.info?.babyName = value.isEmpty ? "Not decided yet" : value
