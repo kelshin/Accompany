@@ -31,8 +31,8 @@ class HomeViewController: UIViewController {
   
   let bgCircleView = ImageView()
   
-  static var currentUser = User()
-  static var todoLists = [TodoList]()
+  static var currentUser = UserModel()
+  static var todoLists = [TodoListModel]()
   var currentTodos = [Todo]()
   var currentTrimester = String()
   
@@ -97,24 +97,24 @@ class HomeViewController: UIViewController {
     let defaults = UserDefaults.standard
     let decoder = JSONDecoder()
     if let savedTodo = defaults.object(forKey: "SavedTodos") as? Data {
-      if let loadedTodo = try? decoder.decode([TodoList].self, from: savedTodo){
+      if let loadedTodo = try? decoder.decode([TodoListModel].self, from: savedTodo){
         HomeViewController.todoLists = loadedTodo
       } else {
         print("Error loading previous list")
       }
     } else {
-      HomeViewController.todoLists = TodoList.loadSampleTodoLists()
+      HomeViewController.todoLists = TodoListModel.loadSampleTodoLists()
       saveTodoList()
     }
     if let savedUserData = defaults.object(forKey: "SavedUser") as? Data {
-      if let loadedUserData = try? decoder.decode(User.self, from: savedUserData){
+      if let loadedUserData = try? decoder.decode(UserModel.self, from: savedUserData){
         HomeViewController.currentUser = loadedUserData
         welcomeTitleLabel.text = "Welcome back!"
       } else {
         print("Error loading user data")
       }
     } else {
-        HomeViewController.currentUser.info = Info.loadSampleInfo()
+        HomeViewController.currentUser.info = UserDetailsInfoModel.loadSampleInfo()
         if HomeViewController.currentUser.info?.dueDate == nil {
           print("Due date is nil")
           let getDueDate = PopupViewController()
@@ -136,7 +136,7 @@ class HomeViewController: UIViewController {
     // decide current trimester
     let currentTrimester = getCurrentTrimester()
     // assign current todos
-    currentTodos = TodoList.getTodos(of: currentTrimester, from: HomeViewController.todoLists, status: .notDone) ?? [Todo]()
+    currentTodos = TodoListModel.getTodos(of: currentTrimester, from: HomeViewController.todoLists, status: .notDone) ?? [Todo]()
   }
   
   private func getCurrentTrimester() -> Trimester {
@@ -227,19 +227,19 @@ class HomeViewController: UIViewController {
     case firstTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.firstTrimester.rawValue
       todoListVC.currentTrimester = Trimester.firstTrimester.rawValue
-      todoListVC.todos = TodoList.getTodos(of: .firstTrimester, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
+      todoListVC.todos = TodoListModel.getTodos(of: .firstTrimester, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
     case secondTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.secondTrimester.rawValue
       todoListVC.currentTrimester = Trimester.secondTrimester.rawValue
-      todoListVC.todos = TodoList.getTodos(of: .secondTrimester, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
+      todoListVC.todos = TodoListModel.getTodos(of: .secondTrimester, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
     case thirdTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.thirdTrimester.rawValue
       todoListVC.currentTrimester = Trimester.thirdTrimester.rawValue
-      todoListVC.todos = TodoList.getTodos(of: .thirdTrimester, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
+      todoListVC.todos = TodoListModel.getTodos(of: .thirdTrimester, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
     case afterButton:
       todoListVC.todoListTitleLabel.text = Trimester.after.rawValue
       todoListVC.currentTrimester = Trimester.after.rawValue
-      todoListVC.todos = TodoList.getTodos(of: .after, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
+      todoListVC.todos = TodoListModel.getTodos(of: .after, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
     default:
       return
     }

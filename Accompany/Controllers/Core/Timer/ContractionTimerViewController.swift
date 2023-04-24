@@ -12,8 +12,8 @@ class ContractionTimerViewController: UIViewController {
   
   let titleLabel = TitleLabel(title: "Contraction Timer", size: .medium, color: .red)
  
-  var userConstractionRecords : [Contractions]?
-  var newRecord: Contractions?
+  var userConstractionRecords : [ContractionTimerModel]?
+  var newRecord: ContractionTimerModel?
   var timerValue : String?
   var todaysRecord = [[String]]()
   
@@ -333,7 +333,7 @@ class ContractionTimerViewController: UIViewController {
   func startTimer() {
     scheduledTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
     setTimerCounting(true)
-    newRecord = Contractions(contractionDate: Date(), contractionRecord: [])
+    newRecord = ContractionTimerModel(contractionDate: Date(), contractionRecord: [])
     currentRecordList.reloadData()
     isContracting.toggle()
   }
@@ -377,7 +377,7 @@ class ContractionTimerViewController: UIViewController {
       currentRecordList.reloadData()
     } else {
       newRecord = nil
-      newRecord = Contractions(contractionDate: Date(), contractionRecord: [])
+      newRecord = ContractionTimerModel(contractionDate: Date(), contractionRecord: [])
     }
     setStartTime(date: Date())
     minutesLabel.text = "00"

@@ -18,3 +18,7 @@ target 'Accompany' do
     end
   end
 end
+
+
+
+I have demonstrated skills and solid fundamentals and I can add value for your company. I still have a lot to learn but I'm a quick learner, ready to roll up my sleeves and not afraid of challenges. My goal is to grow my iOS skills and learn from the senior developers so that I can provide even more value to your business.

@@ -7,32 +7,49 @@
 
 import Foundation
 
+// MARK: - Enums
+
+/// An enum that we indicates the descriptions based on different trimesters.
 enum Trimester: String, CaseIterable, Codable {
   
+  /// The first trimester.
   case firstTrimester = "1st Trimester"
-  case secondTrimester = "2nd Trimester"
-  case thirdTrimester = "3rd Trimester"
-  case after = "After"
   
+  /// The second trimester.
+  case secondTrimester = "2nd Trimester"
+  
+  /// The third trimester.
+  case thirdTrimester = "3rd Trimester"
+  
+  /// After trimesters.
+  case after = "After"
 }
 
+/// An enum that we distinguish the status of to do.
 enum ToDoStatus: String, CaseIterable, Codable {
   
+  /// Shows all to do items.
   case all = "All"
-  case done = "Done"
-  case notDone = "Not Done"
   
+  /// Shows the items marked as done.
+  case done = "Done"
+  
+  /// Shows the items marked as not done.
+  case notDone = "Not Done"
 }
 
-struct TodoList: Codable {
+// MARK: - Model
+
+/// A model that we use to create a todolist.
+struct TodoListModel: Codable {
   
   var id = UUID()
   var trimester: Trimester
   public var todos: [Todo]?
   
-  static func loadSampleTodoLists() -> [TodoList] {
+  static func loadSampleTodoLists() -> [TodoListModel] {
     return [
-      TodoList(trimester: .firstTrimester, todos: [
+      TodoListModel(trimester: .firstTrimester, todos: [
         Todo(title: "Ask Medical History", isCompleted: false, note: "Type notes"),
         Todo(title: "MTHFR Gene Testing", isCompleted: false, note: "Type notes"),
         Todo(title: "Nutrition Counseling & Patient Instructions (D3 Testing)", isCompleted: false, note: "Type notes"),
@@ -52,7 +69,7 @@ struct TodoList: Codable {
         Todo(title: "Maternal blood Down’s syndrome screening for the first trimester", isCompleted: false, note: "Type notes"),
         Todo(title: "Preeclampsia risk assessment", isCompleted: false, note: "Type notes")
       ]),
-      TodoList(trimester: .secondTrimester, todos: [
+      TodoListModel(trimester: .secondTrimester, todos: [
         Todo(title: "Maternal blood Down’s syndrome screening", isCompleted: false, note: "Type notes"),
         Todo(title: "Health education consultation for prenatal check-up", isCompleted: false, note: "Type notes"),
         Todo(title: "Amniocentesis, Amniotic fluid", isCompleted: false, note: "Type notes"),
@@ -62,7 +79,7 @@ struct TodoList: Codable {
         Todo(title: "Syphilis", isCompleted: false, note: "Type notes"),
         Todo(title: "Gestational diabetes screening", isCompleted: false, note: "Type notes")
       ]),
-      TodoList(trimester: .thirdTrimester, todos: [
+      TodoListModel(trimester: .thirdTrimester, todos: [
         Todo(title: "Gestational diabetes reexamination", isCompleted: false, note: "Type notes"),
         Todo(title: "Pregnant woman physical fitness", isCompleted: false, note: "Type notes"),
         Todo(title: "Nutrition consultation", isCompleted: false, note: "Type notes"),
@@ -75,7 +92,7 @@ struct TodoList: Codable {
         Todo(title: "Prenatal blood and urine examination", isCompleted: false, note: "Type notes"),
         Todo(title: "GBS(Group B Streptococcus test)", isCompleted: false, note: "Type notes")
       ]),
-      TodoList(trimester: .after, todos: [
+      TodoListModel(trimester: .after, todos: [
         Todo(title: "Pertussis vaccination", isCompleted: false, note: "Type notes"),
         Todo(title: "Pap smear", isCompleted: false, note: "Type notes"),
         Todo(title: "HPV vaccination ", isCompleted: false, note: "Type notes"),
@@ -85,7 +102,7 @@ struct TodoList: Codable {
     ]
   }
   
-  static func getTodos(of trimester: Trimester, from todoLists: [TodoList], status: ToDoStatus) -> [Todo]? {
+  static func getTodos(of trimester: Trimester, from todoLists: [TodoListModel], status: ToDoStatus) -> [Todo]? {
     switch status {
     case .all:
       return todoLists.filter { $0.trimester == trimester }.first?.todos
