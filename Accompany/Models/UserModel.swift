@@ -12,14 +12,14 @@ struct UserModel: Codable {
   // MARK: - Properties
   
   /// An id that we use to identify the user.
-  public let id: UUID? = UUID()
+  public var id: UUID? = UUID()
   
   /// The details info of the user.
-  public let detailsInfo: UserDetailsInfoModel?
+  public var detailsInfo: UserDetailsInfoModel?
   
   /// An array that contains the user's contraction times.
-  public let contractionRecord: [ContractionTimerModel]?
+  public var contractionRecord: [ContractionTimerModel]?
   
   /// The note that the user writes in the To Do List view.
-  public let note: String?
+  public var note: String?
 }

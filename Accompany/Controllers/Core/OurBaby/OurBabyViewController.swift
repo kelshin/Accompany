@@ -88,7 +88,7 @@ class OurBabyViewController: UIViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    nameTitleTextField.text = HomeViewController.currentUser.info?.babyName ?? ""
+    nameTitleTextField.text = HomeViewController.currentUser.detailsInfo?.babyName ?? ""
     babyCalculator()
   }
   
@@ -210,7 +210,7 @@ class OurBabyViewController: UIViewController {
 //  }
   
   func babyCalculator() {
-    guard let userDueDate = HomeViewController.currentUser.info?.dueDate else {
+    guard let userDueDate = HomeViewController.currentUser.detailsInfo?.dueDate else {
       leftTitle.text = "due date not specified"
       leftNumberTitle.text = ""
       return
@@ -258,7 +258,7 @@ class OurBabyViewController: UIViewController {
   }
   
   @objc func nameChanged(){
-    HomeViewController.currentUser.info?.babyName = nameTitleTextField.text ?? ""
+    HomeViewController.currentUser.detailsInfo?.babyName = nameTitleTextField.text ?? ""
     HomeViewController().saveUserData()
   }
   

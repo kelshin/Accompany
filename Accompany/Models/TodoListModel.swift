@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Enums
 
-/// An enum that we indicates the descriptions based on different trimesters.
+/// An enum that indicates the descriptions based on different trimesters
 enum Trimester: String, CaseIterable, Codable {
   
   /// The first trimester.
@@ -25,7 +25,7 @@ enum Trimester: String, CaseIterable, Codable {
   case after = "After"
 }
 
-/// An enum that we distinguish the status of to do.
+/// An enum used to distinguish the status of a to-do item.
 enum ToDoStatus: String, CaseIterable, Codable {
   
   /// Shows all to do items.
@@ -42,63 +42,73 @@ enum ToDoStatus: String, CaseIterable, Codable {
 
 /// A model that we use to create a todolist.
 struct TodoListModel: Codable {
+ 
+  // MARK: - Properties
   
-  var id = UUID()
-  var trimester: Trimester
+  /// An ID used to generate unique IDs for each to-do item.
+  public var id = UUID()
+  
+  /// The trimester that the user is in.
+  public let trimester: Trimester
+  
+  /// An array that holds Todo items within a todo list.
   public var todos: [Todo]?
   
-  static func loadSampleTodoLists() -> [TodoListModel] {
-    return [
-      TodoListModel(trimester: .firstTrimester, todos: [
-        Todo(title: "Ask Medical History", isCompleted: false, note: "Type notes"),
-        Todo(title: "MTHFR Gene Testing", isCompleted: false, note: "Type notes"),
-        Todo(title: "Nutrition Counseling & Patient Instructions (D3 Testing)", isCompleted: false, note: "Type notes"),
-        Todo(title: "First Ultrasound", isCompleted: false, note: "Type notes"),
-        Todo(title: "Prenatal examination and  Blood tests", isCompleted: false, note: "Type notes"),
-        Todo(title: "Neisseria gonorrhoeae test & Chlamydia trachomatis test", isCompleted: false, note: "Type notes"),
-        Todo(title: "Pap smear, Human papilloma virus", isCompleted: false, note: "Type notes"),
-        Todo(title: "Cytomegalovirus screening", isCompleted: false, note: "Type notes"),
-        Todo(title: "Diabetes test", isCompleted: false, note: "Type notes"),
-        Todo(title: "NHI Regular blood screening for the first trimester", isCompleted: false, note: "Type notes"),
-        Todo(title: "Spinal muscular atrophy", isCompleted: false, note: "Type notes"),
-        Todo(title: "Thyroid function tests", isCompleted: false, note: "Type notes"),
-        Todo(title: "Fragile X syndrome", isCompleted: false, note: "Type notes") ,
-        Todo(title: "Toxoplasmosis screening", isCompleted: false, note: "Type notes"),
-        Todo(title: "Pregnant woman physical fitness", isCompleted: false, note: "Type notes"),
-        Todo(title: "Non-invasive Prenatal test", isCompleted: false, note: "Type notes"),
-        Todo(title: "Maternal blood Down’s syndrome screening for the first trimester", isCompleted: false, note: "Type notes"),
-        Todo(title: "Preeclampsia risk assessment", isCompleted: false, note: "Type notes")
-      ]),
-      TodoListModel(trimester: .secondTrimester, todos: [
-        Todo(title: "Maternal blood Down’s syndrome screening", isCompleted: false, note: "Type notes"),
-        Todo(title: "Health education consultation for prenatal check-up", isCompleted: false, note: "Type notes"),
-        Todo(title: "Amniocentesis, Amniotic fluid", isCompleted: false, note: "Type notes"),
-        Todo(title: "Premature birth risk assessment", isCompleted: false, note: "Type notes"),
-        Todo(title: "Anomaly Scan", isCompleted: false, note: "Type notes"),
-        Todo(title: "Seasonal influenza vaccination", isCompleted: false, note: "Type notes"),
-        Todo(title: "Syphilis", isCompleted: false, note: "Type notes"),
-        Todo(title: "Gestational diabetes screening", isCompleted: false, note: "Type notes")
-      ]),
-      TodoListModel(trimester: .thirdTrimester, todos: [
-        Todo(title: "Gestational diabetes reexamination", isCompleted: false, note: "Type notes"),
-        Todo(title: "Pregnant woman physical fitness", isCompleted: false, note: "Type notes"),
-        Todo(title: "Nutrition consultation", isCompleted: false, note: "Type notes"),
-        Todo(title: "Diphtheria and tetanus toxoid with acellular pertussis vaccination", isCompleted: false, note: "Type notes"),
-        Todo(title: "Fetal growth assessment", isCompleted: false, note: "Type notes"),
-        Todo(title: "Fetal ultrasound test", isCompleted: false, note: "Type notes"),
-        Todo(title: "Fetal movement record", isCompleted: false, note: "Type notes"),
-        Todo(title: "Fetal  health monitoring", isCompleted: false, note: "Type notes"),
-        Todo(title: "Fetal monitor", isCompleted: false, note: "Type notes"),
-        Todo(title: "Prenatal blood and urine examination", isCompleted: false, note: "Type notes"),
-        Todo(title: "GBS(Group B Streptococcus test)", isCompleted: false, note: "Type notes")
-      ]),
-      TodoListModel(trimester: .after, todos: [
-        Todo(title: "Pertussis vaccination", isCompleted: false, note: "Type notes"),
-        Todo(title: "Pap smear", isCompleted: false, note: "Type notes"),
-        Todo(title: "HPV vaccination ", isCompleted: false, note: "Type notes"),
-        Todo(title: "HPV screening", isCompleted: false, note: "Type notes"),
-        Todo(title: "Family planning", isCompleted: false, note: "Type notes"),
-      ]),
+  // MARK: - Methods
+  /// A method that we use to load the default data.
+  /// - Returns: An array of TodoListModel objects.
+  static func loadTodoListsData() -> [TodoListModel] {
+    let todoStrings = Strings.Todo.Title.self
+    return [TodoListModel(trimester: .firstTrimester,
+                          todos: [Todo(title: todoStrings.FirstTrimester.geneTesting),
+                                  Todo(title: todoStrings.FirstTrimester.d3Testing),
+                                  Todo(title: todoStrings.FirstTrimester.askMedicalHistory),
+                                  Todo(title: todoStrings.FirstTrimester.firstUltrasound),
+                                  Todo(title: todoStrings.FirstTrimester.prenatalExaminationBloodTests),
+                                  Todo(title: todoStrings.FirstTrimester.regularBloodTest),
+                                  Todo(title: todoStrings.FirstTrimester.neisseriaGonorrhoeaeChlamydiaTrachomatisTests),
+                                  Todo(title: todoStrings.FirstTrimester.spinalMuscularAtrophy),
+                                  Todo(title: todoStrings.FirstTrimester.smearHumanPapillomaVirus),
+                                  Todo(title: todoStrings.FirstTrimester.thyroidFunctionTests),
+                                  Todo(title: todoStrings.FirstTrimester.torchScreen),
+                                  Todo(title: todoStrings.FirstTrimester.fragileXSyndrome),
+                                  Todo(title: todoStrings.FirstTrimester.diabetesTest),
+                                  Todo(title: todoStrings.FirstTrimester.toxoplasmosisScreening),
+                                  Todo(title: todoStrings.FirstTrimester.nonInvasivePrenatalTest),
+                                  Todo(title: todoStrings.FirstTrimester.maternalBloodDownsSyndromeScreening),
+                                  Todo(title: todoStrings.FirstTrimester.preeclampsiaRiskAssessment),
+                                  Todo(title: todoStrings.FirstTrimester.pregnantWomanPhysicalFitness)
+                                 ]),
+            TodoListModel(trimester: .secondTrimester,
+                          todos: [Todo(title: "Maternal blood Down’s syndrome screening"),
+                                  Todo(title: "Health education consultation for prenatal check-up"),
+                                  Todo(title: "Amniocentesis, Amniotic fluid"),
+                                  Todo(title: "Premature birth risk assessment"),
+                                  Todo(title: "Anomaly Scan"),
+                                  Todo(title: "Seasonal influenza vaccination"),
+                                  Todo(title: "Syphilis"),
+                                  Todo(title: "Gestational diabetes screening")
+                                 ]),
+            TodoListModel(trimester: .thirdTrimester,
+                          todos: [Todo(title: "Gestational diabetes reexamination"),
+                                  Todo(title: "Pregnant woman physical fitness"),
+                                  Todo(title: "Nutrition consultation"),
+                                  Todo(title: "Diphtheria and tetanus toxoid with acellular pertussis vaccination"),
+                                  Todo(title: "Fetal growth assessment"),
+                                  Todo(title: "Fetal ultrasound test"),
+                                  Todo(title: "Fetal movement record"),
+                                  Todo(title: "Fetal  health monitoring"),
+                                  Todo(title: "Fetal monitor"),
+                                  Todo(title: "Prenatal blood and urine examination"),
+                                  Todo(title: "GBS(Group B Streptococcus test)")
+                                 ]),
+            TodoListModel(trimester: .after,
+                          todos: [Todo(title: "Pertussis vaccination"),
+                                  Todo(title: "Pap smear"),
+                                  Todo(title: "HPV vaccination"),
+                                  Todo(title: "HPV screening"),
+                                  Todo(title: "Family planning"),
+                                 ]),
     ]
   }
   

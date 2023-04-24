@@ -103,7 +103,7 @@ class HomeViewController: UIViewController {
         print("Error loading previous list")
       }
     } else {
-      HomeViewController.todoLists = TodoListModel.loadSampleTodoLists()
+      HomeViewController.todoLists = TodoListModel.loadTodoListsData()
       saveTodoList()
     }
     if let savedUserData = defaults.object(forKey: "SavedUser") as? Data {
@@ -114,8 +114,8 @@ class HomeViewController: UIViewController {
         print("Error loading user data")
       }
     } else {
-        HomeViewController.currentUser.info = UserDetailsInfoModel.loadSampleInfo()
-        if HomeViewController.currentUser.info?.dueDate == nil {
+        HomeViewController.currentUser.detailsInfo = UserDetailsInfoModel.loadSampleInfo()
+        if HomeViewController.currentUser.detailsInfo?.dueDate == nil {
           print("Due date is nil")
           let getDueDate = PopupViewController()
           getDueDate.modalPresentationStyle = .fullScreen
@@ -127,9 +127,7 @@ class HomeViewController: UIViewController {
   }
   
   func updateWelcome() {
-    welcomeTitleLabel.text = "Welcome\(HomeViewController.currentUser.info?.dueDate == nil ? "" : " back")!"
-    // add user name soon
-//    welcomeTitleLabel.text = "Welcome back \(HomeViewController.currentUser.info?.name ?? "")!"
+    welcomeTitleLabel.text = "Welcome\(HomeViewController.currentUser.detailsInfo?.dueDate == nil ? "" : " back")!"
   }
   
   private func fetchCurrentLists() {
@@ -141,7 +139,7 @@ class HomeViewController: UIViewController {
   
   private func getCurrentTrimester() -> Trimester {
     
-    guard let dueDate = HomeViewController.currentUser.info?.dueDate else {
+    guard let dueDate = HomeViewController.currentUser.detailsInfo?.dueDate else {
       currentTrimester = Trimester.firstTrimester.rawValue
       return .firstTrimester
     }

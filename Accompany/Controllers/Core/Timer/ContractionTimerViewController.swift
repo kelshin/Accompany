@@ -65,7 +65,7 @@ class ContractionTimerViewController: UIViewController {
     button.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
     button.setTitle("Records", for: .normal)
     button.setTitleColor(.white, for: .normal)
-    button.addTarget(self, action: #selector(contractionAndRecordTabTapped), for: .touchUpInside)
+    button.addTarget(ContractionTimerViewController.self, action: #selector(contractionAndRecordTabTapped), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     
     return button
@@ -373,7 +373,7 @@ class ContractionTimerViewController: UIViewController {
   
   func recordData(){
     if timerCounting {
-      newRecord?.contractionRecord?.append(Detail(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
+      newRecord?.contractionRecord?.append(ContractionDetailsModel(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
       currentRecordList.reloadData()
     } else {
       newRecord = nil
@@ -402,7 +402,7 @@ class ContractionTimerViewController: UIViewController {
   
   @objc func stopTimer(){
     if newRecord != nil {
-      newRecord?.contractionRecord?.append(Detail(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
+      newRecord?.contractionRecord?.append(ContractionDetailsModel(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
       saveRecord()
       currentRecordList.reloadData()
       if userConstractionRecords != nil {

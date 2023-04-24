@@ -16,5 +16,5 @@ struct ContractionTimerModel: Codable {
   public let contractionDate: Date?
   
   /// An array of contraction details.
-  public let contractionRecord: [ContractionDetailsModel]?
+  public var contractionRecord: [ContractionDetailsModel]?
 }

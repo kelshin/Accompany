@@ -53,6 +53,7 @@
 		6CB9D47427CA063900D377F7 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D47327CA063900D377F7 /* Image.swift */; };
 		6CD119B329F5E1C700E803DB /* UserDetailsInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD119B229F5E1C700E803DB /* UserDetailsInfoModel.swift */; };
 		6CD119B729F60C5000E803DB /* ContractionDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD119B629F60C5000E803DB /* ContractionDetailsModel.swift */; };
+		6CD119C129F618D300E803DB /* Strings+Todo+Titles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD119C029F618D300E803DB /* Strings+Todo+Titles.swift */; };
 		6CF45F7427BE520100ED0942 /* PhotoAlbumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7327BE520100ED0942 /* PhotoAlbumController.swift */; };
 		6CF45F7627BE624400ED0942 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */; };
 		6CF5E38627C3C26B00F427A2 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF5E38527C3C26B00F427A2 /* NotesViewController.swift */; };
@@ -110,6 +111,7 @@
 		6CB9D47327CA063900D377F7 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		6CD119B229F5E1C700E803DB /* UserDetailsInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsInfoModel.swift; sourceTree = "<group>"; };
 		6CD119B629F60C5000E803DB /* ContractionDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractionDetailsModel.swift; sourceTree = "<group>"; };
+		6CD119C029F618D300E803DB /* Strings+Todo+Titles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Todo+Titles.swift"; sourceTree = "<group>"; };
 		6CF45F7327BE520100ED0942 /* PhotoAlbumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumController.swift; sourceTree = "<group>"; };
 		6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		6CF5E38527C3C26B00F427A2 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 		437721DC27ADE4E700EC8A98 /* Accompany */ = {
 			isa = PBXGroup;
 			children = (
+				6CD119BC29F617D100E803DB /* Resources */,
 				437721F127ADE83600EC8A98 /* Supporting Files */,
 				4306D26827B5D26B00050369 /* Models */,
 				437721F327ADE85000EC8A98 /* Views */,
@@ -405,8 +408,8 @@
 		6CD119BA29F60D6900E803DB /* Todolist */ = {
 			isa = PBXGroup;
 			children = (
-				43FB2AF427BDDC7C004A641D /* TodoListModel.swift */,
 				4354219627BDD88C002160DA /* Todo.swift */,
+				43FB2AF427BDDC7C004A641D /* TodoListModel.swift */,
 			);
 			name = Todolist;
 			sourceTree = "<group>";
@@ -417,6 +420,22 @@
 				6CB9D47327CA063900D377F7 /* Image.swift */,
 			);
 			path = PhotoAlbum;
+			sourceTree = "<group>";
+		};
+		6CD119BC29F617D100E803DB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6CD119BD29F617F200E803DB /* Todo */,
+				6CD119C029F618D300E803DB /* Strings+Todo+Titles.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6CD119BD29F617F200E803DB /* Todo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Todo;
 			sourceTree = "<group>";
 		};
 		849BD287FAC13C3F0A2B32A6 /* Pods */ = {
@@ -573,6 +592,7 @@
 				6CD119B729F60C5000E803DB /* ContractionDetailsModel.swift in Sources */,
 				43FB2B2227BE4A8B004A641D /* AboutAccompanyViewController.swift in Sources */,
 				43FB2B1C27BE4A0B004A641D /* AccountSettingsViewController.swift in Sources */,
+				6CD119C129F618D300E803DB /* Strings+Todo+Titles.swift in Sources */,
 				6CF45F7627BE624400ED0942 /* PhotoCollectionViewCell.swift in Sources */,
 				430F6D9027BF67F20095DB8D /* FeedbackViewController.swift in Sources */,
 				6CB9D46127C60B8200D377F7 /* ProfileDetailViewController.swift in Sources */,

@@ -74,7 +74,7 @@ class ProfileDetailViewController: CustomTextViewController {
       textView.text = fieldValue!
     case .statusMessage:
       textView.text = fieldValue!
-    case .bio:
+    case .intro:
       textView.text = fieldValue!
     default:
       return

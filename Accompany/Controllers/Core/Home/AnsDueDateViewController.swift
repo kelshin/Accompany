@@ -134,7 +134,7 @@ class AnsDueDateViewController: UIViewController {
       self.present(alert, animated: true, completion: {
       })
       } else {
-        HomeViewController.currentUser.info?.dueDate = dueDatePicker.date
+        HomeViewController.currentUser.detailsInfo?.dueDate = dueDatePicker.date
         HomeViewController().saveUserData()
         self.view.window!.rootViewController?.dismiss(animated: true)
       }

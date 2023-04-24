@@ -14,7 +14,7 @@ enum InfoField: String, CaseIterable {
   case babyName = "Baby's Name"
   case dueDate = "Due Date"
   case statusMessage = "Status"
-  case bio = "Bio"
+  case intro = "Intro"
  
  
 }
@@ -35,7 +35,7 @@ class MyProfileViewController: CustomTextViewController {
   
   let datePickerCell = DatePickerTableViewCell()
   
-  var userInfo = HomeViewController.currentUser.info
+  var userInfo = HomeViewController.currentUser.detailsInfo
   var selectedIndexPath: IndexPath?
   
   let datePickerIndexPath = IndexPath(row: 2, section: 0)
@@ -63,7 +63,7 @@ class MyProfileViewController: CustomTextViewController {
   
   // TODO: fetch user info from db
   private func fetchUserInfo() {
-    userInfo = HomeViewController.currentUser.info
+    userInfo = HomeViewController.currentUser.detailsInfo
   }
   
   func addTapToImage() {
@@ -183,7 +183,7 @@ extension MyProfileViewController: UITableViewDataSource {
     
     else {
       let cell = profileTableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier, for: indexPath) as! ProfileCell
-      let userData = HomeViewController.currentUser.info
+      let userData = HomeViewController.currentUser.detailsInfo
       switch indexPath.row {
       // Username to be implemented soon
 //      case 0:
@@ -191,13 +191,13 @@ extension MyProfileViewController: UITableViewDataSource {
       case 0:
         cell.update(with: userData?.name ?? "", for: InfoField.name)
       case 1:
-        cell.update(with: userData!.babyName, for: InfoField.babyName)
+        cell.update(with: userData?.babyName ?? "", for: InfoField.babyName)
       case 2:
         cell.update(with: DateFormatter().string(from: userData?.dueDate ?? Date.now) , for: InfoField.dueDate)
       case 3:
         cell.update(with: userData?.statusMessage ?? "", for: InfoField.statusMessage)
       default:
-        cell.update(with: userData?.bio ?? "", for: InfoField.bio)
+        cell.update(with: userData?.intro ?? "", for: InfoField.intro)
       }
       return cell
     }
@@ -224,7 +224,7 @@ extension MyProfileViewController: UITableViewDataSource {
       case 3:
         profileDetailVC.fieldValue = userInfo?.statusMessage
       case 4:
-        profileDetailVC.fieldValue = userInfo?.bio
+        profileDetailVC.fieldValue = userInfo?.intro
       default:
         profileDetailVC.fieldValue = ""
       }
@@ -250,7 +250,7 @@ extension MyProfileViewController: UITableViewDataSource {
 
 //    let selectedDate: String = dateFormatter.string(from: datePicker.date)
     
-    HomeViewController.currentUser.info?.dueDate = datePicker.date
+    HomeViewController.currentUser.detailsInfo?.dueDate = datePicker.date
     HomeViewController().saveUserData()
   }
 }
@@ -282,17 +282,15 @@ extension MyProfileViewController: ProfileDetailViewControllerDelegate {
   
   func edit(_ value: String, for field: InfoField) {
     switch field {
-//      case .username:
-//        HomeViewController.currentUser.info?.username = value
       case .name:
-        HomeViewController.currentUser.info?.name = value
+        HomeViewController.currentUser.detailsInfo?.name = value
         HomeViewController().updateWelcome()
       case .babyName:
-        HomeViewController.currentUser.info?.babyName = value.isEmpty ? "Not decided yet" : value
+        HomeViewController.currentUser.detailsInfo?.babyName = value.isEmpty ? "Not decided yet" : value
       case .statusMessage:
-        HomeViewController.currentUser.info?.statusMessage = value
-      case .bio:
-        HomeViewController.currentUser.info?.bio = value
+        HomeViewController.currentUser.detailsInfo?.statusMessage = value
+      case .intro:
+      HomeViewController.currentUser.detailsInfo?.intro = value
       default:
         return
     }
