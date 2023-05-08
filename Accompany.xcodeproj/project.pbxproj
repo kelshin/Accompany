@@ -13,7 +13,6 @@
 		430F6D9027BF67F20095DB8D /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430F6D8F27BF67F20095DB8D /* FeedbackViewController.swift */; };
 		4325CD4A27C4506D0065A206 /* TodoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325CD4927C4506D0065A206 /* TodoHeaderView.swift */; };
 		4354218D27BC66B2002160DA /* ContractionTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4354218C27BC66B2002160DA /* ContractionTimerViewController.swift */; };
-		4354219727BDD88C002160DA /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4354219627BDD88C002160DA /* Todo.swift */; };
 		437721DE27ADE4E700EC8A98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437721DD27ADE4E700EC8A98 /* AppDelegate.swift */; };
 		437721E027ADE4E700EC8A98 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437721DF27ADE4E700EC8A98 /* SceneDelegate.swift */; };
 		437721EA27ADE4E800EC8A98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 437721E827ADE4E800EC8A98 /* LaunchScreen.storyboard */; };
@@ -25,7 +24,6 @@
 		4378AA2527C86C5B0019773E /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4378AA2427C86C5B0019773E /* DatePickerTableViewCell.swift */; };
 		439FC07227B705660016CD7F /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439FC07127B705660016CD7F /* TodoListViewController.swift */; };
 		43A8C58227C0790F00FD647F /* ToDoNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A8C58127C0790F00FD647F /* ToDoNotesCell.swift */; };
-		43FB2AF527BDDC7C004A641D /* TodoListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2AF427BDDC7C004A641D /* TodoListModel.swift */; };
 		43FB2AFC27BDEB91004A641D /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2AFB27BDEB91004A641D /* TitleLabel.swift */; };
 		43FB2B0727BE37F0004A641D /* VStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B0627BE37F0004A641D /* VStack.swift */; };
 		43FB2B0E27BE381C004A641D /* OutlineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B0B27BE381C004A641D /* OutlineButton.swift */; };
@@ -36,7 +34,6 @@
 		43FB2B1C27BE4A0B004A641D /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B1B27BE4A0B004A641D /* AccountSettingsViewController.swift */; };
 		43FB2B2227BE4A8B004A641D /* AboutAccompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B2127BE4A8B004A641D /* AboutAccompanyViewController.swift */; };
 		6413589A27C0623B0086BB39 /* ToDoBasicInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6413589827C0623B0086BB39 /* ToDoBasicInfoCell.swift */; };
-		641452EC27BF0B0D0058800B /* ContractionTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641452EB27BF0B0D0058800B /* ContractionTimerModel.swift */; };
 		641452F427BF9E3F0058800B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641452F327BF9E3E0058800B /* Extensions.swift */; };
 		642E8A3327B8EE7E00C9C2E5 /* Simple-Boy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 642E8A3227B8EC7200C9C2E5 /* Simple-Boy.ttf */; };
 		64EF106D27B717C600167984 /* ToDoFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106A27B717C600167984 /* ToDoFormTableViewController.swift */; };
@@ -50,9 +47,12 @@
 		6CB9D45D27C5F07C00D377F7 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D45C27C5F07C00D377F7 /* ProfileCell.swift */; };
 		6CB9D45F27C5F35F00D377F7 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D45E27C5F35F00D377F7 /* UserModel.swift */; };
 		6CB9D46127C60B8200D377F7 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D46027C60B8200D377F7 /* ProfileDetailViewController.swift */; };
-		6CB9D47427CA063900D377F7 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D47327CA063900D377F7 /* Image.swift */; };
+		6CD081D829FF6FAA002DD03B /* ContractionTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD081D729FF6FAA002DD03B /* ContractionTimerModel.swift */; };
+		6CD081DA29FF6FC8002DD03B /* ContractionTimerDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD081D929FF6FC8002DD03B /* ContractionTimerDetailsModel.swift */; };
+		6CD081DD29FF7005002DD03B /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD081DC29FF7005002DD03B /* ImageModel.swift */; };
+		6CD081E029FF704E002DD03B /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD081DF29FF704E002DD03B /* TodoModel.swift */; };
+		6CD081E229FF706D002DD03B /* TodoListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD081E129FF706D002DD03B /* TodoListModel.swift */; };
 		6CD119B329F5E1C700E803DB /* UserDetailsInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD119B229F5E1C700E803DB /* UserDetailsInfoModel.swift */; };
-		6CD119B729F60C5000E803DB /* ContractionDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD119B629F60C5000E803DB /* ContractionDetailsModel.swift */; };
 		6CD119C129F618D300E803DB /* Strings+Todo+Titles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD119C029F618D300E803DB /* Strings+Todo+Titles.swift */; };
 		6CF45F7427BE520100ED0942 /* PhotoAlbumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7327BE520100ED0942 /* PhotoAlbumController.swift */; };
 		6CF45F7627BE624400ED0942 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */; };
@@ -68,7 +68,6 @@
 		430F6D8F27BF67F20095DB8D /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		4325CD4927C4506D0065A206 /* TodoHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoHeaderView.swift; sourceTree = "<group>"; };
 		4354218C27BC66B2002160DA /* ContractionTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractionTimerViewController.swift; sourceTree = "<group>"; };
-		4354219627BDD88C002160DA /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		437721DA27ADE4E700EC8A98 /* Accompany.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accompany.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		437721DD27ADE4E700EC8A98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		437721DF27ADE4E700EC8A98 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,7 +81,6 @@
 		4378AA2427C86C5B0019773E /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		439FC07127B705660016CD7F /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		43A8C58127C0790F00FD647F /* ToDoNotesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoNotesCell.swift; sourceTree = "<group>"; };
-		43FB2AF427BDDC7C004A641D /* TodoListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListModel.swift; sourceTree = "<group>"; };
 		43FB2AFB27BDEB91004A641D /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		43FB2B0627BE37F0004A641D /* VStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStack.swift; sourceTree = "<group>"; };
 		43FB2B0B27BE381C004A641D /* OutlineButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineButton.swift; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 		43FB2B1B27BE4A0B004A641D /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
 		43FB2B2127BE4A8B004A641D /* AboutAccompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAccompanyViewController.swift; sourceTree = "<group>"; };
 		6413589827C0623B0086BB39 /* ToDoBasicInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoBasicInfoCell.swift; sourceTree = "<group>"; };
-		641452EB27BF0B0D0058800B /* ContractionTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractionTimerModel.swift; sourceTree = "<group>"; };
 		641452F327BF9E3E0058800B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		642E8A3227B8EC7200C9C2E5 /* Simple-Boy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Simple-Boy.ttf"; sourceTree = "<group>"; };
 		64EF106A27B717C600167984 /* ToDoFormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoFormTableViewController.swift; sourceTree = "<group>"; };
@@ -108,9 +105,12 @@
 		6CB9D45C27C5F07C00D377F7 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		6CB9D45E27C5F35F00D377F7 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		6CB9D46027C60B8200D377F7 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
-		6CB9D47327CA063900D377F7 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		6CD081D729FF6FAA002DD03B /* ContractionTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractionTimerModel.swift; sourceTree = "<group>"; };
+		6CD081D929FF6FC8002DD03B /* ContractionTimerDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractionTimerDetailsModel.swift; sourceTree = "<group>"; };
+		6CD081DC29FF7005002DD03B /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		6CD081DF29FF704E002DD03B /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
+		6CD081E129FF706D002DD03B /* TodoListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListModel.swift; sourceTree = "<group>"; };
 		6CD119B229F5E1C700E803DB /* UserDetailsInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsInfoModel.swift; sourceTree = "<group>"; };
-		6CD119B629F60C5000E803DB /* ContractionDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractionDetailsModel.swift; sourceTree = "<group>"; };
 		6CD119C029F618D300E803DB /* Strings+Todo+Titles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Todo+Titles.swift"; sourceTree = "<group>"; };
 		6CF45F7327BE520100ED0942 /* PhotoAlbumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumController.swift; sourceTree = "<group>"; };
 		6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -138,7 +138,10 @@
 		4306D26827B5D26B00050369 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6CD119B929F60CDA00E803DB /* Features */,
+				6CD081DE29FF703E002DD03B /* TodoList */,
+				6CD081DB29FF6FEF002DD03B /* PhotoAlbum */,
+				6CD081D629FF6F8F002DD03B /* ContractionTimer */,
+				6CD119B429F5EA3D00E803DB /* Settings */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -173,9 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				6CD119BC29F617D100E803DB /* Resources */,
-				437721F127ADE83600EC8A98 /* Supporting Files */,
-				4306D26827B5D26B00050369 /* Models */,
-				437721F327ADE85000EC8A98 /* Views */,
 				437721F427ADE86300EC8A98 /* Controllers */,
 				437721EB27ADE4E800EC8A98 /* Info.plist */,
 				6C1FC57927C36F83007D625E /* Assets.xcassets */,
@@ -367,6 +367,41 @@
 			path = QANotes;
 			sourceTree = "<group>";
 		};
+		6CD081D429FF6E4A002DD03B /* Accompany */ = {
+			isa = PBXGroup;
+			children = (
+				6CD119C029F618D300E803DB /* Strings+Todo+Titles.swift */,
+				4306D26827B5D26B00050369 /* Models */,
+			);
+			path = Accompany;
+			sourceTree = "<group>";
+		};
+		6CD081D629FF6F8F002DD03B /* ContractionTimer */ = {
+			isa = PBXGroup;
+			children = (
+				6CD081D729FF6FAA002DD03B /* ContractionTimerModel.swift */,
+				6CD081D929FF6FC8002DD03B /* ContractionTimerDetailsModel.swift */,
+			);
+			path = ContractionTimer;
+			sourceTree = "<group>";
+		};
+		6CD081DB29FF6FEF002DD03B /* PhotoAlbum */ = {
+			isa = PBXGroup;
+			children = (
+				6CD081DC29FF7005002DD03B /* ImageModel.swift */,
+			);
+			path = PhotoAlbum;
+			sourceTree = "<group>";
+		};
+		6CD081DE29FF703E002DD03B /* TodoList */ = {
+			isa = PBXGroup;
+			children = (
+				6CD081DF29FF704E002DD03B /* TodoModel.swift */,
+				6CD081E129FF706D002DD03B /* TodoListModel.swift */,
+			);
+			path = TodoList;
+			sourceTree = "<group>";
+		};
 		6CD119AD29DE9BC900E803DB /* LaunchView */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,59 +418,17 @@
 				6CD119B229F5E1C700E803DB /* UserDetailsInfoModel.swift */,
 			);
 			name = Settings;
-			sourceTree = "<group>";
-		};
-		6CD119B829F60CB300E803DB /* ContractionTimer */ = {
-			isa = PBXGroup;
-			children = (
-				641452EB27BF0B0D0058800B /* ContractionTimerModel.swift */,
-				6CD119B629F60C5000E803DB /* ContractionDetailsModel.swift */,
-			);
-			path = ContractionTimer;
-			sourceTree = "<group>";
-		};
-		6CD119B929F60CDA00E803DB /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				6CD119B829F60CB300E803DB /* ContractionTimer */,
-				6CD119BB29F60D8700E803DB /* PhotoAlbum */,
-				6CD119B429F5EA3D00E803DB /* Settings */,
-				6CD119BA29F60D6900E803DB /* Todolist */,
-			);
-			name = Features;
-			sourceTree = "<group>";
-		};
-		6CD119BA29F60D6900E803DB /* Todolist */ = {
-			isa = PBXGroup;
-			children = (
-				4354219627BDD88C002160DA /* Todo.swift */,
-				43FB2AF427BDDC7C004A641D /* TodoListModel.swift */,
-			);
-			name = Todolist;
-			sourceTree = "<group>";
-		};
-		6CD119BB29F60D8700E803DB /* PhotoAlbum */ = {
-			isa = PBXGroup;
-			children = (
-				6CB9D47327CA063900D377F7 /* Image.swift */,
-			);
-			path = PhotoAlbum;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		6CD119BC29F617D100E803DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6CD119BD29F617F200E803DB /* Todo */,
-				6CD119C029F618D300E803DB /* Strings+Todo+Titles.swift */,
+				437721F127ADE83600EC8A98 /* Supporting Files */,
+				6CD081D429FF6E4A002DD03B /* Accompany */,
+				437721F327ADE85000EC8A98 /* Views */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		6CD119BD29F617F200E803DB /* Todo */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Todo;
 			sourceTree = "<group>";
 		};
 		849BD287FAC13C3F0A2B32A6 /* Pods */ = {
@@ -583,26 +576,25 @@
 				6CF5E38827C3D9D000F427A2 /* ContentCell.swift in Sources */,
 				43FB2B1627BE49BD004A641D /* MyProfileViewController.swift in Sources */,
 				439FC07227B705660016CD7F /* TodoListViewController.swift in Sources */,
+				6CD081E029FF704E002DD03B /* TodoModel.swift in Sources */,
 				437721DE27ADE4E700EC8A98 /* AppDelegate.swift in Sources */,
+				6CD081D829FF6FAA002DD03B /* ContractionTimerModel.swift in Sources */,
 				437721FD27ADE98500EC8A98 /* OurBabyViewController.swift in Sources */,
 				641452F427BF9E3F0058800B /* Extensions.swift in Sources */,
-				641452EC27BF0B0D0058800B /* ContractionTimerModel.swift in Sources */,
 				437721E027ADE4E700EC8A98 /* SceneDelegate.swift in Sources */,
 				6CF5E38A27C44B4A00F427A2 /* TextView.swift in Sources */,
-				6CD119B729F60C5000E803DB /* ContractionDetailsModel.swift in Sources */,
+				6CD081E229FF706D002DD03B /* TodoListModel.swift in Sources */,
 				43FB2B2227BE4A8B004A641D /* AboutAccompanyViewController.swift in Sources */,
 				43FB2B1C27BE4A0B004A641D /* AccountSettingsViewController.swift in Sources */,
 				6CD119C129F618D300E803DB /* Strings+Todo+Titles.swift in Sources */,
 				6CF45F7627BE624400ED0942 /* PhotoCollectionViewCell.swift in Sources */,
 				430F6D9027BF67F20095DB8D /* FeedbackViewController.swift in Sources */,
 				6CB9D46127C60B8200D377F7 /* ProfileDetailViewController.swift in Sources */,
-				6CB9D47427CA063900D377F7 /* Image.swift in Sources */,
 				4377220327ADE9A800EC8A98 /* TabBarViewController.swift in Sources */,
 				6C97121728CA164100AE4227 /* PopUpFormView.swift in Sources */,
 				437721FB27ADE97B00EC8A98 /* HomeViewController.swift in Sources */,
 				6CB9D45D27C5F07C00D377F7 /* ProfileCell.swift in Sources */,
-				4354219727BDD88C002160DA /* Todo.swift in Sources */,
-				43FB2AF527BDDC7C004A641D /* TodoListModel.swift in Sources */,
+				6CD081DD29FF7005002DD03B /* ImageModel.swift in Sources */,
 				6CB9D45B27C4D11C00D377F7 /* CustomTextViewController.swift in Sources */,
 				437721FF27ADE98B00EC8A98 /* RecordsViewController.swift in Sources */,
 				6C97121928CB1C8900AE4227 /* PopupViewController.swift in Sources */,
@@ -619,6 +611,7 @@
 				4354218D27BC66B2002160DA /* ContractionTimerViewController.swift in Sources */,
 				4378AA2527C86C5B0019773E /* DatePickerTableViewCell.swift in Sources */,
 				6CD119B329F5E1C700E803DB /* UserDetailsInfoModel.swift in Sources */,
+				6CD081DA29FF6FC8002DD03B /* ContractionTimerDetailsModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,7 +757,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N53R4WJ796;
+				DEVELOPMENT_TEAM = 7669655F54;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Accompany/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
@@ -797,7 +790,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N53R4WJ796;
+				DEVELOPMENT_TEAM = 7669655F54;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Accompany/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";

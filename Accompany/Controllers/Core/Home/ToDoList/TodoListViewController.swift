@@ -93,8 +93,9 @@ extension TodoListViewController: UITableViewDelegate {
     cell.update(with: todo)
     cell.isCompleteButton.isSelected = todo.isCompleted
     cell.delegate = self
-    cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    
+    if traitCollection.userInterfaceStyle == .dark || traitCollection.userInterfaceStyle == .light {
+      cell.contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    }    
     return cell
   }
   

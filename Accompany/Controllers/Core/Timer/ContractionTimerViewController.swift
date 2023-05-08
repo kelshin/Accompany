@@ -60,12 +60,11 @@ class ContractionTimerViewController: UIViewController {
     }
   }
   
-  var contractionAndRecordTab : UIButton = {
+  var contractionAndRecordTab: UIButton = {
     let button = UIButton()
     button.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
     button.setTitle("Records", for: .normal)
     button.setTitleColor(.white, for: .normal)
-    button.addTarget(ContractionTimerViewController.self, action: #selector(contractionAndRecordTabTapped), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     
     return button
@@ -187,6 +186,7 @@ class ContractionTimerViewController: UIViewController {
     
     startButton.addTarget(self, action: #selector(startRestTimer), for: .touchUpInside)
     stopButton.addTarget(self, action: #selector(stopTimer), for: .touchUpInside)
+    contractionAndRecordTab.addTarget(self, action: #selector(contractionAndRecordTabTapped), for: .touchUpInside)
     
     if timerCounting {
       startTimer()
@@ -202,12 +202,6 @@ class ContractionTimerViewController: UIViewController {
     }
     
     userConstractionRecords = HomeViewController.currentUser.contractionRecord
-//    userConstractionRecords = [
-//      Contractions(contractionDate: Date(), contractionRecord: [Detail(state: "Constracting", length: "00:04"),Detail(state: "Rest", length: "00:04")]),
-//      Contractions(contractionDate: Date(), contractionRecord: [Detail(state: "Constracting", length: "00:06"),Detail(state: "Rest", length: "00:02")])]
-//    newRecord =
-//      Contractions(contractionDate: Date(), contractionRecord: [Detail(state: "Constracting", length: "00:04"),Detail(state: "Rest", length: "00:07")])
-    
   }
   
   func addSubview(){
@@ -386,7 +380,6 @@ class ContractionTimerViewController: UIViewController {
   
   func saveRecord() {
     print("saving record")
-//    print(newRecord)
     if HomeViewController.currentUser.contractionRecord != nil {
       HomeViewController.currentUser.contractionRecord?.insert(newRecord!, at: 0)
     } else {
@@ -421,7 +414,8 @@ class ContractionTimerViewController: UIViewController {
     startButton.setTitle("Start", for: .normal)
     startButton.backgroundColor = #colorLiteral(red: 0.9845016599, green: 0.3794513941, blue: 0.5343101621, alpha: 1)
   }
-
+  
+  
   @objc func resetTimer(){
     setStopTime(date: nil)
     setStartTime(date: nil)
