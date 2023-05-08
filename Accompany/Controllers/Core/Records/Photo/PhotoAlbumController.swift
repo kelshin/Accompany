@@ -19,7 +19,7 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
   
   let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
   
-  var uploadedImages = [Image]()
+  var uploadedImages = [ImageModel]()
   var saveImgName = [String]()
   var imgURLArr = [URL]()
   var imgCounter : Int {
@@ -138,7 +138,7 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
   
   func loadFileNames() {
     guard let saveImgName = listFilesFromDocumentsFolder() else { return }
-    _ = saveImgName.map{ uploadedImages.insert(Image(uiImage: loadImageFromDiskWith(fileName: $0) ?? UIImage(named: appName)!, uuid: $0), at: 0)}
+    _ = saveImgName.map{ uploadedImages.insert(ImageModel(uiImage: loadImageFromDiskWith(fileName: $0) ?? UIImage(named: appName)!, uuid: $0), at: 0)}
     self.collectionView.reloadData()
   }
   
@@ -202,7 +202,7 @@ class PhotoAblumController: UIViewController, UIImagePickerControllerDelegate, U
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     if let uiImage = info[.originalImage] as? UIImage {
-      uploadedImages.insert(Image(uiImage: uiImage), at: 0)
+      uploadedImages.insert(ImageModel(uiImage: uiImage), at: 0)
       self.saveImages(image: uiImage, filename: self.getDateForFilename())
       self.collectionView.reloadData()
       picker.dismiss(animated: true)
@@ -261,7 +261,7 @@ extension PhotoAblumController: PHPickerViewControllerDelegate {
         guard let image = reading as? UIImage, error == nil else {
           return
         }
-        self.uploadedImages.insert(Image(uiImage: image), at: 0)
+        self.uploadedImages.insert(ImageModel(uiImage: image), at: 0)
         self.saveImages(image: image, filename: self.getDateForFilename() + String(i))
         
       }

@@ -55,6 +55,7 @@ struct TodoListModel: Codable {
   public var todos: [Todo]?
   
   // MARK: - Methods
+  
   /// A method that we use to load the default data.
   /// - Returns: An array of TodoListModel objects.
   static func loadTodoListsData() -> [TodoListModel] {
@@ -80,38 +81,43 @@ struct TodoListModel: Codable {
                                   Todo(title: todoStrings.FirstTrimester.pregnantWomanPhysicalFitness)
                                  ]),
             TodoListModel(trimester: .secondTrimester,
-                          todos: [Todo(title: "Maternal blood Down’s syndrome screening"),
-                                  Todo(title: "Health education consultation for prenatal check-up"),
-                                  Todo(title: "Amniocentesis, Amniotic fluid"),
-                                  Todo(title: "Premature birth risk assessment"),
-                                  Todo(title: "Anomaly Scan"),
-                                  Todo(title: "Seasonal influenza vaccination"),
-                                  Todo(title: "Syphilis"),
-                                  Todo(title: "Gestational diabetes screening")
+                          todos: [Todo(title: todoStrings.SecondTrimester.amniocentesis),
+                                  Todo(title: todoStrings.SecondTrimester.maternalBloodScreening),
+                                  Todo(title: todoStrings.SecondTrimester.pretermBirthRiskAssessment),
+                                  Todo(title: todoStrings.SecondTrimester.healthEducationConsultation),
+                                  Todo(title: todoStrings.SecondTrimester.seasonalInfluenzaVaccination),
+                                  Todo(title: todoStrings.SecondTrimester.ultrasoundLevelII),
+                                  Todo(title: todoStrings.SecondTrimester.gestationalDiabetesMellitus),
+                                  Todo(title: todoStrings.SecondTrimester.syphilisTest)
                                  ]),
             TodoListModel(trimester: .thirdTrimester,
-                          todos: [Todo(title: "Gestational diabetes reexamination"),
-                                  Todo(title: "Pregnant woman physical fitness"),
-                                  Todo(title: "Nutrition consultation"),
-                                  Todo(title: "Diphtheria and tetanus toxoid with acellular pertussis vaccination"),
-                                  Todo(title: "Fetal growth assessment"),
-                                  Todo(title: "Fetal ultrasound test"),
-                                  Todo(title: "Fetal movement record"),
-                                  Todo(title: "Fetal  health monitoring"),
-                                  Todo(title: "Fetal monitor"),
-                                  Todo(title: "Prenatal blood and urine examination"),
-                                  Todo(title: "GBS(Group B Streptococcus test)")
+                          todos: [Todo(title:todoStrings.ThirdTrimester.gestationalDiabetesMellitusReexamination),
+                                  Todo(title: todoStrings.ThirdTrimester.pertussisVaccination),
+                                  Todo(title: todoStrings.ThirdTrimester.fetalGrowthAssessment),
+                                  Todo(title: todoStrings.ThirdTrimester.pregnantWomanPhysicalFitness),
+                                  Todo(title: todoStrings.ThirdTrimester.fetalUltrasoundTest),
+                                  Todo(title: todoStrings.ThirdTrimester.nutritionConsultation),
+                                  Todo(title: todoStrings.ThirdTrimester.fetalMovementRecord),
+                                  Todo(title: todoStrings.ThirdTrimester.prenatalBloodAndUrineExamination),
+                                  Todo(title: todoStrings.ThirdTrimester.fetalHealthMonitoring),
+                                  Todo(title: todoStrings.ThirdTrimester.fetalGrowthAssessment),
+                                  Todo(title: todoStrings.ThirdTrimester.fetalMonitor)
                                  ]),
             TodoListModel(trimester: .after,
-                          todos: [Todo(title: "Pertussis vaccination"),
-                                  Todo(title: "Pap smear"),
-                                  Todo(title: "HPV vaccination"),
-                                  Todo(title: "HPV screening"),
-                                  Todo(title: "Family planning"),
+                          todos: [Todo(title: todoStrings.after.hpvVaccination),
+                                  Todo(title: todoStrings.after.hpvScreening),
+                                  Todo(title: todoStrings.after.pertussisVaccination),
+                                  Todo(title: todoStrings.after.papSmear)
                                  ]),
     ]
   }
   
+  /// A method that displays to-do items on lists based on the trimester in which the user is currently enrolled
+  /// - Parameters:
+  ///   - trimester: Which trimester the user is currently enrolled in.
+  ///   - todoLists: An array of TodoListModel displayed on the view.
+  ///   - status: A status of  todo item.
+  /// - Returns: An array of todo object.
   static func getTodos(of trimester: Trimester, from todoLists: [TodoListModel], status: ToDoStatus) -> [Todo]? {
     switch status {
     case .all:
