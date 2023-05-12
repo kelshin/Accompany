@@ -7,7 +7,9 @@
 
 import Foundation
 
-// A model that we can use to view the user's contraction details.
+// MARK: - Model
+
+/// A model that we can use to view the user's contraction details.
 struct ContractionDetailsModel: Codable {
   
   // MARK: - Properties

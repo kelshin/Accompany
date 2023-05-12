@@ -7,7 +7,9 @@
 
 import Foundation
 
-// A model we used to create a details info of the user object.
+// MARK: - Model
+
+/// A model we used to create a details info of the user object.
 struct UserDetailsInfoModel: Codable {
   
   // MARK: - Properties
