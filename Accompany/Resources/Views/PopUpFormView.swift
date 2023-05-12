@@ -14,9 +14,9 @@ import SnapKit
 /// An UI View that represents the pop up form view for the users.
 public class PopUpFormView: UIView {
 
-  // MARK: - Private Properties
+  // MARK: - Properties
 
-  /// Creates an UIView that represents the content view on the screen.
+  /// Creates an UIView that represents a content view on the screen.
   private let popUpContentView: UIView = {
     let contentView = UIView()
     contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -55,15 +55,13 @@ public class PopUpFormView: UIView {
     return VTitleStack
   }()
 
-  // MARK: - fileprivate properties
-
-  /// A fileprivate property that represents a UIButton view named as "Answer".
+  /// A property that represents an UIButton view named as "Answer".
   let answerButton = OutlineButton(title: "Answer")
 
-  /// A fileprivate property that represents a UIButton view named as "Not sure".
+  /// A property that represents an UIButton view named as "Not sure".
   let notSureButton = OutlineButton(title: "Not sure")
 
-  /// A fileprivate property that represents a UIStackView containing two UIButton views.
+  /// A fileprivate property that represents an UIStackView containing two UIButton views.
   fileprivate lazy var optionsButtonsStack: UIStackView = {
     let buttonStack = UIStackView(arrangedSubviews: [answerButton, notSureButton])
     buttonStack.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +72,7 @@ public class PopUpFormView: UIView {
     return buttonStack
   }()
 
-  /// A fileprivate property that
+  /// A fileprivate property that represents an UIStackView containing a VStack view and HStack view.
   fileprivate lazy var questionVStackView: UIStackView = {
     let questionStack = UIStackView(arrangedSubviews: [questionTitlesVStackView, optionsButtonsStack])
     questionStack.translatesAutoresizingMaskIntoConstraints = false
@@ -92,11 +90,16 @@ public class PopUpFormView: UIView {
     self.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     self.frame = UIScreen.main.bounds
     self.addSubview(popUpContentView)
-
+    
+    setupLayout()
+  }
+  
+  /// A method that we use to set up every component for the layout on the screen.
+  func setupLayout() {
     popUpContentView.snp.makeConstraints { make in
       make.centerX.equalTo(self)
       make.centerY.equalTo(self)
-      make.width.equalTo(self.snp.width).multipliedBy(0.7)
+      make.width.equalTo(self.snp.width).multipliedBy(0.8)
       make.height.equalTo(self.snp.height).multipliedBy(0.3)
     }
 
