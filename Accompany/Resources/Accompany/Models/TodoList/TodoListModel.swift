@@ -118,7 +118,9 @@ struct TodoListModel: Codable {
   ///   - todoLists: An array of TodoListModel displayed on the view.
   ///   - status: A status of  todo item.
   /// - Returns: An array of todo object.
-  static func getTodos(of trimester: Trimester, from todoLists: [TodoListModel], status: ToDoStatus) -> [Todo]? {
+  static func getTodos(of trimester: Trimester,
+                       from todoLists: [TodoListModel],
+                       status: ToDoStatus) -> [Todo]? {
     switch status {
     case .all:
       return todoLists.filter { $0.trimester == trimester }.first?.todos

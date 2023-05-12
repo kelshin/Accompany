@@ -4,7 +4,10 @@
 //
 //  Created by Esperanza on 2022-02-22.
 //
+
 import Foundation
+
+// MARK: - Model
 
 /// A model we use to create an user object.
 struct UserModel: Codable {

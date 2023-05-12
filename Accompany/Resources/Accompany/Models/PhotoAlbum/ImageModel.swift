@@ -28,7 +28,7 @@ struct ImageModel: Hashable {
   /// A property that we use to create a subfolder for archiving data, and store that path to a constant.
   static let archieveURL = documentsDirectory.appendingPathComponent("")
 
-  // MARK: - Private Methods
+  // MARK: - Private Methods - Hashable
   
   /// A method is to allow an object to be used as a key in a hash-based collection by providing a hash value for the object.
   /// - Parameter hasher: A hash function that combines values into a single hash value.

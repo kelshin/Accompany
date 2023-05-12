@@ -36,21 +36,4 @@ extension CustomTextViewController {
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     textView.resignFirstResponder() //keyboard
   }
-  
-//  @objc func keyboardWasShown(notification: NSNotification) {
-//    let info = notification.userInfo
-//    
-//    if let keyboardRect = info?[UIResponder.keyboardFrameBeginUserInfoKey] as? CGRect {
-//      
-//      let keyboardSize = keyboardRect.size
-//      textView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
-//      textView.scrollIndicatorInsets = textView.contentInset
-//    }
-//  }
-//  
-//  @objc func keyboardWillBeHidden(notification: NSNotification) {
-//    textView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//    textView.scrollIndicatorInsets = textView.contentInset
-//  }
-
 }

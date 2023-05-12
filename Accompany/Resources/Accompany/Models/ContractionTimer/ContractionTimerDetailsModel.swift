@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Model
+
 /// A model that we use to create a contraction timer object.
 struct ContractionTimerModel: Codable {
   
