@@ -1,4 +1,4 @@
-# iOS Pregnant App: Accompany
+# iOS Pregnancy App: Accompany
 
 Summary: 
 
