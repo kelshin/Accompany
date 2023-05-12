@@ -8,6 +8,5 @@ Accompany with every father-to-be and mother-to-be during pregnancy.
 
 Background:
 
-Our application is related to pregnancy. When the person is ready to be a father or mother, they always feel nervous and have no ideas what they should do or prepare for during their pregnancy. That’s why they need this application. One of the most important features is that we will give to-do lists for things they have to do/check in different trimesters. The information is reliable and provided by my mid-wife friend.
-
+Our application is designed to assist individuals during pregnancy. When someone is ready to become a parent, they often feel nervous and uncertain about what they need to do to prepare for the journey. This is where our application comes in handy. One of the most significant features is the provision of trimester-specific to-do lists, which guide users on the essential things they need to do or check. The information is reliable and has been provided by a trusted source, my midwife sister.
 
