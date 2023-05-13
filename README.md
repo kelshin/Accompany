@@ -15,7 +15,7 @@ Accompany App is designed to assist individuals during pregnancy. When someone i
 
 👼🏾 Notes: A feature that enables users to record important details such as their mood, symptoms, or other relevant information.
 
-👼🏿 Settings: A feature that enables users to configure their profile details and submit feedback to the official email of Accompany.
+👼🏿 Service: A feature that enables users to configure their profile details and submit feedback to the official email of Accompany.
 
 Accompany App was built using Swift and the UIKit framework.
 
