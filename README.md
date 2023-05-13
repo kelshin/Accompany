@@ -6,10 +6,15 @@ Accompany App is designed to assist individuals during pregnancy. When someone i
 ## Features:
 
 👼🏻 TodoLists: A feature that allows users to create personalized to-do lists and receive notifications tailored to their specific trimester to remind them to complete their tasks.
+
 👼 Due Date: A feature that allows users to calculate the number of days remaining until their baby's due date.
+
 👼🏼 Photo Album: A feature that enables users to upload photos from their phone or camera, and can view them in a detailed screen.
+
 👼🏽 Contraction Timer: A feature that enables users to record the frequency and duration of their contractions.
+
 👼🏾 Notes: A feature that enables users to record important details such as their mood, symptoms, or other relevant information.
+
 👼🏿 Settings: A feature that enables users to configure their profile details and submit feedback to the official email of Accompany.
 
 Accompany App was built using Swift and the UIKit framework.
