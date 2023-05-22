@@ -12,7 +12,7 @@ import SnapKit
 
 /// A protocol holds a method which can help us send the data to HomeViewController if other files conform this protocl.
 protocol AnsDueDateViewControllerDelegateProtocol {
-  /// A methods we pass the data as a String type to the HomeViewController.
+  /// A method we pass the data as a String type to the HomeViewController.
   func sendDataToHomeVC(data: String)
 }
 
@@ -26,7 +26,7 @@ class AnsDueDateViewController: UIViewController {
   /// An instance of AnsDueDateView.
   let ansDueDateView = AnsDueDateView()
   
-  // MARK: - View Conformance
+  // MARK: - viewDidLoad method
   
   override func viewDidLoad() {
     super.viewDidLoad()

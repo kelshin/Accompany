@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 
 protocol TodoCellDelegate {
-  func isCompleteButtonTapped(sender: TodoCell)
+  func isCompleteButtonTapped(sender: TodoCellView)
 }
 
-class TodoCell: UITableViewCell {
+class TodoCellView: UITableViewCell {
   
   static let identifier = "TodoCell"
   
@@ -66,7 +66,7 @@ class TodoCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func update(with todo: Todo) {
+  func update(with todo: TodoModel) {
     self.isCompleteButton.isSelected = todo.isCompleted
     self.isCompleteButton.setContentHuggingPriority(UILayoutPriority(250), for: .horizontal)
 //    self.isCompleteButton.translatesAutoresizingMaskIntoConstraints = false

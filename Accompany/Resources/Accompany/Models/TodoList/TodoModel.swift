@@ -10,7 +10,7 @@ import Foundation
 // MARK: - Model
 
 /// A model that we use to create a todo obejct, which is displayed on a todo list.
-struct Todo: Codable {
+struct TodoModel: Codable {
   
   // MARK: - Properties
   

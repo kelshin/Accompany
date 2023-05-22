@@ -178,10 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				6CD119BC29F617D100E803DB /* Resources */,
-				437721F427ADE86300EC8A98 /* Controllers */,
 				437721EB27ADE4E800EC8A98 /* Info.plist */,
 				6C1FC57927C36F83007D625E /* Assets.xcassets */,
-				6C96352827B7C252001D0E45 /* Simple Boy ttf.ttf */,
 			);
 			path = Accompany;
 			sourceTree = "<group>";
@@ -189,6 +187,7 @@
 		437721F127ADE83600EC8A98 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6C96352827B7C252001D0E45 /* Simple Boy ttf.ttf */,
 				642E8A3227B8EC7200C9C2E5 /* Simple-Boy.ttf */,
 				437721DD27ADE4E700EC8A98 /* AppDelegate.swift */,
 				437721DF27ADE4E700EC8A98 /* SceneDelegate.swift */,
@@ -199,8 +198,8 @@
 		437721F327ADE85000EC8A98 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6CD119AD29DE9BC900E803DB /* LaunchView */,
 				4378AA2A27C8CCB20019773E /* Components */,
+				6CD119AD29DE9BC900E803DB /* LaunchView */,
 				43FB2AEF27BDDB70004A641D /* TodoList */,
 				43FB2AF327BDDBD1004A641D /* Album */,
 				6413589D27C0626A0086BB39 /* Services */,
@@ -252,8 +251,8 @@
 			isa = PBXGroup;
 			children = (
 				437721FE27ADE98B00EC8A98 /* RecordsViewController.swift */,
-				6C1FC57D27C3BEF1007D625E /* QANotes */,
 				6C1FC57B27C3BEB1007D625E /* Photo */,
+				6C1FC57D27C3BEF1007D625E /* QANotes */,
 			);
 			path = Records;
 			sourceTree = "<group>";
@@ -374,6 +373,8 @@
 			children = (
 				6CD119C029F618D300E803DB /* Strings+Todo+Titles.swift */,
 				4306D26827B5D26B00050369 /* Models */,
+				437721F327ADE85000EC8A98 /* Views */,
+				437721F427ADE86300EC8A98 /* Controllers */,
 			);
 			path = Accompany;
 			sourceTree = "<group>";
@@ -429,7 +430,6 @@
 			children = (
 				437721F127ADE83600EC8A98 /* Supporting Files */,
 				6CD081D429FF6E4A002DD03B /* Accompany */,
-				437721F327ADE85000EC8A98 /* Views */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

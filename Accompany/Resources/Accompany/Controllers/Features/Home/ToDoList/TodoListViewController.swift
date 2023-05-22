@@ -14,14 +14,14 @@ class TodoListViewController: UIViewController {
   
   let tableView: UITableView = {
     let tableView = UITableView()
-    tableView.register(TodoCell.self, forCellReuseIdentifier: TodoCell.identifier)
+    tableView.register(TodoCellView.self, forCellReuseIdentifier: TodoCellView.identifier)
     tableView.layer.cornerRadius = 20
     tableView.translatesAutoresizingMaskIntoConstraints = false
     
     return tableView
   }()
   
-  var todos = [Todo]()
+  var todos = [TodoModel]()
   var currentTrimester = String()
 
   override func viewDidLoad() {
@@ -87,7 +87,7 @@ extension TodoListViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.identifier, for: indexPath) as! TodoCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: TodoCellView.identifier, for: indexPath) as! TodoCellView
     let todo = todos[indexPath.row]
     // configure cell
     cell.update(with: todo)
@@ -160,7 +160,7 @@ extension TodoListViewController: UITableViewDataSource {
 
 extension TodoListViewController: ToDoFormTableViewControllerDelegate {
   
-  func add(todo: Todo) {
+  func add(todo: TodoModel) {
     todos.append(todo)
     
     if let trimesterIndex =  HomeViewController.todoLists.firstIndex(where: { $0.trimester.rawValue == currentTrimester }){
@@ -170,7 +170,7 @@ extension TodoListViewController: ToDoFormTableViewControllerDelegate {
 //    tableView.insertRows(at: [IndexPath(row: todos.count - 1, section: 0)], with: .automatic)
   }
   
-  func edit(todo: Todo) {
+  func edit(todo: TodoModel) {
     if let selectedIndexPath = tableView.indexPathForSelectedRow {
       todos[selectedIndexPath.row] = todo
       tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
@@ -192,7 +192,7 @@ extension TodoListViewController: ToDoFormTableViewControllerDelegate {
 
 extension TodoListViewController: TodoCellDelegate {
   
-  func isCompleteButtonTapped(sender: TodoCell) {
+  func isCompleteButtonTapped(sender: TodoCellView) {
     if let indexPath = tableView.indexPath(for: sender) {
       var todo = todos[indexPath.row]
       todo.isCompleted.toggle()

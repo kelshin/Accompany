@@ -54,7 +54,7 @@ class MyProfileViewController: CustomTextViewController {
     setupLayout()
    
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
-        title: "My Profile", style: .plain, target: nil, action: nil)
+        title: "Profile", style: .plain, target: nil, action: nil)
   }
   
   override func viewWillAppear(_ animated: Bool){
@@ -185,9 +185,6 @@ extension MyProfileViewController: UITableViewDataSource {
       let cell = profileTableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier, for: indexPath) as! ProfileCell
       let userData = HomeViewController.currentUser.detailsInfo
       switch indexPath.row {
-      // Username to be implemented soon
-//      case 0:
-//        cell.update(with: userData!.username, for: InfoField.username)
       case 0:
         cell.update(with: userData?.name ?? "", for: InfoField.name)
       case 1:

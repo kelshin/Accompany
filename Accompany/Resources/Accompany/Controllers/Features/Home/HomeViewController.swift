@@ -8,67 +8,77 @@
 import UIKit
 import SnapKit
 
+// MARK: - View Controller
+
+/// A view controller that handles the todo lists and their detailed view.
 class HomeViewController: UIViewController {
   
-  let accompanyTitleLabel = TitleLabel(title: "Accompany", size: .large, color: .red)
-  let welcomeTitleLabel = TitleLabel(title: "Welcome back!", size: .mini, color: .black)
-
-  let firstTrimesterButton = PrimaryButton(title: Trimester.firstTrimester.rawValue)
-  let secondTrimesterButton = PrimaryButton(title: Trimester.secondTrimester.rawValue)
-  let thirdTrimesterButton = PrimaryButton(title: Trimester.thirdTrimester.rawValue)
-  let afterButton = SecondaryButton(title: Trimester.after.rawValue)
+  // MARK: - Properties
   
+  /// A title that represents the name of application.
+  let accompanyTitleLabel = TitleLabel(title: "Accompany", size: .large, color: .red)
+  /// A title that represents the welcoming message.
+  let welcomeTitleLabel = TitleLabel(title: "Welcome back!", size: .mini, color: .black)
+  /// A title that represents the title of the first trimester button.
+  let firstTrimesterButton = PrimaryButton(title: Trimester.firstTrimester.rawValue)
+  /// A title that represents the title of the second trimester button.
+  let secondTrimesterButton = PrimaryButton(title: Trimester.secondTrimester.rawValue)
+  /// A title that represents the title of the third trimester button.
+  let thirdTrimesterButton = PrimaryButton(title: Trimester.thirdTrimester.rawValue)
+  /// A title that represents the title of the after trimester button.
+  let afterButton = SecondaryButton(title: Trimester.after.rawValue)
+  /// A table view that displays different todo lists with their todo items.
   let notifyTableView: UITableView = {
     let notifyTableView = UITableView(frame: .zero, style: .plain)
-    notifyTableView.register(TodoCell.self, forCellReuseIdentifier: TodoCell.identifier)
+    notifyTableView.register(TodoCellView.self, forCellReuseIdentifier: TodoCellView.identifier)
     notifyTableView.register(TodoHeaderView.self, forHeaderFooterViewReuseIdentifier: TodoHeaderView.identifier)
     notifyTableView.isUserInteractionEnabled = true
     notifyTableView.layer.cornerRadius = 5
     notifyTableView.translatesAutoresizingMaskIntoConstraints = false
-    
     return notifyTableView
-  }() 
-  
-  let bgCircleView = ImageView()
-  
-  static var currentUser = UserModel()
-  static var todoLists = [TodoListModel]()
-  var currentTodos = [Todo]()
+  }()
+  /// An image view that displays a big circle background view.
+  let bigCircleView = ImageView()
+  /// An array of TodoModel objects that represents the items users can do in their current trimesters,
+  var currentTodos = [TodoModel]()
+  /// A string that represents a current trimester.
   var currentTrimester = String()
+  
+  // MARK: - Static Properties
+  
+  /// An UserModel that represents information of the user.
+  static var currentUser = UserModel()
+  /// An array of TodoListModels that holds the whole todo lists.
+  static var todoLists = [TodoListModel]()
+  
+  // MARK: - override methods
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
- 
-    bgCircleView.image = UIImage(named: "grey-bg")
+    bigCircleView.image = UIImage(named: "grey-bg")
     
-    // KELBIN
+    // ESDEBUG
     print("I AM CURRENT USER")
     print(HomeViewController.currentUser)
+    // ESDEBUG
     
-    // createData()
     loadSavedData()
     fetchCurrentLists()
-    
-    // TODO: fetch todoLists
-    
     configureTableView()
     setupLayout()
     
+    /// For Table View
     UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self])
-           .textColor = UIColor.black
+      .textColor = UIColor.black
     UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self])
       .font = UIFont.systemFont(ofSize: 18)
-    
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
-        title: "Home Page", style: .plain, target: nil, action: nil)
-    
-//    updateWelcome()
+      title: "Home", style: .plain, target: nil, action: nil)
   }
   
   override func viewWillAppear(_ animated: Bool) {
     navigationController?.navigationBar.isHidden = true
-//    fetchUserDetails()
     fetchCurrentLists()
     notifyTableView.reloadData()
   }
@@ -76,7 +86,13 @@ class HomeViewController: UIViewController {
   override func viewWillDisappear(_ animated: Bool) {
     navigationController?.navigationBar.isHidden = false
   }
+}
+
+// MARK: fetch data/ save data methods
+
+extension HomeViewController {
   
+  /// A method that we use to save the data for a TodoList.
   func saveTodoList() {
     let encoder = JSONEncoder()
     if let encoder = try? encoder.encode(HomeViewController.todoLists){
@@ -85,6 +101,7 @@ class HomeViewController: UIViewController {
     }
   }
   
+  /// A method that we use to save the user's information data.
   func saveUserData() {
     let encoder = JSONEncoder()
     if let encoder = try? encoder.encode(HomeViewController.currentUser){
@@ -125,16 +142,18 @@ class HomeViewController: UIViewController {
     }
     print(HomeViewController.currentUser)
   }
-  
-  func updateWelcome() {
-    welcomeTitleLabel.text = "Welcome\(HomeViewController.currentUser.detailsInfo?.dueDate == nil ? "" : " back")!"
-  }
+//
+//  func updateWelcome() {
+//    if let userName = HomeViewController.currentUser.detailsInfo?.name {
+//      welcomeTitleLabel.text = "Welcome back, \(userName)!"
+//    }
+//  }
   
   private func fetchCurrentLists() {
     // decide current trimester
     let currentTrimester = getCurrentTrimester()
     // assign current todos
-    currentTodos = TodoListModel.getTodos(of: currentTrimester, from: HomeViewController.todoLists, status: .notDone) ?? [Todo]()
+    currentTodos = TodoListModel.getTodos(of: currentTrimester, from: HomeViewController.todoLists, status: .notDone) ?? [TodoModel]()
   }
   
   private func getCurrentTrimester() -> Trimester {
@@ -191,8 +210,8 @@ class HomeViewController: UIViewController {
       make.height.equalTo(view.snp.width).multipliedBy(0.5)
     }
     
-    view.addSubview(bgCircleView)
-    bgCircleView.snp.makeConstraints { make in
+    view.addSubview(bigCircleView)
+    bigCircleView.snp.makeConstraints { make in
       make.centerX.equalTo(view)
       make.top.equalTo(notifyTableView.snp.bottom).offset(15)
       make.left.equalTo(view.safeAreaLayoutGuide)
@@ -213,7 +232,7 @@ class HomeViewController: UIViewController {
     
     stackView.snp.makeConstraints { make in
       make.centerX.equalTo(view)
-      make.top.equalTo(bgCircleView.snp.top).offset(40)
+      make.top.equalTo(bigCircleView.snp.top).offset(40)
       make.width.equalTo(view.snp.width).multipliedBy(0.45)
     }
   }
@@ -225,19 +244,19 @@ class HomeViewController: UIViewController {
     case firstTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.firstTrimester.rawValue
       todoListVC.currentTrimester = Trimester.firstTrimester.rawValue
-      todoListVC.todos = TodoListModel.getTodos(of: .firstTrimester, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
+      todoListVC.todos = TodoListModel.getTodos(of: .firstTrimester, from: HomeViewController.todoLists, status: .all) ?? [TodoModel]()
     case secondTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.secondTrimester.rawValue
       todoListVC.currentTrimester = Trimester.secondTrimester.rawValue
-      todoListVC.todos = TodoListModel.getTodos(of: .secondTrimester, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
+      todoListVC.todos = TodoListModel.getTodos(of: .secondTrimester, from: HomeViewController.todoLists, status: .all) ?? [TodoModel]()
     case thirdTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.thirdTrimester.rawValue
       todoListVC.currentTrimester = Trimester.thirdTrimester.rawValue
-      todoListVC.todos = TodoListModel.getTodos(of: .thirdTrimester, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
+      todoListVC.todos = TodoListModel.getTodos(of: .thirdTrimester, from: HomeViewController.todoLists, status: .all) ?? [TodoModel]()
     case afterButton:
       todoListVC.todoListTitleLabel.text = Trimester.after.rawValue
       todoListVC.currentTrimester = Trimester.after.rawValue
-      todoListVC.todos = TodoListModel.getTodos(of: .after, from: HomeViewController.todoLists, status: .all) ?? [Todo]()
+      todoListVC.todos = TodoListModel.getTodos(of: .after, from: HomeViewController.todoLists, status: .all) ?? [TodoModel]()
     default:
       return
     }
@@ -273,7 +292,7 @@ extension HomeViewController: UITableViewDelegate {
 extension HomeViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.identifier, for: indexPath) as! TodoCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: TodoCellView.identifier, for: indexPath) as! TodoCellView
     let toDo = currentTodos[indexPath.row]
     cell.delegate = self
     cell.update(with: toDo)
@@ -294,7 +313,7 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: TodoCellDelegate {
   
-  func isCompleteButtonTapped(sender: TodoCell) {
+  func isCompleteButtonTapped(sender: TodoCellView) {
     if let indexPath = notifyTableView.indexPath(for: sender) {
       var todo = currentTodos[indexPath.row]
       todo.isCompleted.toggle()
@@ -316,10 +335,10 @@ extension HomeViewController: TodoCellDelegate {
 
 extension HomeViewController: ToDoFormTableViewControllerDelegate {
 
-  func add(todo: Todo) {
+  func add(todo: TodoModel) {
   }
 
-  func edit(todo: Todo) {
+  func edit(todo: TodoModel) {
     if let trimesterIndex =  HomeViewController.todoLists.firstIndex(where: { $0.trimester.rawValue == currentTrimester }){
       if let todoIndex = HomeViewController.todoLists[trimesterIndex].todos?.firstIndex(where: { $0.id == todo.id }) {
         HomeViewController.todoLists[trimesterIndex].todos?[todoIndex] = todo

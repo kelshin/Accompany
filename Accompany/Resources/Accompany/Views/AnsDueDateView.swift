@@ -14,10 +14,10 @@ import SnapKit
 /// A view that shows up an answer due date view with its components.
 public class AnsDueDateView: UIView {
   
-  // MARK: - Private Properties
+  // MARK: - Properties
  
   /// Creates an UIView that represents a content view on the screen.
-  private let container: UIView = {
+  let container: UIView = {
     let container = UIView()
     container.translatesAutoresizingMaskIntoConstraints = false
     container.backgroundColor = .white
@@ -75,7 +75,7 @@ public class AnsDueDateView: UIView {
     return answerVStack
   }()
   
-  // MARK: - Initializers
+  // MARK: - Initializer
 
   /// An override init method that builds up a view.
   /// - Parameter frame: Size of the view.

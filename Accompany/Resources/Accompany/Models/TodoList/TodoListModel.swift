@@ -52,7 +52,7 @@ struct TodoListModel: Codable {
   public let trimester: Trimester
   
   /// An array that holds Todo items within a todo list.
-  public var todos: [Todo]?
+  public var todos: [TodoModel]?
   
   // MARK: - Methods
   
@@ -61,53 +61,53 @@ struct TodoListModel: Codable {
   static func loadTodoListsData() -> [TodoListModel] {
     let todoStrings = Strings.Todo.Title.self
     return [TodoListModel(trimester: .firstTrimester,
-                          todos: [Todo(title: todoStrings.FirstTrimester.geneTesting),
-                                  Todo(title: todoStrings.FirstTrimester.d3Testing),
-                                  Todo(title: todoStrings.FirstTrimester.askMedicalHistory),
-                                  Todo(title: todoStrings.FirstTrimester.firstUltrasound),
-                                  Todo(title: todoStrings.FirstTrimester.prenatalExaminationBloodTests),
-                                  Todo(title: todoStrings.FirstTrimester.regularBloodTest),
-                                  Todo(title: todoStrings.FirstTrimester.neisseriaGonorrhoeaeChlamydiaTrachomatisTests),
-                                  Todo(title: todoStrings.FirstTrimester.spinalMuscularAtrophy),
-                                  Todo(title: todoStrings.FirstTrimester.smearHumanPapillomaVirus),
-                                  Todo(title: todoStrings.FirstTrimester.thyroidFunctionTests),
-                                  Todo(title: todoStrings.FirstTrimester.torchScreen),
-                                  Todo(title: todoStrings.FirstTrimester.fragileXSyndrome),
-                                  Todo(title: todoStrings.FirstTrimester.diabetesTest),
-                                  Todo(title: todoStrings.FirstTrimester.toxoplasmosisScreening),
-                                  Todo(title: todoStrings.FirstTrimester.nonInvasivePrenatalTest),
-                                  Todo(title: todoStrings.FirstTrimester.maternalBloodDownsSyndromeScreening),
-                                  Todo(title: todoStrings.FirstTrimester.preeclampsiaRiskAssessment),
-                                  Todo(title: todoStrings.FirstTrimester.pregnantWomanPhysicalFitness)
+                          todos: [TodoModel(title: todoStrings.FirstTrimester.geneTesting),
+                                  TodoModel(title: todoStrings.FirstTrimester.d3Testing),
+                                  TodoModel(title: todoStrings.FirstTrimester.askMedicalHistory),
+                                  TodoModel(title: todoStrings.FirstTrimester.firstUltrasound),
+                                  TodoModel(title: todoStrings.FirstTrimester.prenatalExaminationBloodTests),
+                                  TodoModel(title: todoStrings.FirstTrimester.regularBloodTest),
+                                  TodoModel(title: todoStrings.FirstTrimester.neisseriaGonorrhoeaeChlamydiaTrachomatisTests),
+                                  TodoModel(title: todoStrings.FirstTrimester.spinalMuscularAtrophy),
+                                  TodoModel(title: todoStrings.FirstTrimester.smearHumanPapillomaVirus),
+                                  TodoModel(title: todoStrings.FirstTrimester.thyroidFunctionTests),
+                                  TodoModel(title: todoStrings.FirstTrimester.torchScreen),
+                                  TodoModel(title: todoStrings.FirstTrimester.fragileXSyndrome),
+                                  TodoModel(title: todoStrings.FirstTrimester.diabetesTest),
+                                  TodoModel(title: todoStrings.FirstTrimester.toxoplasmosisScreening),
+                                  TodoModel(title: todoStrings.FirstTrimester.nonInvasivePrenatalTest),
+                                  TodoModel(title: todoStrings.FirstTrimester.maternalBloodDownsSyndromeScreening),
+                                  TodoModel(title: todoStrings.FirstTrimester.preeclampsiaRiskAssessment),
+                                  TodoModel(title: todoStrings.FirstTrimester.pregnantWomanPhysicalFitness)
                                  ]),
             TodoListModel(trimester: .secondTrimester,
-                          todos: [Todo(title: todoStrings.SecondTrimester.amniocentesis),
-                                  Todo(title: todoStrings.SecondTrimester.maternalBloodScreening),
-                                  Todo(title: todoStrings.SecondTrimester.pretermBirthRiskAssessment),
-                                  Todo(title: todoStrings.SecondTrimester.healthEducationConsultation),
-                                  Todo(title: todoStrings.SecondTrimester.seasonalInfluenzaVaccination),
-                                  Todo(title: todoStrings.SecondTrimester.ultrasoundLevelII),
-                                  Todo(title: todoStrings.SecondTrimester.gestationalDiabetesMellitus),
-                                  Todo(title: todoStrings.SecondTrimester.syphilisTest)
+                          todos: [TodoModel(title: todoStrings.SecondTrimester.amniocentesis),
+                                  TodoModel(title: todoStrings.SecondTrimester.maternalBloodScreening),
+                                  TodoModel(title: todoStrings.SecondTrimester.pretermBirthRiskAssessment),
+                                  TodoModel(title: todoStrings.SecondTrimester.healthEducationConsultation),
+                                  TodoModel(title: todoStrings.SecondTrimester.seasonalInfluenzaVaccination),
+                                  TodoModel(title: todoStrings.SecondTrimester.ultrasoundLevelII),
+                                  TodoModel(title: todoStrings.SecondTrimester.gestationalDiabetesMellitus),
+                                  TodoModel(title: todoStrings.SecondTrimester.syphilisTest)
                                  ]),
             TodoListModel(trimester: .thirdTrimester,
-                          todos: [Todo(title:todoStrings.ThirdTrimester.gestationalDiabetesMellitusReexamination),
-                                  Todo(title: todoStrings.ThirdTrimester.pertussisVaccination),
-                                  Todo(title: todoStrings.ThirdTrimester.fetalGrowthAssessment),
-                                  Todo(title: todoStrings.ThirdTrimester.pregnantWomanPhysicalFitness),
-                                  Todo(title: todoStrings.ThirdTrimester.fetalUltrasoundTest),
-                                  Todo(title: todoStrings.ThirdTrimester.nutritionConsultation),
-                                  Todo(title: todoStrings.ThirdTrimester.fetalMovementRecord),
-                                  Todo(title: todoStrings.ThirdTrimester.prenatalBloodAndUrineExamination),
-                                  Todo(title: todoStrings.ThirdTrimester.fetalHealthMonitoring),
-                                  Todo(title: todoStrings.ThirdTrimester.fetalGrowthAssessment),
-                                  Todo(title: todoStrings.ThirdTrimester.fetalMonitor)
+                          todos: [TodoModel(title:todoStrings.ThirdTrimester.gestationalDiabetesMellitusReexamination),
+                                  TodoModel(title: todoStrings.ThirdTrimester.pertussisVaccination),
+                                  TodoModel(title: todoStrings.ThirdTrimester.fetalGrowthAssessment),
+                                  TodoModel(title: todoStrings.ThirdTrimester.pregnantWomanPhysicalFitness),
+                                  TodoModel(title: todoStrings.ThirdTrimester.fetalUltrasoundTest),
+                                  TodoModel(title: todoStrings.ThirdTrimester.nutritionConsultation),
+                                  TodoModel(title: todoStrings.ThirdTrimester.fetalMovementRecord),
+                                  TodoModel(title: todoStrings.ThirdTrimester.prenatalBloodAndUrineExamination),
+                                  TodoModel(title: todoStrings.ThirdTrimester.fetalHealthMonitoring),
+                                  TodoModel(title: todoStrings.ThirdTrimester.fetalGrowthAssessment),
+                                  TodoModel(title: todoStrings.ThirdTrimester.fetalMonitor)
                                  ]),
             TodoListModel(trimester: .after,
-                          todos: [Todo(title: todoStrings.after.hpvVaccination),
-                                  Todo(title: todoStrings.after.hpvScreening),
-                                  Todo(title: todoStrings.after.pertussisVaccination),
-                                  Todo(title: todoStrings.after.papSmear)
+                          todos: [TodoModel(title: todoStrings.after.hpvVaccination),
+                                  TodoModel(title: todoStrings.after.hpvScreening),
+                                  TodoModel(title: todoStrings.after.pertussisVaccination),
+                                  TodoModel(title: todoStrings.after.papSmear)
                                  ]),
     ]
   }
@@ -120,7 +120,7 @@ struct TodoListModel: Codable {
   /// - Returns: An array of todo object.
   static func getTodos(of trimester: Trimester,
                        from todoLists: [TodoListModel],
-                       status: ToDoStatus) -> [Todo]? {
+                       status: ToDoStatus) -> [TodoModel]? {
     switch status {
     case .all:
       return todoLists.filter { $0.trimester == trimester }.first?.todos

@@ -18,7 +18,7 @@ class PopupViewController: UIViewController {
   /// An instance of  popUpFormView.
   let popUpFormView = PopUpFormView()
   
-  // MARK: - Initializer
+  // MARK: - viewDidLoad method
   
   override func viewDidLoad() {
     super.viewDidLoad()
